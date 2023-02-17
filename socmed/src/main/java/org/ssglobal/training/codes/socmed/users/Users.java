@@ -20,6 +20,8 @@ import jakarta.persistence.Table;
 @Table
 public class Users {
 	
+	//tryyyyyy
+	
 	@Id
 	@SequenceGenerator(
 			  name = "users_sequence",
