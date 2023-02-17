@@ -1,6 +1,13 @@
 package org.ssglobal.training.codes.socmed.post;
 
+import java.util.HashSet;
+import java.util.Set;
+
+import org.ssglobal.training.codes.socmed.comment.Comment;
+import org.ssglobal.training.codes.socmed.like.Likes;
 import org.ssglobal.training.codes.socmed.users.Users;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
@@ -9,6 +16,7 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.SequenceGenerator;
 import jakarta.persistence.Table;
 
@@ -35,6 +43,14 @@ public class Post {
 	private String post_text;
 	private String image;
 	private String created_date;
+	
+	@JsonIgnore
+	@OneToMany(mappedBy = "post_id")
+	private Set<Comment> comments= new HashSet<>(); 
+	
+	@JsonIgnore
+	@OneToMany(mappedBy = "post_id")
+	private Set<Likes> likes= new HashSet<>(); 
 	
 	public Post() {}
 

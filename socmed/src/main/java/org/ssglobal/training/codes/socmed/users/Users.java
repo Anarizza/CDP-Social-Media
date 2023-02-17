@@ -1,8 +1,10 @@
 package org.ssglobal.training.codes.socmed.users;
 
-import java.util.HashSet;
+import java.util.HashSet; 
 import java.util.Set;
 
+import org.ssglobal.training.codes.socmed.comment.Comment;
+import org.ssglobal.training.codes.socmed.like.Likes;
 import org.ssglobal.training.codes.socmed.post.Post;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
@@ -44,6 +46,14 @@ public class Users {
 	@JsonIgnore
 	@OneToMany(mappedBy = "user_id")
 	private Set<Post> post= new HashSet<>(); 
+	
+	@JsonIgnore
+	@OneToMany(mappedBy = "profile_id")
+	private Set<Likes> likes= new HashSet<>(); 
+	
+	@JsonIgnore
+	@OneToMany(mappedBy = "profile_id")
+	private Set<Comment> comments= new HashSet<>(); 
 	
 	public Users() {}
 

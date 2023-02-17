@@ -1,5 +1,8 @@
 package org.ssglobal.training.codes.socmed.comment;
 
+import org.ssglobal.training.codes.socmed.post.Post;
+import org.ssglobal.training.codes.socmed.users.Users;
+
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
@@ -16,17 +19,18 @@ public class Comment {
 	
 	@ManyToOne(cascade = CascadeType.MERGE)
 	@JoinColumn(name = "post_id",referencedColumnName = "post_id")
-	private Integer post_id;
+	private Post post_id;
 	
 	@ManyToOne(cascade = CascadeType.MERGE)
-	@JoinColumn(name = "profile_id",referencedColumnName = "profile_id")
-	private Integer profile_id;
+	@JoinColumn(name = "profile_id",referencedColumnName = "user_id")
+	private Users profile_id;
+	
 	private String comment_text;
 	private String date_created;
 	
 	public Comment() {}
 
-	public Comment(Integer comment_id, Integer post_id, Integer profile_id, String comment_text, String date_created) {
+	public Comment(Integer comment_id, Post post_id, Users profile_id, String comment_text, String date_created) {
 		this.comment_id = comment_id;
 		this.post_id = post_id;
 		this.profile_id = profile_id;
@@ -34,7 +38,7 @@ public class Comment {
 		this.date_created = date_created;
 	}
 
-	public Comment(Integer post_id, Integer profile_id, String comment_text, String date_created) {
+	public Comment(Post post_id, Users profile_id, String comment_text, String date_created) {
 		this.post_id = post_id;
 		this.profile_id = profile_id;
 		this.comment_text = comment_text;
@@ -49,19 +53,19 @@ public class Comment {
 		this.comment_id = comment_id;
 	}
 
-	public Integer getPost_id() {
+	public Post getPost_id() {
 		return post_id;
 	}
 
-	public void setPost_id(Integer post_id) {
+	public void setPost_id(Post post_id) {
 		this.post_id = post_id;
 	}
 
-	public Integer getProfile_id() {
+	public Users getProfile_id() {
 		return profile_id;
 	}
 
-	public void setProfile_id(Integer profile_id) {
+	public void setProfile_id(Users profile_id) {
 		this.profile_id = profile_id;
 	}
 

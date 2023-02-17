@@ -1,5 +1,8 @@
 package org.ssglobal.training.codes.socmed.like;
 
+import org.ssglobal.training.codes.socmed.post.Post;
+import org.ssglobal.training.codes.socmed.users.Users;
+
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
@@ -16,23 +19,24 @@ public class Likes {
 	
 	@ManyToOne(cascade = CascadeType.MERGE)
 	@JoinColumn(name = "post_id",referencedColumnName = "post_id")
-	private Integer post_id;
+	private Post post_id;
 	
 	@ManyToOne(cascade = CascadeType.MERGE)
-	@JoinColumn(name = "profile_id",referencedColumnName = "profile_id")
-	private Integer profile_id;
+	@JoinColumn(name = "profile_id",referencedColumnName = "user_id")
+	private Users profile_id;
+	
 	private String date_created;
 	
 	public Likes() {}
 
-	public Likes(Integer like_id, Integer post_id, Integer profile_id, String date_created) {
+	public Likes(Integer like_id, Post post_id, Users profile_id, String date_created) {
 		this.like_id = like_id;
 		this.post_id = post_id;
 		this.profile_id = profile_id;
 		this.date_created = date_created;
 	}
 
-	public Likes(Integer post_id, Integer profile_id, String date_created) {
+	public Likes(Post post_id, Users profile_id, String date_created) {
 		this.post_id = post_id;
 		this.profile_id = profile_id;
 		this.date_created = date_created;
@@ -46,19 +50,19 @@ public class Likes {
 		this.like_id = like_id;
 	}
 
-	public Integer getPost_id() {
+	public Post getPost_id() {
 		return post_id;
 	}
 
-	public void setPost_id(Integer post_id) {
+	public void setPost_id(Post post_id) {
 		this.post_id = post_id;
 	}
 
-	public Integer getProfile_id() {
+	public Users getProfile_id() {
 		return profile_id;
 	}
 
-	public void setProfile_id(Integer profile_id) {
+	public void setProfile_id(Users profile_id) {
 		this.profile_id = profile_id;
 	}
 
