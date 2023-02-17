@@ -1,9 +1,17 @@
 package org.ssglobal.training.codes.socmed.users;
 
+import java.util.HashSet;
+import java.util.Set;
+
+import org.ssglobal.training.codes.socmed.post.Post;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import jakarta.persistence.Entity;  
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.SequenceGenerator;
 import jakarta.persistence.Table;
 
@@ -26,15 +34,19 @@ public class Users {
 	private String givenName;
 	private String surname;
 	private String username;
-	private Integer phoneNumber;
+	private String phoneNumber;
 	private String email;
 	private String password;
 	private String address;
 	private String dot; 
 	
+	@JsonIgnore
+	@OneToMany(mappedBy = "user_id")
+	private Set<Post> post= new HashSet<>(); 
+	
 	public Users() {}
 
-	public Users(Integer user_id, String givenName, String surname, String username,Integer phoneNumber, String email, String password,
+	public Users(Integer user_id, String givenName, String surname, String username,String phoneNumber, String email, String password,
 			String address, String dot) {
 		this.user_id = user_id;
 		this.givenName = givenName;
@@ -47,7 +59,7 @@ public class Users {
 		this.dot = dot;
 	}
 
-	public Users(String givenName, String surname, String username, Integer phoneNumber, String email, String password, String address,
+	public Users(String givenName, String surname, String username, String phoneNumber, String email, String password, String address,
 			String dot) {
 		this.givenName = givenName;
 		this.surname = surname;
@@ -91,11 +103,11 @@ public class Users {
 		this.username = username;
 	}
 	
-	public Integer getPhoneNumber() {
+	public String getPhoneNumber() {
 		return phoneNumber;
 	}
 
-	public void setPhoneNumber(Integer phoneNumber) {
+	public void setPhoneNumber(String phoneNumber) {
 		this.phoneNumber = phoneNumber;
 	}
 

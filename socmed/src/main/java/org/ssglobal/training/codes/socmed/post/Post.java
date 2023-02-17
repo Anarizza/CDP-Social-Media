@@ -1,9 +1,14 @@
 package org.ssglobal.training.codes.socmed.post;
 
+import org.ssglobal.training.codes.socmed.users.Users;
+
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
 import jakarta.persistence.SequenceGenerator;
 import jakarta.persistence.Table;
 
@@ -22,23 +27,27 @@ public class Post {
 			generator = "post_sequence"
 	)
 	private Integer post_id;
-	private Integer profile_id;
+	
+	@ManyToOne(cascade = CascadeType.MERGE)
+	@JoinColumn(name = "user_id",referencedColumnName = "user_id")
+	private Users user_id;
+	
 	private String post_text;
 	private String image;
 	private String created_date;
 	
 	public Post() {}
 
-	public Post(Integer post_id, Integer profile_id, String post_text, String image, String created_date) {
+	public Post(Integer post_id, Users user_id, String post_text, String image, String created_date) {
 		this.post_id = post_id;
-		this.profile_id = profile_id;
+		this.user_id = user_id;
 		this.post_text = post_text;
 		this.image = image;
 		this.created_date = created_date;
 	}
 
-	public Post(Integer profile_id, String post_text, String image, String created_date) {
-		this.profile_id = profile_id;
+	public Post(Users user_id, String post_text, String image, String created_date) {
+		this.user_id = user_id;
 		this.post_text = post_text;
 		this.image = image;
 		this.created_date = created_date;
@@ -52,12 +61,12 @@ public class Post {
 		this.post_id = post_id;
 	}
 
-	public Integer getProfile_id() {
-		return profile_id;
+	public Users getProfile_id() {
+		return user_id;
 	}
 
-	public void setProfile_id(Integer profile_id) {
-		this.profile_id = profile_id;
+	public void setProfile_id(Users profile_id) {
+		this.user_id = profile_id;
 	}
 
 	public String getPost_text() {
