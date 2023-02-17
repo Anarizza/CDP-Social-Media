@@ -1,8 +1,8 @@
 package org.ssglobal.training.codes.socmed.users;
 
-import java.util.HashSet; 
+import java.util.HashSet;  
 import java.util.Set;
-
+import jakarta.persistence.JoinColumn;
 import org.ssglobal.training.codes.socmed.comment.Comment;
 import org.ssglobal.training.codes.socmed.like.Likes;
 import org.ssglobal.training.codes.socmed.post.Post;
@@ -13,6 +13,8 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinTable;
+import jakarta.persistence.ManyToMany;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.SequenceGenerator;
 import jakarta.persistence.Table;
@@ -21,7 +23,6 @@ import jakarta.persistence.Table;
 @Entity
 @Table
 public class Users {
-	
 	
 	@Id
 	@SequenceGenerator(
@@ -54,6 +55,16 @@ public class Users {
 	@JsonIgnore
 	@OneToMany(mappedBy = "profile_id")
 	private Set<Comment> comments= new HashSet<>(); 
+	
+	/*
+	@ManyToMany
+    @JoinTable(
+   			name="friends",
+			joinColumns = @JoinColumn(name = "user_id" ),
+			inverseJoinColumns = @JoinColumn(name = "")
+			)  
+	private Set<Users> friends = new HashSet<>();		
+	*/
 	
 	public Users() {}
 
