@@ -20,7 +20,6 @@ import jakarta.persistence.Table;
 @Table
 public class Users {
 	
-	//tryyyyyy
 	
 	@Id
 	@SequenceGenerator(
@@ -144,6 +143,6 @@ public class Users {
 	public void setDot(String dot) {
 		this.dot = dot;
 	}
-	//rwr
+
 	
 }

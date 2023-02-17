@@ -1,7 +1,10 @@
 package org.ssglobal.training.codes.socmed.like;
 
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 
 @Entity
@@ -10,7 +13,13 @@ public class Likes {
 	
 	@Id
 	private Integer like_id;
+	
+	@ManyToOne(cascade = CascadeType.MERGE)
+	@JoinColumn(name = "post_id",referencedColumnName = "post_id")
 	private Integer post_id;
+	
+	@ManyToOne(cascade = CascadeType.MERGE)
+	@JoinColumn(name = "profile_id",referencedColumnName = "profile_id")
 	private Integer profile_id;
 	private String date_created;
 	
