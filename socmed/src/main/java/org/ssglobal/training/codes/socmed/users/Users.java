@@ -34,7 +34,7 @@ public class Users {
 			strategy = GenerationType.SEQUENCE,
 			generator = "users_sequence"
 	)
-	private Integer user_id;
+	private Integer userId;
 	private String givenName;
 	private String surname;
 	private String username;
@@ -45,15 +45,15 @@ public class Users {
 	private String dot; 
 	
 	@JsonIgnore
-	@OneToMany(mappedBy = "user_id")
+	@OneToMany(mappedBy = "userId")
 	private Set<Post> post= new HashSet<>(); 
 	
 	@JsonIgnore
-	@OneToMany(mappedBy = "profile_id")
+	@OneToMany(mappedBy = "userId")
 	private Set<Likes> likes= new HashSet<>(); 
 	
 	@JsonIgnore
-	@OneToMany(mappedBy = "profile_id")
+	@OneToMany(mappedBy = "userId")
 	private Set<Comment> comments= new HashSet<>(); 
 	
 	/*
@@ -68,9 +68,9 @@ public class Users {
 	
 	public Users() {}
 
-	public Users(Integer user_id, String givenName, String surname, String username,String phoneNumber, String email, String password,
+	public Users(Integer userId, String givenName, String surname, String username,String phoneNumber, String email, String password,
 			String address, String dot) {
-		this.user_id = user_id;
+		this.userId = userId;
 		this.givenName = givenName;
 		this.surname = surname;
 		this.username = username;
@@ -93,12 +93,12 @@ public class Users {
 		this.dot = dot;
 	}
 
-	public Integer getUser_id() {
-		return user_id;
+	public Integer getUserId() {
+		return userId;
 	}
 
-	public void setUser_id(Integer user_id) {
-		this.user_id = user_id;
+	public void setUser_id(Integer userId) {
+		this.userId = userId;
 	}
 
 	public String getGivenName() {

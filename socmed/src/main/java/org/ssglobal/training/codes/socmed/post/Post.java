@@ -17,7 +17,6 @@ import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
-import jakarta.persistence.SequenceGenerator;
 import jakarta.persistence.Table;
 
 @Entity
@@ -25,72 +24,64 @@ import jakarta.persistence.Table;
 public class Post {
 	
 	@Id
-	@SequenceGenerator(
-			  name = "post_sequence",
-			  sequenceName = "post_sequence",
-			  allocationSize = 1
-	)
-	@GeneratedValue(
-			strategy = GenerationType.SEQUENCE,
-			generator = "post_sequence"
-	)
-	private Integer post_id;
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	private Integer postId;
 	
 	@ManyToOne(cascade = CascadeType.MERGE)
-	@JoinColumn(name = "user_id",referencedColumnName = "user_id")
-	private Users user_id;
+	@JoinColumn(name = "userId",referencedColumnName = "userId")
+	private Users userId;
 	
-	private String post_text;
+	private String posttext;
 	private String image;
 	private String created_date;
 	
 	@JsonIgnore
-	@OneToMany(mappedBy = "post_id")
+	@OneToMany(mappedBy = "postId")
 	private Set<Comment> comments= new HashSet<>(); 
 	
 	@JsonIgnore
-	@OneToMany(mappedBy = "post_id")
+	@OneToMany(mappedBy = "postId")
 	private Set<Likes> likes= new HashSet<>(); 
 	
 	public Post() {}
 
-	public Post(Integer post_id, Users user_id, String post_text, String image, String created_date) {
-		this.post_id = post_id;
-		this.user_id = user_id;
-		this.post_text = post_text;
+	public Post(Integer postId, Users userId, String posttext, String image, String created_date) {
+		this.postId = postId;
+		this.userId = userId;
+		this.posttext = posttext;
 		this.image = image;
 		this.created_date = created_date;
 	}
 
-	public Post(Users user_id, String post_text, String image, String created_date) {
-		this.user_id = user_id;
-		this.post_text = post_text;
+	public Post(Users userId, String posttext, String image, String created_date) {
+		this.userId = userId;
+		this.posttext = posttext;
 		this.image = image;
 		this.created_date = created_date;
 	}
 
-	public Integer getPost_id() {
-		return post_id;
+	public Integer getPostId() {
+		return postId;
 	}
 
-	public void setPost_id(Integer post_id) {
-		this.post_id = post_id;
+	public void setPostId(Integer postId) {
+		this.postId = postId;
 	}
 
 	public Users getProfile_id() {
-		return user_id;
+		return userId;
 	}
 
 	public void setProfile_id(Users profile_id) {
-		this.user_id = profile_id;
+		this.userId = profile_id;
 	}
 
 	public String getPost_text() {
-		return post_text;
+		return posttext;
 	}
 
-	public void setPost_text(String post_text) {
-		this.post_text = post_text;
+	public void setPost_text(String posttext) {
+		this.posttext = posttext;
 	}
 
 	public String getImage() {

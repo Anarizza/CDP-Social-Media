@@ -1,6 +1,6 @@
 package org.ssglobal.training.codes.socmed.users;
 
-import java.util.List;
+import java.util.List; 
 import java.util.Optional;
 
 import org.springframework.stereotype.Service;
@@ -60,9 +60,13 @@ public class UsersService {
 	public Users getUsersByGivenName(String userUName) {
 		return usersRepository.findByGivenName(userUName);
 	}
+	
+	public Users getUsersById(Integer userId) {
+		return usersRepository.findByUserId(userId);
+	}
 
-	public Users getUsersBySurname(String sureName) {
-		return usersRepository.findBySurname(sureName);
+	public Users getUsersBySurname(String surname) {
+		return usersRepository.findBySurname(surname);
 	}
 
 }

@@ -18,29 +18,29 @@ public class Comment {
 	private Integer comment_id;
 	
 	@ManyToOne(cascade = CascadeType.MERGE)
-	@JoinColumn(name = "post_id",referencedColumnName = "post_id")
-	private Post post_id;
+	@JoinColumn(name = "postId",referencedColumnName = "postId")
+	private Post postId;
 	
 	@ManyToOne(cascade = CascadeType.MERGE)
-	@JoinColumn(name = "profile_id",referencedColumnName = "user_id")
-	private Users profile_id;
+	@JoinColumn(name = "userId",referencedColumnName = "userId")
+	private Users userId;
 	
 	private String comment_text;
 	private String date_created;
 	
 	public Comment() {}
 
-	public Comment(Integer comment_id, Post post_id, Users profile_id, String comment_text, String date_created) {
+	public Comment(Integer comment_id, Post postId, Users userId, String comment_text, String date_created) {
 		this.comment_id = comment_id;
-		this.post_id = post_id;
-		this.profile_id = profile_id;
+		this.postId = postId;
+		this.userId = userId;
 		this.comment_text = comment_text;
 		this.date_created = date_created;
 	}
 
-	public Comment(Post post_id, Users profile_id, String comment_text, String date_created) {
-		this.post_id = post_id;
-		this.profile_id = profile_id;
+	public Comment(Post post_id, Users userId, String comment_text, String date_created) {
+		this.postId = post_id;
+		this.userId = userId;
 		this.comment_text = comment_text;
 		this.date_created = date_created;
 	}
@@ -54,19 +54,19 @@ public class Comment {
 	}
 
 	public Post getPost_id() {
-		return post_id;
+		return postId;
 	}
 
-	public void setPost_id(Post post_id) {
-		this.post_id = post_id;
+	public void setPost_id(Post postId) {
+		this.postId = postId;
 	}
 
-	public Users getProfile_id() {
-		return profile_id;
+	public Users getUserId() {
+		return userId;
 	}
 
-	public void setProfile_id(Users profile_id) {
-		this.profile_id = profile_id;
+	public void setUserId(Users profile_id) {
+		this.userId = profile_id;
 	}
 
 	public String getComment_text() {

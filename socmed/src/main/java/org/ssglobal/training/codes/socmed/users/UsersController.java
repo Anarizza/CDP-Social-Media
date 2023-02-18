@@ -29,15 +29,22 @@ public class UsersController {
 	}
 	
 	@CrossOrigin(originPatterns = "http://localhost:4200")
-	@RequestMapping(path = "users/{givenName}", method = RequestMethod.GET)
+	@RequestMapping(path = "users/givenname/{givenName}", method = RequestMethod.GET)
 	public Users selectUsersByGivenName(@PathVariable("givenName") String givenName) {
 		Users user =usersService.getUsersByGivenName(givenName);
 		return user;
 	}
 	
 	@CrossOrigin(originPatterns = "http://localhost:4200")
-	@RequestMapping(path = "users/{surname}", method = RequestMethod.GET)
-	public Users selectUsersBySurName(@PathVariable("surname") String surname) {
+	@RequestMapping(path = "users/id/{id}", method = RequestMethod.GET)
+	public Users selectUsersById(@PathVariable("id") Integer userId) {
+		Users user =usersService.getUsersById(userId);
+		return user;
+	}
+	
+	@CrossOrigin(originPatterns = "http://localhost:4200")
+	@RequestMapping(path = "users/surename/{surename}", method = RequestMethod.GET)
+	public Users selectUsersBySurname(@PathVariable("surename") String surname) {
 		Users user =usersService.getUsersBySurname(surname);
 		return user;
 	}
