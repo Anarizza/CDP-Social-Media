@@ -13,6 +13,7 @@ import jakarta.persistence.Table;
 @Entity
 @Table
 public class Comment {
+	//Tryyyyyyy
 	
 	@Id
 	private Integer comment_id;
