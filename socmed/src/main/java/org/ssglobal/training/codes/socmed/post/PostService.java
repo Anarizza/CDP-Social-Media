@@ -43,11 +43,18 @@ public class PostService {
 	}
 	*/
 	
+	public String updatePost(Post newPost) {
+		Post rec = postRepository.findById(newPost.getPostId()).get();
+		rec.setPost_text(newPost.getPost_text());
+		rec.setImage(newPost.getImage());
+		postRepository.save(rec);
+		return "Done updating post!";
+	}
+	
 	
 	public List<Post> deleteFromPostByPostId(Integer post_id) {
 		postRepository.deleteById(post_id);
 		return getPosts();
 	}
 	
-
 }

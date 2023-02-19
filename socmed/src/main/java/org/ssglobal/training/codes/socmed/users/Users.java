@@ -49,11 +49,11 @@ public class Users {
 	private Set<Post> post= new HashSet<>(); 
 	
 	@JsonIgnore
-	@OneToMany(mappedBy = "userId")
+	@OneToMany(mappedBy = "users")
 	private Set<Likes> likes= new HashSet<>(); 
 	
 	@JsonIgnore
-	@OneToMany(mappedBy = "userId")
+	@OneToMany(mappedBy = "users")
 	private Set<Comment> comments= new HashSet<>(); 
 	
 	/*

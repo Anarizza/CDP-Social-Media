@@ -5,7 +5,9 @@ import java.util.List;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.ssglobal.training.codes.socmed.comment.Comment;
 import org.ssglobal.training.codes.socmed.comment.CommentRepository;
+import org.ssglobal.training.codes.socmed.like.Likes;
 import org.ssglobal.training.codes.socmed.like.LikesRepository;
 import org.ssglobal.training.codes.socmed.post.Post;
 import org.ssglobal.training.codes.socmed.post.PostRepository;
@@ -34,7 +36,19 @@ public class UsersConfig {
 			Post p7 = new Post(user1, "world", "", "02/17/2023");
 			postRepo.saveAll(List.of(p1, p2, p3, p4, p5, p6, p7));
 			
+			Comment c1 = new Comment(1, p1, user1, "Nice Post", "02/17/2023");
+			Comment c2 = new Comment(p1, user2, "Nice Post", "02/17/2023");
+			Comment c3 = new Comment(p1, user3, "Nice Post", "02/17/2023");
+			Comment c4 = new Comment(p2, user4, "Nice Post", "02/17/2023");
+			Comment c5 = new Comment(p5, user5, "Nice Post", "02/17/2023");
+			commRepo.saveAll(List.of(c1, c2, c3, c4, c5));
 			
+			Likes l1 = new Likes(1, p1, user1, "");
+			Likes l2 = new Likes(p1, user1, "");
+			Likes l3 = new Likes(p1, user2, "");
+			Likes l4 = new Likes(p1, user3, "");
+			Likes l5 = new Likes(p1, user3, "");
+			likerepo.saveAll(List.of(l1, l2, l3, l4, l5));
 		};
 	}
 
