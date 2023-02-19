@@ -36,11 +36,11 @@ public class Post {
 	private String created_date;
 	
 	@JsonIgnore
-	@OneToMany(mappedBy = "postId")
+	@OneToMany(mappedBy = "post")
 	private Set<Comment> comments= new HashSet<>(); 
 	
 	@JsonIgnore
-	@OneToMany(mappedBy = "postId")
+	@OneToMany(mappedBy = "post")
 	private Set<Likes> likes= new HashSet<>(); 
 	
 	public Post() {}

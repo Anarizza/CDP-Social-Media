@@ -54,6 +54,12 @@ public class PostController {
 	}
 	
 	@CrossOrigin(originPatterns = "http://localhost:4200")
+	@RequestMapping(path = "update/status", method = RequestMethod.POST)
+	public String updatePost(@RequestBody Post updatePost) {
+		return postService.updatePost(updatePost);
+	}
+	
+	@CrossOrigin(originPatterns = "http://localhost:4200")
 	@RequestMapping(path = "deletefrompost/{postId}", method = RequestMethod.POST)
 	public List<Post> RemoveFromPostByPostId(@PathVariable("postId") Integer postId) {
 		return postService.deleteFromPostByPostId(postId);

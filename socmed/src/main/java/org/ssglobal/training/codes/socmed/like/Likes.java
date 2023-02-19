@@ -5,6 +5,8 @@ import org.ssglobal.training.codes.socmed.users.Users;
 
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
@@ -15,55 +17,56 @@ import jakarta.persistence.Table;
 public class Likes {
 	
 	@Id
-	private Integer like_id;
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	private Integer likeId;
 	
 	@ManyToOne(cascade = CascadeType.MERGE)
-	@JoinColumn(name = "postId",referencedColumnName = "postId")
-	private Post postId;
+	@JoinColumn(name = "post",referencedColumnName = "postId")
+	private Post post;
 	
 	@ManyToOne(cascade = CascadeType.MERGE)
-	@JoinColumn(name = "userId",referencedColumnName = "userId")
-	private Users userId;
+	@JoinColumn(name = "users",referencedColumnName = "userId")
+	private Users users;
 	
 	private String date_created;
 	
 	public Likes() {}
 
-	public Likes(Integer like_id, Post postId, Users userId, String date_created) {
-		this.like_id = like_id;
-		this.postId = postId;
-		this.userId = userId;
+	public Likes(Integer likeId, Post post, Users users, String date_created) {
+		this.likeId = likeId;
+		this.post = post;
+		this.users = users;
 		this.date_created = date_created;
 	}
 
-	public Likes(Post postId, Users userId, String date_created) {
-		this.postId = postId;
-		this.userId = userId;
+	public Likes(Post post, Users users, String date_created) {
+		this.post = post;
+		this.users = users;
 		this.date_created = date_created;
 	}
 
-	public Integer getLike_id() {
-		return like_id;
+	public Integer getLikeId() {
+		return likeId;
 	}
 
-	public void setLike_id(Integer like_id) {
-		this.like_id = like_id;
+	public void setLikeId(Integer likeId) {
+		this.likeId = likeId;
 	}
 
-	public Post getPost_id() {
-		return postId;
+	public Post getPost() {
+		return post;
 	}
 
-	public void setPost_id(Post post_id) {
-		this.postId = post_id;
+	public void setPost(Post post) {
+		this.post = post;
 	}
 
 	public Users getUserId() {
-		return userId;
+		return users;
 	}
 
-	public void setUserId(Users profile_id) {
-		this.userId = profile_id;
+	public void setUserId(Users userId) {
+		this.users = userId;
 	}
 
 	public String getDate_created() {
