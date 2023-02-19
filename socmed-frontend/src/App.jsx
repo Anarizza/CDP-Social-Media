@@ -11,7 +11,6 @@ const App = () => {
   return (
     <>
       <CssBaseline>
-        <Container>
           <Routes>
             <Route path="/" element={<Navigate to="/homepage" />} />
             <Route path="/homepage" element={<HomePage />} />
@@ -19,7 +18,6 @@ const App = () => {
             <Route path="/register" element={<Register />} />
             <Route path="/profile" element={<Profile />} />
           </Routes>
-        </Container>
       </CssBaseline>
     </>
   );
