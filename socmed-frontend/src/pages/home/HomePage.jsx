@@ -1,4 +1,5 @@
 import React from "react";
+import Feed from "../../Components/feed/Feed";
 import NavBar from "../../Components/navbar/NavBar";
 import Sidebar from "../../Components/sidebar/Sidebar";
 import "./HomePage.css";
@@ -7,8 +8,8 @@ const HomePage = () => {
     <div className="home">
       <NavBar />
       <div className="homeContainer">
-    <Sidebar/>
-
+        <Sidebar />
+        <Feed />
       </div>
     </div>
   );
