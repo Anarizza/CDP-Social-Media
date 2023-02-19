@@ -1,6 +1,7 @@
 import React from "react";
 import Feed from "../../Components/feed/Feed";
 import NavBar from "../../Components/navbar/NavBar";
+import Rightbar from "../../Components/rightbar/Rightbar";
 import Sidebar from "../../Components/sidebar/Sidebar";
 import "./HomePage.css";
 const HomePage = () => {
@@ -10,6 +11,7 @@ const HomePage = () => {
       <div className="homeContainer">
         <Sidebar />
         <Feed />
+        <Rightbar />
       </div>
     </div>
   );
