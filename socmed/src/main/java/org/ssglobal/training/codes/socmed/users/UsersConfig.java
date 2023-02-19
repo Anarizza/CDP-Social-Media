@@ -30,7 +30,9 @@ public class UsersConfig {
 			Post p3 = new Post(user3, "Good Morning", "", "02/17/2023");
 			Post p4 = new Post(user4, "Good Morning", "", "02/17/2023");
 			Post p5 = new Post(user5, "Good Morning", "", "02/17/2023");
-			postRepo.saveAll(List.of(p1, p2, p3, p4, p5));
+			Post p6 = new Post(user1, "bye", "", "02/17/2023");
+			Post p7 = new Post(user1, "world", "", "02/17/2023");
+			postRepo.saveAll(List.of(p1, p2, p3, p4, p5, p6, p7));
 			
 			
 		};

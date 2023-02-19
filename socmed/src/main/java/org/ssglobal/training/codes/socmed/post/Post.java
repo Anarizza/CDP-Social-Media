@@ -28,8 +28,8 @@ public class Post {
 	private Integer postId;
 	
 	@ManyToOne(cascade = CascadeType.MERGE)
-	@JoinColumn(name = "userId",referencedColumnName = "userId")
-	private Users userId;
+	@JoinColumn(name = "users",referencedColumnName = "userId")
+	private Users users;
 	
 	private String posttext;
 	private String image;
@@ -45,16 +45,16 @@ public class Post {
 	
 	public Post() {}
 
-	public Post(Integer postId, Users userId, String posttext, String image, String created_date) {
+	public Post(Integer postId, Users users, String posttext, String image, String created_date) {
 		this.postId = postId;
-		this.userId = userId;
+		this.users = users;
 		this.posttext = posttext;
 		this.image = image;
 		this.created_date = created_date;
 	}
 
-	public Post(Users userId, String posttext, String image, String created_date) {
-		this.userId = userId;
+	public Post(Users users, String posttext, String image, String created_date) {
+		this.users = users;
 		this.posttext = posttext;
 		this.image = image;
 		this.created_date = created_date;
@@ -68,12 +68,12 @@ public class Post {
 		this.postId = postId;
 	}
 
-	public Users getProfile_id() {
-		return userId;
+	public Users getUsers() {
+		return users;
 	}
 
-	public void setProfile_id(Users profile_id) {
-		this.userId = profile_id;
+	public void setUsers(Users users) {
+		this.users = users;
 	}
 
 	public String getPost_text() {

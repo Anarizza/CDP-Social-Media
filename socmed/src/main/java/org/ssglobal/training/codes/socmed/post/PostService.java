@@ -28,6 +28,14 @@ public class PostService {
 		return postRepository.findByPosttext(post_text);
 	}
 	
+	public List<Post> getPostByPostId(Integer postId) {
+		return postRepository.findByPostId(postId);
+	}
+	
+	public List<Post> getPostByUsersUserId(Integer userId) {
+		return postRepository.findByUsersUserId(userId);
+	}
+	
 	/*
 	public List<Post> getPostByPostText(String post_text){
 		//Integer transaction = null;

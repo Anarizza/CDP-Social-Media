@@ -28,7 +28,6 @@ public class PostController {
 		return postService.getPosts();
 	}
 	
-	
 	@CrossOrigin(originPatterns = "http://localhost:4200")
 	@RequestMapping(path = "new", method = RequestMethod.POST)
 	public Post registerUser(@RequestBody Post post) {
@@ -37,8 +36,21 @@ public class PostController {
 	
 	@CrossOrigin(originPatterns = "http://localhost:4200")
 	@RequestMapping(path = "message/{pText}", method = RequestMethod.GET)
-	public List<Post> selectPostByPostText(@PathVariable("pText") String post_text) {
-		 return postService.getPostByPostText(post_text);
+	public List<Post> selectPostByPostText(@PathVariable("pText") String posttext) {
+		 return postService.getPostByPostText(posttext);
+	}
+	
+	@CrossOrigin(originPatterns = "http://localhost:4200")
+	@RequestMapping(path = "id/{id}", method = RequestMethod.GET)
+	public List<Post> selectPostByPostId(@PathVariable("id") Integer postId) {
+		 return postService.getPostByPostId(postId);
+	}
+	
+	@CrossOrigin(originPatterns = "http://localhost:4200")
+	@RequestMapping(path = "userid/{user}", method = RequestMethod.GET)
+	public List<Post> selectPostByUsersUserId(@PathVariable("user") Integer userId) {
+		 List<Post> post =  postService.getPostByUsersUserId(userId);
+		 return post;
 	}
 	
 	@CrossOrigin(originPatterns = "http://localhost:4200")
@@ -46,6 +58,5 @@ public class PostController {
 	public List<Post> RemoveFromPostByPostId(@PathVariable("postId") Integer postId) {
 		return postService.deleteFromPostByPostId(postId);
 	}
-	
 	
 }

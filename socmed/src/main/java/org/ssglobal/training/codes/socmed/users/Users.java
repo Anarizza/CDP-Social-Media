@@ -45,7 +45,7 @@ public class Users {
 	private String dot; 
 	
 	@JsonIgnore
-	@OneToMany(mappedBy = "userId")
+	@OneToMany(mappedBy = "users")
 	private Set<Post> post= new HashSet<>(); 
 	
 	@JsonIgnore
