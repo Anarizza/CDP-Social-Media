@@ -40,7 +40,7 @@ const NavBar = () => {
             <div className="navbarIconBadge">8</div>
           </div>
         </div>
-        <Link to="/profile/userId">
+        <Link to="/profile">
           <img src="/assets/person/user.jpg" alt="" className="navbarImg" />
         </Link>
       </div>

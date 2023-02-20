@@ -1,0 +1,157 @@
+.doublecol {
+    display: flex;
+}
+
+/* Cover */
+.top-2 {
+    position: static;
+    top: 0px;
+    width: 1000px;
+}
+
+.cover-photo {
+    margin-bottom: 20px;
+    margin-top: 0px;
+    margin-right: -100px;
+    margin-left: -210px;
+    text-align: right;
+}
+
+.cover-photo img {
+    box-shadow: 0px 0px 5px 1px grey;
+    height: 300px;
+    width: 70%;
+}
+
+.profile {
+    margin-top: -90px;
+    margin-left: -400px;
+    position: relative;
+    text-align: center;
+}
+
+.profile img {
+    box-shadow: 0px 0px 5px 1px grey;
+    height: 150px;
+    width: 150px;
+    border-radius: 50%;
+    object-fit: cover;
+}
+
+.name {
+    font-size: 30px;
+    font-weight: bold;
+    margin-top: -40px;
+    margin-left: 360px;
+}
+/* End */
+
+/* Menu */
+.menu {
+    color: #ffffff;
+    height: 50px;
+    margin-left: 165px;
+    margin-right: 210px;
+}
+
+.menu ul {
+    float: none;
+    height: 100px;
+    list-style-type: none;
+    margin-top: 30px;
+    margin-left: 0px;
+    overflow: hidden;
+    padding: 8px 50px 0 40px;
+}
+
+.menu ul li {
+    float: left;
+    position: relative;
+}
+
+.menu ul li a {
+    color: #000000;
+    padding: 14px 16px;
+    text-align: center;
+}
+/* End */
+
+/* Main */
+.main {
+    margin-top: 0px;
+    margin-left: 160px;
+    float: left;
+    font-size: 28px;
+    padding: 0 10px;
+    position: static;
+    width: 300px;
+}
+
+.main h2 {
+    color: #333;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    font-size: 24px;
+    margin-bottom: 10px;
+}
+
+.main .card {
+    background-color: #fff;
+    border-radius: 18px;
+    box-shadow: 1px 1px 8px 0 grey;
+    height: auto;
+    margin-bottom: 20px;
+    padding: 20px 310px 20px 50px;
+}
+
+.main .card table {
+    border: none;
+    font-size: 16px;
+    height: 270px;
+    width: 80%;
+    margin-left: -30px;
+}
+
+.friends {
+    text-align: center;
+    width: 90%;
+}
+
+.friends span {
+    margin: 0 10px;
+}
+/* End */
+
+/* Main2 */
+.main-2 {
+    margin-top: 0px;
+    margin-left: 100px;
+    float: left;
+    font-size: 28px;
+    padding: 0 10px;
+    position: static;
+    width: 560px;
+}
+
+.main-2 h2 {
+    color: #333;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    font-size: 24px;
+    margin-bottom: 10px;
+}
+
+.main-2 .card-2 {
+    background-color: #fff;
+    border-radius: 18px;
+    box-shadow: 1px 1px 8px 0 grey;
+    height: 500px;
+    margin-bottom: 20px;
+    padding: 20px 0px 20px 50px;
+}
+
+.main-2 .card-2 table {
+    border: none;
+    font-size: 16px;
+    height: 270px;
+    width: 80%;
+}
+/* End */
