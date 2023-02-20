@@ -21,20 +21,20 @@ public class LikesController {
 		this.likeService = likeService;
 	}
 
-	@CrossOrigin(originPatterns = "http://localhost:4200")
+	@CrossOrigin(originPatterns = "http://localhost:3000")
 	@RequestMapping(path = "new", method = RequestMethod.POST)
 	public Likes newLikes(@RequestBody Likes comm) {
 		return likeService.addLikes(comm);
 	}
 	
-	@CrossOrigin(originPatterns = "http://localhost:4200")
+	@CrossOrigin(originPatterns = "http://localhost:3000")
 	@RequestMapping(path = "{like}", method = RequestMethod.GET)
 	public List<Likes> selectLikesByUsersUserId(@PathVariable("like") Integer userId) {
 		 List<Likes> like =  likeService.getLikesByUsersUserId(userId);
 		 return like;
 	}
 	
-	@CrossOrigin(originPatterns = "http://localhost:4200")
+	@CrossOrigin(originPatterns = "http://localhost:3000")
 	@RequestMapping(path = "removelikes/{likeId}", method = RequestMethod.POST)
 	public String RemoveFromLikesByLikeId(@PathVariable("likeId") Integer likeId) {
 		return likeService.deleteFromLikesByUsersUserId(likeId).toString();

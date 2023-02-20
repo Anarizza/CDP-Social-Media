@@ -21,26 +21,26 @@ public class CommentController {
 		this.commentService = commentService;
 	}
 	
-	@CrossOrigin(originPatterns = "http://localhost:4200")
+	@CrossOrigin(originPatterns = "http://localhost:3000")
 	@RequestMapping(path = "{post}", method = RequestMethod.GET)
 	public List<Comment> selectCommentByPostPostId(@PathVariable("post") Integer postId) {
 		 List<Comment> comment =  commentService.getCommentByPostPostId(postId);
 		 return comment;
 	}
 	
-	@CrossOrigin(originPatterns = "http://localhost:4200")
+	@CrossOrigin(originPatterns = "http://localhost:3000")
 	@RequestMapping(path = "new", method = RequestMethod.POST)
 	public Comment newPost(@RequestBody Comment comm) {
 		return commentService.addComment(comm);
 	}
 	
-	@CrossOrigin(originPatterns = "http://localhost:4200")
+	@CrossOrigin(originPatterns = "http://localhost:3000")
 	@RequestMapping(path = "update/status", method = RequestMethod.POST)
 	public String updateComment(@RequestBody Comment updateComment) {
 		return commentService.updateComment(updateComment);
 	}
 	
-	@CrossOrigin(originPatterns = "http://localhost:4200")
+	@CrossOrigin(originPatterns = "http://localhost:3000")
 	@RequestMapping(path = "deletecomment/{commId}", method = RequestMethod.POST)
 	public String RemoveFromCommentByCommentId(@PathVariable("commId") Integer commentId) {
 		return commentService.deleteFromPostByPostId(commentId).toString();
