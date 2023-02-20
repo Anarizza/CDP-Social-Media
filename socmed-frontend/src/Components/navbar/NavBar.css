@@ -9,7 +9,13 @@
   font-weight: 500;
   cursor: pointer;
 }
+.bars {
+  margin-bottom: 1%;
+}
 
+.imeline{
+  margin-bottom: 12%;
+}
 .navbarContainer {
     width: 100%;
     height: 50px;
@@ -37,7 +43,7 @@
   
   .navbarCenter {
     flex: 5;
-   
+    margin-bottom: 1%;
   }
   .searchBar {
     width: 100%;

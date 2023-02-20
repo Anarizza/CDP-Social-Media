@@ -39,27 +39,31 @@ const NavBar = () => {
 
   return (
     
-    <AppBar position="sticky" sx={{background: '#00796b', height: '50px' }}>
+    <AppBar position="sticky" sx={{background: '#00796b', height: '50px'}}>
     <Container maxWidth="xl" >
       <Toolbar disableGutters>
-        <img src="./assets/logo.png" width="40px" height="40px" />
+        <div className="bars">
+          <img src="./assets/logo.png" width="40px" height="40px" />
+        </div>
+        
         <Typography
           variant="h4"
           noWrap
           component="a"
           href="/"
           sx={{
-            my: 2,
+            my: 1,
             mr: 1,
             display: { xs: 'none', md: 'flex' },
-            fontFamily: 'monospace',
             fontWeight: 700,
             letterSpacing: '.2rem',
             color: 'inherit',
             textDecoration: 'none',
           }}
-        >
-          IMELINE
+        > <div className="imeline">
+           IMELINE
+          </div>
+         
         </Typography>
         <div className="navbarCenter">
             <div className="searchBar">
@@ -117,22 +121,22 @@ const NavBar = () => {
           </Menu>
         </Box>
        
-        <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex', paddingRight: '100px'},  flexDirection: 'row-reverse', p: 1, m: 1}}>
+        <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex', paddingRight: '100px'},  flexDirection: 'row-reverse', p: 1, mb: 1}}>
            <Link to="/homepage">
               <Button sx={{ my: -1, color: 'white', display: 'block' }} >
-                  <HomeIcon fontSize='large'/> 
+                  <HomeIcon fontSize='medium'/> 
               </Button>
            </Link>
          
             <Button sx={{ my: -1, color: 'white', display: 'block' }}>
-                <NotificationsIcon fontSize='large'/> 
+                <NotificationsIcon fontSize='medium'/> 
             </Button>
             <Button sx={{ my: -1, color: 'white', display: 'block' }}>
-                <ChatIcon fontSize='large' />
+                <ChatIcon fontSize='medium' />
             </Button>
             <Link to="/profile">
             <Button sx={{ my: -1, color: 'white', display: 'block' }}>
-                <AccountCircleIcon fontSize='large'/>
+                <AccountCircleIcon fontSize='medium'/>
             </Button>
             </Link>
         </Box>
