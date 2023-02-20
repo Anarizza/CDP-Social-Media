@@ -4,13 +4,14 @@ import NavBar from "../../Components/navbar/NavBar";
 import Rightbar from "../../Components/rightbar/Rightbar";
 import Sidebar from "../../Components/sidebar/Sidebar";
 import "./HomePage.css";
+
 const HomePage = () => {
   return (
     <div className="home">
-      <NavBar />
+      <NavBar/>
       <div className="homeContainer">
         <Sidebar />
-        <Feed />
+        <Feed className="feed"/>
         <Rightbar />
       </div>
     </div>
