@@ -1,10 +1,19 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Close, EmojiEmotions, PermMedia } from "@mui/icons-material";
 import "./Share.css";
 import SendIcon from "@mui/icons-material/Send";
+import * as postService from "../../Service/post";
 
 const Share = () => {
   const [file, setFile] = useState(null);
+  const [posts, setPosts] = useState([]);
+
+  useEffect(() => {
+    postService.addPost().then((response) => {
+      setPosts(response.data);
+      console.log(response.data);
+    });
+  }, []);
 
   const removeImage = () => {
     setFile(null);
@@ -35,7 +44,7 @@ const Share = () => {
           <div className="shareOptions">
             <label htmlFor="file" className="shareOption">
               <PermMedia className="shareIcon" style={{ color: "#2e0196f1" }} />
-              <div className="shareOptionText">Photo/Video</div>
+              <div className="shareOptionText">Image</div>
               <input
                 type="file"
                 id="file"
