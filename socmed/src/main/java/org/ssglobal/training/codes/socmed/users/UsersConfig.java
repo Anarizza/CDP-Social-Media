@@ -20,20 +20,20 @@ public class UsersConfig {
 			CommentRepository commRepo) {
 		return args -> {
 			
-			Users user1 = new Users(1, "", "Pola", "Dela Cruz", "pola", "09123456789", "ana@delacruz", "admin2255", "Bulacan", "07/15/1999");
-			Users user2 = new Users("", "Hazel", "Fugata", "hazel", "09123456789", "hazel@delacruz", "admin2255", "Cavite", "07/15/1999");
-			Users user3 = new Users("", "Allan", "Dela Cruz", "allan", "09123456789", "allan@delacruz", "admin2255", "Pasig", "07/15/1999");
-			Users user4 = new Users("", "Nick", "Dela Cruz", "Nick", "09123456789", "nick@delacruz", "admin2255", "Cebu", "07/15/1999");
-			Users user5 = new Users("", "Janus", "Dela Cruz", "janus", "09123456789", "janus@delacruz", "admin2255", "Mindanao", "07/15/1999");
+			Users user1 = new Users(1, "/assets/person/person1.jpg", "Pola", "Dela Cruz", "pola", "09123456789", "ana@delacruz", "admin2255", "Bulacan", "07/15/1999");
+			Users user2 = new Users("/assets/person/person2.jpg", "Hazel", "Fugata", "hazel", "09123456789", "hazel@delacruz", "admin2255", "Cavite", "07/15/1999");
+			Users user3 = new Users("/assets/person/person3.jpg", "Allan", "Dela Cruz", "allan", "09123456789", "allan@delacruz", "admin2255", "Pasig", "07/15/1999");
+			Users user4 = new Users("/assets/person/person4.jpg", "Nick", "Dela Cruz", "Nick", "09123456789", "nick@delacruz", "admin2255", "Cebu", "07/15/1999");
+			Users user5 = new Users("/assets/person/person5.jpg", "Janus", "Dela Cruz", "janus", "09123456789", "janus@delacruz", "admin2255", "Mindanao", "07/15/1999");
 			userRepo.saveAll(List.of(user1, user2, user3, user4, user5));
 			
-			Post p1 = new Post(1, user1, "Hello World", "/assets/person/person1.jpg", "02/17/2023");
-			Post p2 = new Post(user2, "Good Morning", "/assets/person/person2.jpg", "02/17/2023");
-			Post p3 = new Post(user3, "Have a good day!", "/assets/person/person3.jpg", "02/17/2023");
-			Post p4 = new Post(user4, "Greate powers comes with greate responsibility", "/assets/person/person4.jpg", "02/17/2023");
-			Post p5 = new Post(user5, "Nice day!", "/assets/person/friend4.jpg", "02/17/2023");
-			Post p6 = new Post(user1, "Cant hold back", "/assets/person/friend5.jpg", "02/17/2023");
-			Post p7 = new Post(user1, "Happy Birthday", "/assets/person/friend6.jpg", "02/17/2023");
+			Post p1 = new Post(1, user1, "Hello World", "/assets/posts/post1.jpg", "02/17/2023");
+			Post p2 = new Post(user2, "Good Morning", "/assets/posts/post2.jpg", "02/17/2023");
+			Post p3 = new Post(user3, "Have a good day!", "/assets/posts/post3.jpg", "02/17/2023");
+			Post p4 = new Post(user4, "Greate powers comes with greate responsibility", "/assets/posts/post4.jpg", "02/17/2023");
+			Post p5 = new Post(user5, "Nice day!", "/assets/posts/post5.jpg", "02/17/2023");
+			Post p6 = new Post(user1, "Cant hold back", "/assets/posts/post6.jpg", "02/17/2023");
+			Post p7 = new Post(user1, "Happy Birthday", "/assets/posts/post7.jpg", "02/17/2023");
 			postRepo.saveAll(List.of(p1, p2, p3, p4, p5, p6, p7));
 			
 			Comment c1 = new Comment(1, p1, user1, "Nice Post", "02/17/2023");
