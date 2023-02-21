@@ -35,6 +35,7 @@ public class Users {
 			generator = "users_sequence"
 	)
 	private Integer userId;
+	private String profilePic;
 	private String givenName;
 	private String surname;
 	private String username;
@@ -68,9 +69,10 @@ public class Users {
 	
 	public Users() {}
 
-	public Users(Integer userId, String givenName, String surname, String username,String phoneNumber, String email, String password,
+	public Users(Integer userId, String profilePic, String givenName, String surname, String username,String phoneNumber, String email, String password,
 			String address, String dot) {
 		this.userId = userId;
+		this.profilePic =profilePic;
 		this.givenName = givenName;
 		this.surname = surname;
 		this.username = username;
@@ -81,8 +83,9 @@ public class Users {
 		this.dot = dot;
 	}
 
-	public Users(String givenName, String surname, String username, String phoneNumber, String email, String password, String address,
+	public Users(String profilePic, String givenName, String surname, String username, String phoneNumber, String email, String password, String address,
 			String dot) {
+		this.profilePic = profilePic;
 		this.givenName = givenName;
 		this.surname = surname;
 		this.username = username;
@@ -92,6 +95,7 @@ public class Users {
 		this.address = address;
 		this.dot = dot;
 	}
+	
 
 	public Integer getUserId() {
 		return userId;
@@ -99,6 +103,15 @@ public class Users {
 
 	public void setUser_id(Integer userId) {
 		this.userId = userId;
+	}
+	
+	
+	public String getProfilePic() {
+		return profilePic;
+	}
+
+	public void setProfilePic(String profilePic) {
+		this.profilePic = profilePic;
 	}
 
 	public String getGivenName() {
