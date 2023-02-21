@@ -11,8 +11,13 @@ import {
   ShareOutlined,
 } from "@mui/icons-material";
 import { Link } from "react-router-dom";
+import ModalImage from "react-modal-image";
+
 
 const Post = ({ post }) => {
+
+
+
   return (
     <div className="post">
       <div className="postWrapper">
@@ -25,7 +30,7 @@ const Post = ({ post }) => {
                 className="postProfileImg"
               />
             </Link>
-            <div className="postName">{post.users.givenName}</div>
+            <div className="postName">{post.users.givenName +' '+ post.users.surname}</div>
             <div className="postUsername">@{post.users.username}</div>
           </div>
 
@@ -38,7 +43,14 @@ const Post = ({ post }) => {
         <div className="postDate">{post.created_date}</div>
         <div className="postCenter">
           <div className="postText">{post.post_text}</div>
-          <img src={post.image} alt="" className="postImg" />
+
+          <ModalImage
+              className="postImg"
+              small={post.image}
+              medium={post.image}
+              alt=""
+           />
+
         </div>
         <div className="postBottom">
           <div className="postBottomLeft">

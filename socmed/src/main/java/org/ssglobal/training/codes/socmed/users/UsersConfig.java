@@ -22,9 +22,9 @@ public class UsersConfig {
 			
 			Users user1 = new Users(1, "/assets/person/person1.jpg", "Pola", "Dela Cruz", "pola", "09123456789", "ana@delacruz", "admin2255", "Bulacan", "07/15/1999");
 			Users user2 = new Users("/assets/person/person2.jpg", "Hazel", "Fugata", "hazel", "09123456789", "hazel@delacruz", "admin2255", "Cavite", "07/15/1999");
-			Users user3 = new Users("/assets/person/person3.jpg", "Allan", "Dela Cruz", "allan", "09123456789", "allan@delacruz", "admin2255", "Pasig", "07/15/1999");
-			Users user4 = new Users("/assets/person/person4.jpg", "Nick", "Dela Cruz", "Nick", "09123456789", "nick@delacruz", "admin2255", "Cebu", "07/15/1999");
-			Users user5 = new Users("/assets/person/person5.jpg", "Janus", "Dela Cruz", "janus", "09123456789", "janus@delacruz", "admin2255", "Mindanao", "07/15/1999");
+			Users user3 = new Users("/assets/person/person3.jpg", "Allan", "Roxa Jr", "allan", "09123456789", "allan@delacruz", "admin2255", "Pasig", "07/15/1999");
+			Users user4 = new Users("/assets/person/person4.jpg", "Nick", "Libre", "Nick", "09123456789", "nick@delacruz", "admin2255", "Cebu", "07/15/1999");
+			Users user5 = new Users("/assets/person/person5.jpg", "Janus", "Cunanan", "janus", "09123456789", "janus@delacruz", "admin2255", "Mindanao", "07/15/1999");
 			userRepo.saveAll(List.of(user1, user2, user3, user4, user5));
 			
 			Post p1 = new Post(1, user1, "Hello World", "/assets/posts/post1.jpg", "02/17/2023");
