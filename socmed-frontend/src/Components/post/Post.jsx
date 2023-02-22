@@ -16,8 +16,6 @@ import ModalImage from "react-modal-image";
 
 const Post = ({ post }) => {
 
-
-
   return (
     <div className="post">
       <div className="postWrapper">
@@ -71,10 +69,13 @@ const Post = ({ post }) => {
             <ThumbUpAltOutlined className="footerIcon" />
             <div className="footerText">Like</div>
           </div>
+          <Link to={`/post/id/${post.postId}`} style={{textDecoration:'none'}}>
+          <IconButton>
           <div className="postBottomFooterItem">
-            <ChatBubbleOutline className="footerIcon" />
-            <div className="footerText">Comment</div>
+            <div className="footerText">See More..</div>
           </div>
+          </IconButton>
+          </Link>
           <div className="postBottomFooterItem">
             <ShareOutlined className="footerIcon" />
             <div className="footerText">Share</div>
