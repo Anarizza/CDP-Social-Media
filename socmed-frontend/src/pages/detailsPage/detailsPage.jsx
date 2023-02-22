@@ -57,7 +57,7 @@ const DetailsPage = () => {
   if (posts)
   return (
     
-    <div className="post">
+    <div className="postdetails">
       <div className="postWrapper">
         <div className="postTop">
           <div className="postTopLeft">

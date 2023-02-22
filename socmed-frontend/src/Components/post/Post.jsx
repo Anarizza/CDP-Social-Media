@@ -64,7 +64,7 @@ const Post = ({ post }) => {
         </div>
 
         <hr className="footerHr" />
-        <div className="postBottomFooter">
+        <div className="postBottomFooter">  
           <div className="postBottomFooterItem">
             <ThumbUpAltOutlined className="footerIcon" />
             <div className="footerText">Like</div>
