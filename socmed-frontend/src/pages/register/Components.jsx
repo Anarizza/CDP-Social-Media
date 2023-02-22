@@ -1,5 +1,16 @@
 import styled from "styled-components";
 
+export const Outer = styled.div`
+  background: #f6f5f7;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  font-family: "Montserrat", sans-serif;
+  height: 100vh;
+  margin: 0px 0 50px;
+`;
+
 export const Container = styled.div`
   background-color: #fff;
   border-radius: 10px;
@@ -35,6 +46,7 @@ export const SignInContainer = styled.div`
   position: absolute;
   top: 0;
   height: 100%;
+  margin-top: 140px;
   transition: all 0.6s ease-in-out;
   left: 0;
   width: 50%;
@@ -49,8 +61,8 @@ export const Form = styled.form`
   align-items: center;
   justify-content: center;
   flex-direction: column;
-  padding: 0 50px;
-  height: 100%;
+  padding: 50px 50px;
+  max-height: 100%;
   text-align: center;
 `;
 
@@ -63,31 +75,43 @@ export const NameInput = styled.input`
   background-color: #eee;
   border: none;
   border-radius: 20px;
-  padding: 12px 15px;
+  padding: 5px 10px;
   margin: 8px 0;
   width: 100%;
+
+  &.signup-error {
+    border: 1px solid #fc8181;
+  }
 `;
 
 export const SignUpInput = styled.input`
   background-color: #eee;
   border: none;
   border-radius: 20px;
-  padding: 12px 15px;
+  padding: 5px 10px;
   margin: 8px 0;
   margin-right: 203px;
   margin-left: -4px;
   width: 100%;
+
+  &.signup-error {
+    border: 1px solid #fc8181;
+  }
 `;
 
 export const SignUpBDate = styled.input`
   background-color: #eee;
-  border: none;
   border-radius: 20px;
-  padding: 12px 15px;
+  border: none;
+  padding: 5px 10px;
   margin: 8px 0;
   margin-right: 257px;
   margin-left: -5px;
   width: 100%;
+
+  &.signup-error {
+    border: 1px solid #fc8181;
+  }
 `;
 
 export const SignInInput = styled.input`
@@ -97,6 +121,10 @@ export const SignInInput = styled.input`
   padding: 12px 15px;
   margin: 8px 0;
   width: 100%;
+
+  &.signin-error {
+    border: 1px solid #fc8181;
+  }
 `;
 
 export const Button = styled.button`
@@ -110,6 +138,10 @@ export const Button = styled.button`
   letter-spacing: 1px;
   text-transform: uppercase;
   transition: transform 80ms ease-in;
+
+  &:disabled {
+    opacity: 0.35;
+  }
   &:active {
     transform: scale(0.95);
   }

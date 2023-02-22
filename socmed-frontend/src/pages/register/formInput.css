@@ -3,8 +3,40 @@
   flex-direction: row;
 }
 
+/* .bDateContainer {
+  display: flex;
+  flex-direction: row;
+}
+
+.bDateLabel,
+.bDateInput {
+  display: inline-block;
+  margin-right: 10px;
+} */
+
 .givenName,
 .surName {
   display: inline-block;
   margin-right: 10px;
+}
+
+input.signup-error,
+select.signup-error {
+  border-color: #fc8181;
+}
+
+.signupError {
+  font-size: 10px;
+  color: red;
+  margin-top: 0px;
+  margin-left: 5%;
+  text-align: left;
+}
+
+.signinError {
+  font-size: 12px;
+  color: red;
+  margin-left: -230px;
+  margin-top: 0px;
+  text-align: left;
 }

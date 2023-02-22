@@ -1,215 +1,298 @@
-import Joi from "joi";
-import React, { useState } from "react";
+import React from "react";
 import * as Components from "./Components";
 import "./formInput.css";
+import { useFormik } from "formik";
+import { formSchema } from "./schemas";
+
+const onSubmit = async (values, actions) => {
+  console.log(values);
+  console.log(actions);
+  await new Promise((resolve) => setTimeout(resolve, 1000));
+  actions.resetForm();
+};
 
 function Register() {
   const [signIn, toggle] = React.useState(true);
-  const [form, setForm] = useState({
-    givenName: "",
-    surName: "",
-    userName: "",
-    email: "",
-    phone: "",
-    address: "",
-    birthdate: "",
-    password: "",
-    confirmPassword: "",
+  const {
+    values,
+    errors,
+    touched,
+    isSubmitting,
+    handleBlur,
+    handleChange,
+    handleSubmit,
+  } = useFormik({
+    initialValues: {
+      givenName: "",
+      surName: "",
+      signInUsername: "",
+      signUpUsername: "",
+      email: "",
+      phone: "",
+      address: "",
+      birthDate: "",
+      signUpPassword: "",
+      signInPassword: "",
+      confirmPassword: "",
+    },
+    validationSchema: formSchema,
+    onSubmit,
   });
-
-  const [errors, setErrors] = useState({
-    givenName: "Invalid First Name",
-  });
-
-  const schema = Joi.object({
-    givenName: Joi.string().min(2).max(50).required(),
-    surName: Joi.string().min(2).max(50).required(),
-    userName: Joi.string().min(3).max(20).required(),
-    email: Joi.string()
-      .email({ minDomainSegments: 2, tlds: { allow: ["com", "net"] } })
-      .required(),
-    phone: Joi.string().min(6).max(15).allow("").optional(),
-    address: Joi.string().min(3).max(500).allow("").optional(),
-    birthdate: Joi.date().max("now").required(),
-    password: Joi.string()
-      .min(8)
-      .max(20)
-      .regex(/^(?=.*[a-zA-Z])(?=.*\d)(?=.*[!@#$%^&*()_+])(?!.*\s).{8,20}$/)
-      .required(),
-    confirmPassword: Joi.any().valid(Joi.ref("password")).required(),
-  });
-
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    console.log(form);
-  };
-
-  const handleChange = ({ currentTarget: input }) => {
-    setForm({
-      ...form,
-      [input.name]: input.value,
-    });
-
-    const result = schema.extract(input.givenName).validate(input.value);
-    console.log(result);
-  };
-
-  const isFormInvalid = () => {
-    const result = schema.validate(form);
-
-    return !!result.error;
-    //console.log(result);
-  };
 
   return (
-    <Components.Container component="form" onSubmit={handleSubmit}>
-      <Components.SignUpContainer signinIn={signIn}>
-        <Components.Form>
-          <Components.Title>Create Account</Components.Title>
-          <div className="nameContainer">
-            <div className="givenName">
-              <Components.NameInput
-                value={form.givenName}
-                type="text"
-                placeholder="First Name"
-                name="givenName"
-                error={!!errors.givenName}
-                helperText={errors.givenName}
-                onChange={handleChange}
-              />
+    <Components.Outer>
+      <Components.Container>
+        <Components.SignUpContainer signinIn={signIn}>
+          <Components.Form onSubmit={handleSubmit} autoComplete="off">
+            {/* SignUp starts here... */}
+            <Components.Title>Create Account</Components.Title>
+            <div className="nameContainer">
+              <div className="givenName">
+                <Components.NameInput
+                  value={values.givenName}
+                  onChange={handleChange}
+                  id="givenName"
+                  type="text"
+                  placeholder="First Name"
+                  onBlur={handleBlur}
+                  className={
+                    errors.givenName && touched.givenName ? "signup-error" : ""
+                  }
+                />
+                {errors.givenName && touched.givenName && (
+                  <p className="signupError">{errors.givenName}</p>
+                )}
+              </div>
+
+              <div className="surName">
+                <Components.NameInput
+                  value={values.surName}
+                  onChange={handleChange}
+                  id="surName"
+                  type="text"
+                  placeholder="Last Name"
+                  onBlur={handleBlur}
+                  className={
+                    errors.surName && touched.surName ? "signup-error" : ""
+                  }
+                />
+                {errors.surName && touched.surName && (
+                  <p className="signupError">{errors.surName}</p>
+                )}
+              </div>
             </div>
 
-            <div className="surName">
-              <Components.NameInput
-                value={form.surName}
-                type="text"
-                placeholder="Last Name"
-                name="surName"
+            <div>
+              <Components.SignUpInput
+                value={values.signUpUsername}
                 onChange={handleChange}
-                error={!!errors.surName}
-                helperText="mynameishelper"
+                id="signUpUsername"
+                type="text"
+                placeholder="Username"
+                onBlur={handleBlur}
+                className={
+                  errors.signUpUsername && touched.signUpUsername
+                    ? "signup-error"
+                    : ""
+                }
               />
+              {errors.signUpUsername && touched.signUpUsername && (
+                <p className="signupError">{errors.signUpUsername}</p>
+              )}
             </div>
-          </div>
 
-          <div>
-            <Components.SignUpInput
-              value={form.userName}
+            <div>
+              <Components.SignUpInput
+                value={values.email}
+                onChange={handleChange}
+                id="email"
+                type="email"
+                placeholder="Email"
+                onBlur={handleBlur}
+                className={errors.email && touched.email ? "signup-error" : ""}
+              />
+              {errors.email && touched.email && (
+                <p className="signupError">{errors.email}</p>
+              )}
+            </div>
+
+            <div>
+              <Components.SignUpInput
+                value={values.phone}
+                onChange={handleChange}
+                id="phone"
+                type="text"
+                placeholder="Phone Number(+63)"
+                onBlur={handleBlur}
+                className={errors.phone && touched.phone ? "signup-error" : ""}
+              />
+              {errors.phone && touched.phone && (
+                <p className="signupError">{errors.phone}</p>
+              )}
+            </div>
+
+            <div>
+              {/* <Components.LabelBrgy>Barangay</Components.LabelBrgy>
+            <Components.LabelProvince>Province</Components.LabelProvince>
+            <Components.LabelCity>City</Components.LabelCity> */}
+              <Components.SignUpInput
+                value={values.address}
+                onChange={handleChange}
+                id="address"
+                type="text"
+                placeholder="Address"
+                address="address"
+                onBlur={handleBlur}
+                className={
+                  errors.address && touched.address ? "signup-error" : ""
+                }
+              />
+              {errors.address && touched.address && (
+                <p className="signupError">{errors.address}</p>
+              )}
+            </div>
+
+            <div className="bDateContainer">
+              {/* <div className="bDateLabel">
+              <Components.LabelBDate>Birthdate</Components.LabelBDate>
+            </div> */}
+
+              <div className="bDateInput">
+                <Components.SignUpBDate
+                  value={values.birthDate}
+                  onChange={handleChange}
+                  id="birthDate"
+                  type="date"
+                  placeholder="Birthdate"
+                  onBlur={handleBlur}
+                  className={
+                    errors.birthDate && touched.birthDate ? "signup-error" : ""
+                  }
+                />
+                {errors.birthDate && touched.birthDate && (
+                  <p className="signupError">{errors.birthDate}</p>
+                )}
+              </div>
+            </div>
+
+            <div>
+              <Components.SignUpInput
+                value={values.signUpPassword}
+                onChange={handleChange}
+                id="signUpPassword"
+                type="password"
+                placeholder="Password"
+                onBlur={handleBlur}
+                className={
+                  errors.signUpPassword && touched.signUpPassword
+                    ? "signup-error"
+                    : ""
+                }
+              />
+              {errors.signUpPassword && touched.signUpPassword && (
+                <p className="signupError">{errors.signUpPassword}</p>
+              )}
+            </div>
+
+            <div>
+              <Components.SignUpInput
+                value={values.confirmPassword}
+                onChange={handleChange}
+                id="confirmPassword"
+                type="password"
+                placeholder="Confirm Password"
+                onBlur={handleBlur}
+                className={
+                  errors.confirmPassword && touched.confirmPassword
+                    ? "signup-error"
+                    : ""
+                }
+              />
+              {errors.confirmPassword && touched.confirmPassword && (
+                <p className="signupError">{errors.confirmPassword}</p>
+              )}
+            </div>
+
+            <Components.Button type="submit" disabled={isSubmitting}>
+              Sign Up
+            </Components.Button>
+          </Components.Form>
+        </Components.SignUpContainer>
+
+        {/* End of Sign Up */}
+
+        {/* Sign In starts here... */}
+
+        <Components.SignInContainer signinIn={signIn}>
+          <Components.Form>
+            <Components.Title>Sign in</Components.Title>
+            <Components.SignInInput
+              value={values.signInUsername}
+              onChange={handleChange}
+              id="signInUsername"
               type="text"
-              placeholder="Username"
-              name="userName"
-              error={true}
-              helperText="mynameishelper"
-              onChange={handleChange}
+              placeholder="Enter username"
+              onBlur={handleBlur}
+              className={
+                errors.signInUsername && touched.signInUsername
+                  ? "signin-error"
+                  : ""
+              }
             />
-          </div>
-
-          <div>
-            <Components.SignUpInput
-              value={form.email}
-              type="email"
-              placeholder="Email"
-              name="email"
-              error={true}
-              helperText="mynameishelper"
+            {errors.signInUsername && touched.signInUsername && (
+              <p className="signinError">{errors.signInUsername}</p>
+            )}
+            <Components.SignInInput
+              value={values.signInPassword}
               onChange={handleChange}
-            />
-          </div>
-
-          <div>
-            <Components.SignUpInput
-              value={form.phone}
-              type="text"
-              placeholder="Phone Number"
-              name="phone"
-              error={true}
-              helperText="mynameishelper"
-              onChange={handleChange}
-            />
-          </div>
-
-          <div>
-            <Components.SignUpInput
-              value={form.address}
-              type="text"
-              placeholder="Address"
-              name="address"
-              error={true}
-              helperText="mynameishelper"
-              onChange={handleChange}
-            />
-          </div>
-
-          <div>
-            <Components.SignUpBDate
-              value={form.birthdate}
-              type="date"
-              placeholder="Birthdate"
-              name="birthdate"
-              onChange={handleChange}
-            />
-          </div>
-
-          <div>
-            <Components.SignUpInput
-              value={form.password}
+              id="signInPassword"
               type="password"
               placeholder="Password"
-              name="password"
-              onChange={handleChange}
+              onBlur={handleBlur}
+              className={
+                errors.signInPassword && touched.signInPassword
+                  ? "signin-error"
+                  : ""
+              }
             />
-          </div>
+            {errors.signInPassword && touched.signInPassword && (
+              <p className="signinError">{errors.signInPassword}</p>
+            )}
 
-          <div>
-            <Components.SignUpInput
-              value={form.confirmPassword}
-              type="password"
-              placeholder="Confirm Password"
-              name="confirmPassword"
-              onChange={handleChange}
-            />
-          </div>
+            <Components.Anchor href="#">
+              Forgot your password?
+            </Components.Anchor>
+            <Components.Button type="submit">Sign In</Components.Button>
+          </Components.Form>
+        </Components.SignInContainer>
 
-          <Components.Button type="submit" disabled={isFormInvalid()}>
-            Sign Up
-          </Components.Button>
-        </Components.Form>
-      </Components.SignUpContainer>
+        {/* End of Sign In... */}
 
-      <Components.SignInContainer signinIn={signIn}>
-        <Components.Form>
-          <Components.Title>Sign in</Components.Title>
-          <Components.SignInInput type="email" placeholder="Email" />
-          <Components.SignInInput type="password" placeholder="Password" />
-          <Components.Anchor href="#">Forgot your password?</Components.Anchor>
-          <Components.Button>Sign In</Components.Button>
-        </Components.Form>
-      </Components.SignInContainer>
+        <Components.OverlayContainer signinIn={signIn}>
+          <Components.Overlay signinIn={signIn}>
+            <Components.LeftOverlayPanel signinIn={signIn}>
+              <Components.Title>Welcome Back!</Components.Title>
+              <Components.Paragraph>
+                Have an existing account? Please sign in.
+              </Components.Paragraph>
+              <Components.GhostButton onClick={() => toggle(true)}>
+                Sign In
+              </Components.GhostButton>
+            </Components.LeftOverlayPanel>
 
-      <Components.OverlayContainer signinIn={signIn}>
-        <Components.Overlay signinIn={signIn}>
-          <Components.LeftOverlayPanel signinIn={signIn}>
-            <Components.Title>Welcome Back!</Components.Title>
-            <Components.Paragraph>
-              Have an existing account? Please sign in.
-            </Components.Paragraph>
-            <Components.GhostButton onClick={() => toggle(true)}>
-              Sign In
-            </Components.GhostButton>
-          </Components.LeftOverlayPanel>
-
-          <Components.RightOverlayPanel signinIn={signIn}>
-            <Components.Title>Hello, Friend!</Components.Title>
-            <Components.Paragraph>
-              Don't have an account yet? Join and start journey with us!
-            </Components.Paragraph>
-            <Components.GhostButton onClick={() => toggle(false)}>
-              Sign Up
-            </Components.GhostButton>
-          </Components.RightOverlayPanel>
-        </Components.Overlay>
-      </Components.OverlayContainer>
-    </Components.Container>
+            <Components.RightOverlayPanel signinIn={signIn}>
+              <Components.Title>Hello, Friend!</Components.Title>
+              <Components.Paragraph>
+                Don't have an account yet? Join and start journey with us!
+              </Components.Paragraph>
+              <Components.GhostButton onClick={() => toggle(false)}>
+                Sign Up
+              </Components.GhostButton>
+            </Components.RightOverlayPanel>
+          </Components.Overlay>
+        </Components.OverlayContainer>
+      </Components.Container>
+    </Components.Outer>
   );
 }
 
