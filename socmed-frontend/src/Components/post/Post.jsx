@@ -1,9 +1,7 @@
-import React from "react";
-
+import React, { useState } from "react";
 import "./Post.css";
-import { IconButton } from "@mui/material";
+import { IconButton, MenuItem, Menu } from "@mui/material";
 import {
-  ChatBubbleOutline,
   MoreVert,
   Favorite,
   ThumbUp,
@@ -12,10 +10,26 @@ import {
 } from "@mui/icons-material";
 import { Link } from "react-router-dom";
 import ModalImage from "react-modal-image";
-
+import * as postService from "../../Service/post";
+import { useNavigate } from "react-router-dom";
 
 const Post = ({ post }) => {
+  const [anchorEl, setAnchorEl] = useState(null);
+  const navigate = useNavigate();
 
+  const open = Boolean(anchorEl);
+
+  const handleOpenMenu = (event) => {
+    setAnchorEl(event.currentTarget);
+  };
+  const handleCloseMenu = () => {
+    setAnchorEl(null);
+  };
+
+  const handleDeletePost = async (postId) => {
+    await postService.deletePost(postId);
+    navigate("/profile");
+  };
   return (
     <div className="post">
       <div className="postWrapper">
@@ -28,14 +42,27 @@ const Post = ({ post }) => {
                 className="postProfileImg"
               />
             </Link>
-            <div className="postName">{post.users.givenName +' '+ post.users.surname}</div>
+            <div className="postName">
+              {post.users.givenName + " " + post.users.surname}
+            </div>
             <div className="postUsername">@{post.users.username}</div>
           </div>
 
           <div className="postTopRight">
-            <IconButton>
+            <IconButton onClick={handleOpenMenu}>
               <MoreVert className="postVertButton" />
             </IconButton>
+            <Menu
+              id="basic-menu"
+              anchorEl={anchorEl}
+              open={open}
+              onClose={handleCloseMenu}
+            >
+              <MenuItem>Edit</MenuItem>
+              <MenuItem onClick={() => handleDeletePost(post.postId)}>
+                Delete
+              </MenuItem>
+            </Menu>
           </div>
         </div>
         <div className="postDate">{post.created_date}</div>
@@ -43,12 +70,11 @@ const Post = ({ post }) => {
           <div className="postText">{post.post_text}</div>
 
           <ModalImage
-              className="postImg"
-              small={post.image}
-              medium={post.image}
-              alt=""
-           />
-
+            className="postImg"
+            small={post.image}
+            medium={post.image}
+            alt=""
+          />
         </div>
         <div className="postBottom">
           <div className="postBottomLeft">
@@ -64,17 +90,20 @@ const Post = ({ post }) => {
         </div>
 
         <hr className="footerHr" />
-        <div className="postBottomFooter">  
+        <div className="postBottomFooter">
           <div className="postBottomFooterItem">
             <ThumbUpAltOutlined className="footerIcon" />
             <div className="footerText">Like</div>
           </div>
-          <Link to={`/post/id/${post.postId}`} style={{textDecoration:'none'}}>
-          <IconButton>
-          <div className="postBottomFooterItem">
-            <div className="footerText">See More..</div>
-          </div>
-          </IconButton>
+          <Link
+            to={`/post/id/${post.postId}`}
+            style={{ textDecoration: "none" }}
+          >
+            <IconButton>
+              <div className="postBottomFooterItem">
+                <div className="footerText">See More..</div>
+              </div>
+            </IconButton>
           </Link>
           <div className="postBottomFooterItem">
             <ShareOutlined className="footerIcon" />

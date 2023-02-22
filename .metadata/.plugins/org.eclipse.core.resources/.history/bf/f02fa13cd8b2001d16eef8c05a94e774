@@ -61,7 +61,7 @@ public class PostController {
 	}
 	
 	@CrossOrigin(originPatterns = "http://localhost:3000")
-	@RequestMapping(path = "deletefrompost/{postId}",method = RequestMethod.DELETE)
+	@DeleteMapping(path = "deletefrompost/{postId}")
 	public List<Post> RemoveFromPostByPostId(@PathVariable("postId") Integer postId) {
 		return postService.deleteFromPostByPostId(postId);
 	}
