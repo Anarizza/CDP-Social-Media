@@ -7,3 +7,7 @@ export function getPosts() {
 export function addPost() {
   return http.post("/post/new");
 }
+
+export function fetchPostById(id){
+  return http.get(`/post/id/${id}`);
+}
