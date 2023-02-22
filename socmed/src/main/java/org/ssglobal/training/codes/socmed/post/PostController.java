@@ -1,6 +1,6 @@
 package org.ssglobal.training.codes.socmed.post;
 
-import java.util.List;
+import java.util.List; 
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -42,7 +42,7 @@ public class PostController {
 	
 	@CrossOrigin(originPatterns = "http://localhost:3000")
 	@RequestMapping(path = "id/{id}", method = RequestMethod.GET)
-	public List<Post> selectPostByPostId(@PathVariable("id") Integer postId) {
+	public Post selectPostByPostId(@PathVariable("id") Integer postId) {
 		 return postService.getPostByPostId(postId);
 	}
 	

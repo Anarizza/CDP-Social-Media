@@ -30,7 +30,7 @@ public class UsersConfig {
 			Post p1 = new Post(1, user1, "Hello World", "/assets/posts/post1.jpg", "02/17/2023");
 			Post p2 = new Post(user2, "Good Morning", "/assets/posts/post2.jpg", "02/17/2023");
 			Post p3 = new Post(user3, "Have a good day!", "/assets/posts/post3.jpg", "02/17/2023");
-			Post p4 = new Post(user4, "Greate powers comes with greate responsibility", "/assets/posts/post4.jpg", "02/17/2023");
+			Post p4 = new Post(user4, "Great powers comes with greate responsibility", "/assets/posts/post4.jpg", "02/17/2023");
 			Post p5 = new Post(user5, "Nice day!", "/assets/posts/post5.jpg", "02/17/2023");
 			Post p6 = new Post(user1, "Cant hold back", "/assets/posts/post6.jpg", "02/17/2023");
 			Post p7 = new Post(user1, "Happy Birthday", "/assets/posts/post7.jpg", "02/17/2023");

@@ -28,7 +28,7 @@ public class PostService {
 		return postRepository.findByPosttext(post_text);
 	}
 	
-	public List<Post> getPostByPostId(Integer postId) {
+	public Post getPostByPostId(Integer postId) {
 		return postRepository.findByPostId(postId);
 	}
 	
