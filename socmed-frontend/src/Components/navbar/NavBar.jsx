@@ -81,7 +81,7 @@ const NavBar = () => {
             onClick={handleOpenNavMenu}
             color="inherit"
           >
-            IMELINE<MenuIcon fontSize='large' sx={{display: {xs: 'flex', justifyContent: 'flex-end'}, marginLeft: '200px' }}/>
+            IMELINE<MenuIcon fontSize='medium' sx={{display: {xs: 'flex', justifyContent: 'flex-end'}, marginLeft: '200px', fontWeight: '400' }}/>
           </IconButton>
           <Menu
             id="menu-appbar"
@@ -122,23 +122,27 @@ const NavBar = () => {
         </Box>
        
         <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex', paddingRight: '100px'},  flexDirection: 'row-reverse', p: 1, mb: 1}}>
-           <Link to="/homepage">
+         
+           <Link to="/profile">
+            <Button sx={{ my: -1, color: 'white', display: 'block' }}>
+                <AccountCircleIcon fontSize='medium'/>
+            </Button>
+            </Link>
+
+            <Button sx={{ my: -1, color: 'white', display: 'block' }}>
+                <NotificationsIcon fontSize='medium'/> 
+            </Button>
+
+            <Button sx={{ my: -1, color: 'white', display: 'block' }}>
+                <ChatIcon fontSize='medium' />
+            </Button>
+          
+            <Link to="/homepage">
               <Button sx={{ my: -1, color: 'white', display: 'block' }} >
                   <HomeIcon fontSize='medium'/> 
               </Button>
            </Link>
          
-            <Button sx={{ my: -1, color: 'white', display: 'block' }}>
-                <NotificationsIcon fontSize='medium'/> 
-            </Button>
-            <Button sx={{ my: -1, color: 'white', display: 'block' }}>
-                <ChatIcon fontSize='medium' />
-            </Button>
-            <Link to="/profile">
-            <Button sx={{ my: -1, color: 'white', display: 'block' }}>
-                <AccountCircleIcon fontSize='medium'/>
-            </Button>
-            </Link>
         </Box>
  
       </Toolbar>

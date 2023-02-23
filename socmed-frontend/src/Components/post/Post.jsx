@@ -101,7 +101,7 @@ const Post = ({ post }) => {
           >
             <IconButton>
               <div className="postBottomFooterItem">
-                <div className="footerText">See More..</div>
+                <div className="footerText"  style={{fontSize: '11px', color: 'black'}}>See More..</div>
               </div>
             </IconButton>
           </Link>
