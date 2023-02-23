@@ -8,6 +8,7 @@ import Sidebar from "../../Components/sidebar/Sidebar";
 import { Users } from "../../data/data";
 import * as userService from "../../Service/users";
 import { useState, useEffect } from "react";
+import UserFeed from "../../Components/userFeed/UserFeed";
 
 const Profile = () => {
   const [user, setUsers] = useState([]);
@@ -39,7 +40,7 @@ const Profile = () => {
             </div>
           </div>
           <div className="profileRightBottom">
-            <Feed />
+            <UserFeed/>
             <Rightbar profile />
           </div>
         </div>

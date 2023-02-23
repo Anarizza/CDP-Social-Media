@@ -1,3 +1,4 @@
+
 import React, { useState } from "react";
 import "./Post.css";
 import { IconButton, MenuItem, Menu } from "@mui/material";
@@ -44,10 +45,6 @@ const UserPost = ({ post }) => {
       });
     }
   };
-  // refreshPage();
-  // const refreshPage = () => {
-  //   window.location.reload(false);
-  // };
 
   return (
     <div className="post">
