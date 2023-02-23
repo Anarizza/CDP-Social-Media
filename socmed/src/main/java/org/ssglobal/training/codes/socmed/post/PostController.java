@@ -4,7 +4,6 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -17,11 +16,12 @@ import org.springframework.web.bind.annotation.RestController;
 public class PostController {
 	
 	private final PostService postService;
-	
+
 	@Autowired
 	public PostController(PostService postService) {
 		this.postService = postService;
 	}
+
 
 	@CrossOrigin(originPatterns = "http://localhost:3000")
 	@GetMapping(path = "all")
@@ -31,7 +31,7 @@ public class PostController {
 	
 	@CrossOrigin(originPatterns = "http://localhost:3000")
 	@RequestMapping(path = "new", method = RequestMethod.POST)
-	public Post registerUser(@RequestBody Post post) {
+	public Post addToPost(@RequestBody Post post) {
 		return postService.addPost(post);
 	}
 	
@@ -61,9 +61,10 @@ public class PostController {
 	}
 	
 	@CrossOrigin(originPatterns = "http://localhost:3000")
-	@RequestMapping(path = "deletefrompost/{postId}",method = RequestMethod.DELETE)
-	public List<Post> RemoveFromPostByPostId(@PathVariable("postId") Integer postId) {
-		return postService.deleteFromPostByPostId(postId);
+	@RequestMapping(path = "deletefrompost/{postId}", method = RequestMethod.DELETE)
+	public boolean RemoveFromPostByPostId(@PathVariable("postId") Integer postId) {
+		 postService.deleteFromPostByPostId(postId);
+		 return true;
 	}
 	
 }

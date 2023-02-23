@@ -52,9 +52,10 @@ public class PostService {
 	}
 	
 	
-	public List<Post> deleteFromPostByPostId(Integer post_id) {
-		postRepository.deleteById(post_id);
-		return getPosts();
+	public boolean deleteFromPostByPostId(Integer post_id) {
+		 postRepository.deleteById(post_id);
+		 return true;
+		
 	}
 	
 }

@@ -36,11 +36,11 @@ public class Post {
 	private String created_date;
 	
 	@JsonIgnore
-	@OneToMany(mappedBy = "post")
+	@OneToMany(mappedBy = "post", cascade = CascadeType.ALL, orphanRemoval = true)
 	private Set<Comment> comments= new HashSet<>(); 
 	
 	@JsonIgnore
-	@OneToMany(mappedBy = "post")
+	@OneToMany(mappedBy = "post", cascade = CascadeType.ALL, orphanRemoval = true)
 	private Set<Likes> likes= new HashSet<>(); 
 	
 	public Post() {}
@@ -50,6 +50,14 @@ public class Post {
 		this.users = users;
 		this.posttext = posttext;
 		this.image = image;
+		this.created_date = created_date;
+	}
+	
+	
+	public Post(Integer postId, Users users, String posttext, String created_date) {
+		this.postId = postId;
+		this.users = users;
+		this.posttext = posttext;
 		this.created_date = created_date;
 	}
 
