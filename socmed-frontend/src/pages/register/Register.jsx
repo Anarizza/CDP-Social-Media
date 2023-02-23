@@ -3,41 +3,48 @@ import * as Components from "./Components";
 import "./formInput.css";
 import { useFormik } from "formik";
 import { formSchema } from "./schemas";
-
-const onSubmit = async (values, actions) => {
-  console.log(values);
-  console.log(actions);
-  await new Promise((resolve) => setTimeout(resolve, 1000));
-  actions.resetForm();
-};
+import * as authService from "../../Service/auth/auth";
 
 function Register() {
   const [signIn, toggle] = React.useState(true);
-  const {
-    values,
-    errors,
-    touched,
-    isSubmitting,
-    handleBlur,
-    handleChange,
-    handleSubmit,
-  } = useFormik({
-    initialValues: {
-      givenName: "",
-      surName: "",
-      signInUsername: "",
-      signUpUsername: "",
-      email: "",
-      phone: "",
-      address: "",
-      birthDate: "",
-      signUpPassword: "",
-      signInPassword: "",
-      confirmPassword: "",
-    },
-    validationSchema: formSchema,
-    onSubmit,
-  });
+  const { values, errors, touched, isSubmitting, handleBlur, handleChange } =
+    useFormik({
+      initialValues: {
+        givenName: "",
+        surName: "",
+        signInUsername: "",
+        signUpUsername: "",
+        email: "",
+        phone: "",
+        address: "",
+        birthDate: "",
+        signUpPassword: "",
+        signInPassword: "",
+        confirmPassword: "",
+      },
+      validationSchema: formSchema,
+    });
+
+  const handleSubmit = async (event) => {
+    event.preventDefault();
+
+    try {
+      const response = await authService.register(
+        signIn.givenName,
+        signIn.surName,
+        signIn.signUpUsername,
+        signIn.email,
+        signIn.phone,
+        signIn.address,
+        signIn.birthDate,
+        signIn.signUpPassword
+      );
+    } catch (error) {
+      console.log(error);
+    }
+    await new Promise((resolve) => setTimeout(resolve, 1000));
+    event.resetForm();
+  };
 
   return (
     <Components.Outer>
@@ -267,6 +274,8 @@ function Register() {
         </Components.SignInContainer>
 
         {/* End of Sign In... */}
+
+        {/* Flipping SignIn/SignUp starts here... */}
 
         <Components.OverlayContainer signinIn={signIn}>
           <Components.Overlay signinIn={signIn}>
