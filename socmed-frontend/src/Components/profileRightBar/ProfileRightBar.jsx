@@ -1,7 +1,16 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import "./ProfileRightBar.css";
+import * as userService from "../../Service/users";
+import { useState, useEffect } from "react";
 const ProfileRightBar = () => {
+  const [user, setUsers] = useState([]);
+  useEffect(() => {
+    userService.getUsersById(1).then((response) => {
+      setUsers(response.data);
+      console.log(response.data);
+    });
+  }, []);
   return (
     <div className="profileRightBar">
       <div className="profileRightBarHeading">
@@ -14,25 +23,21 @@ const ProfileRightBar = () => {
       <div className="profileRightBarInfo">
         <div className="profileRightBarInfoItem">
           <div className="profileRightBarInfoKey">Email: </div>
-          <div className="profileRightBarInfoValue">amberlogan@gmail.com</div>
+          <div className="profileRightBarInfoValue">{user.email}</div>
         </div>
         <div className="profileRightBarInfoItem">
-          <div className="profileRightBarInfoKey">Phone Number: </div>
-          <div className="profileRightBarInfoValue">+4 123 456 789</div>
-        </div>
-        <div className="profileRightBarInfoItem">
-          <div className="profileRightBarInfoKey">Address: </div>
-          <div className="profileRightBarInfoValue">
-            Melwood Str. 72 Liverpool
-          </div>
-        </div>
-        <div className="profileRightBarInfoItem">
-          <div className="profileRightBarInfoKey">Country: </div>
-          <div className="profileRightBarInfoValue">United Kingdom</div>
+          <div className="profileRightBarInfoKey">City: </div>
+          <div className="profileRightBarInfoValue">{user.city}</div>
         </div>
         <div className="profileRightBarInfoItem">
           <div className="profileRightBarInfoKey">Relationship: </div>
-          <div className="profileRightBarInfoValue">Single</div>
+          <div className="profileRightBarInfoValue">
+            Depende kung sino mag tatanong
+          </div>
+        </div>
+        <div className="profileRightBarInfoItem">
+          <div className="profileRightBarInfoKey">Work Experience: </div>
+          <div className="profileRightBarInfoValue">Manlasing ng tao</div>
         </div>
       </div>
 
