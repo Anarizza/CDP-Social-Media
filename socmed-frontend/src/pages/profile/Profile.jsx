@@ -1,7 +1,7 @@
 import React from "react";
 
 import "./Profile.css";
-import Feed from "../../Components/feed/Feed";
+import UserFeed from "../../Components/userFeed/UserFeed";
 import NavBar from "../../Components/navbar/NavBar";
 import Rightbar from "../../Components/rightbar/Rightbar";
 import Sidebar from "../../Components/sidebar/Sidebar";
@@ -32,7 +32,7 @@ const Profile = () => {
             </div>
           </div>
           <div className="profileRightBottom">
-            <Feed />
+            <UserFeed />
             <Rightbar profile />
           </div>
         </div>

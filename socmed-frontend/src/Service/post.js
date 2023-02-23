@@ -14,3 +14,7 @@ export function fetchPostById(id) {
 export function deletePost(postId) {
   return http.delete(`/post/deletefrompost/${postId}`);
 }
+
+export function selectPostByUsersUserId(userId) {
+  return http.get(`/post/userid/${userId}`);
+}
