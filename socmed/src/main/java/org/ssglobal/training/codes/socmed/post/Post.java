@@ -10,6 +10,7 @@ import org.ssglobal.training.codes.socmed.users.Users;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import jakarta.persistence.CascadeType;
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -31,7 +32,10 @@ public class Post {
 	@JoinColumn(name = "users",referencedColumnName = "userId")
 	private Users users;
 	
+	@Column(nullable = true)
 	private String posttext;
+	
+	@Column(nullable = true)
 	private String image;
 	private String created_date;
 	

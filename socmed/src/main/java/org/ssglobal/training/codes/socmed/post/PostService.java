@@ -9,11 +9,9 @@ import org.ssglobal.training.codes.socmed.users.UsersRepository;
 public class PostService {
 	
 	private final PostRepository postRepository;
-	private final UsersRepository userRepository;
 	
-	public PostService(PostRepository postRepository, UsersRepository userRepository ) {
+	public PostService(PostRepository postRepository ) {
 		this.postRepository = postRepository;
-		this.userRepository = userRepository;
 	}
 
 	public List<Post> getPosts() {

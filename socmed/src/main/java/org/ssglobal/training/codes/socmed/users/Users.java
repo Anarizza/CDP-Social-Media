@@ -9,6 +9,7 @@ import org.ssglobal.training.codes.socmed.post.Post;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;  
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -39,10 +40,14 @@ public class Users {
 	private String givenName;
 	private String surname;
 	private String username;
+	
+	@Column(nullable = true)
 	private String phoneNumber;
 	private String email;
 	private String password;
-	private String address;
+	private String brgy;
+	private String city;
+	private String province;
 	private String dot; 
 	
 	@JsonIgnore
@@ -70,7 +75,7 @@ public class Users {
 	public Users() {}
 
 	public Users(Integer userId, String profilePic, String givenName, String surname, String username,String phoneNumber, String email, String password,
-			String address, String dot) {
+			String brgy, String city, String province, String dot) {
 		this.userId = userId;
 		this.profilePic =profilePic;
 		this.givenName = givenName;
@@ -79,12 +84,14 @@ public class Users {
 		this.phoneNumber = phoneNumber;
 		this.email = email;
 		this.password = password;
-		this.address = address;
+		this.brgy = brgy;
+		this.city = city;
+		this.province = province;
 		this.dot = dot;
 	}
 
-	public Users(String profilePic, String givenName, String surname, String username, String phoneNumber, String email, String password, String address,
-			String dot) {
+	public Users(String profilePic, String givenName, String surname, String username, String phoneNumber, String email, String password, 
+			String brgy, String city, String province, String dot) {
 		this.profilePic = profilePic;
 		this.givenName = givenName;
 		this.surname = surname;
@@ -92,7 +99,9 @@ public class Users {
 		this.phoneNumber = phoneNumber;
 		this.email = email;
 		this.password = password;
-		this.address = address;
+		this.brgy = brgy;
+		this.city = city;
+		this.province = province;
 		this.dot = dot;
 	}
 	
@@ -161,13 +170,29 @@ public class Users {
 	public void setPassword(String password) {
 		this.password = password;
 	}
-
-	public String getAddress() {
-		return address;
+	
+	public String getBrgy() {
+		return brgy;
 	}
 
-	public void setAddress(String address) {
-		this.address = address;
+	public void setBrgy(String brgy) {
+		this.brgy = brgy;
+	}
+
+	public String getCity() {
+		return city;
+	}
+
+	public void setCity(String city) {
+		this.city = city;
+	}
+
+	public String getProvince() {
+		return province;
+	}
+
+	public void setProvince(String province) {
+		this.province = province;
 	}
 
 	public String getDot() {

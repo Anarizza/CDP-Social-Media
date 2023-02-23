@@ -78,9 +78,9 @@ const DetailsPage = () => {
             </IconButton>
           </div>
         </div>
-        <div className="postDate">{posts.created_date}</div>
+        <div className="postDate" style={{marginTop: '-10px', color: 'grey', fontSize: '100%'}}>{posts.created_date}</div>
         <div className="postCenter">
-          <div className="postText">{posts.post_text}</div>
+          <div className="postText" style={{fontSize:'115%'}}>{posts.post_text}</div>
 
           <ModalImage
               className="postImg"

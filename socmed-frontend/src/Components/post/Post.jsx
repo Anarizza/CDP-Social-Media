@@ -65,9 +65,9 @@ const Post = ({ post }) => {
             </Menu>
           </div>
         </div>
-        <div className="postDate">{post.created_date}</div>
+        <div className="postDate" style={{marginTop: '-10px', color: 'grey', fontSize: '100%'}}>{post.created_date}</div>
         <div className="postCenter">
-          <div className="postText">{post.post_text}</div>
+          <div className="postText" style={{fontSize:'115%'}}>{post.post_text}</div>
 
           <ModalImage
             className="postImg"
