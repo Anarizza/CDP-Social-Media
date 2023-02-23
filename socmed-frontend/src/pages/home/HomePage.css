@@ -1,5 +1,30 @@
 .homeContainer{
-    display: flex;
-    width: 100%;
-    background-color: #f1f1f1;
+  display: flex;
+  width: 100%;
+ 
+}
+
+#light {
+  background-color: #ffffff;
+}
+
+#dark {
+  background-color: #35a598;
+}
+
+.switch {
+  width: 100vw;
+  height: 100px;
+}
+
+.switch label {
+  margin: 20px;
+}
+
+#light .switch label {
+  color: black;
+}
+
+#dark .switch label {
+  color: white;
 }
