@@ -3,6 +3,7 @@ import { Close, EmojiEmotions, PermMedia } from "@mui/icons-material";
 import "./Share.css";
 import SendIcon from "@mui/icons-material/Send";
 import * as postService from "../../Service/post";
+import * as userService from "../../Service/users";
 
 const Share = () => {
   const [file, setFile] = useState(null);
@@ -15,6 +16,14 @@ const Share = () => {
     });
   }, []);
 
+  const [user, setUsers] = useState([]);
+  useEffect(() => {
+    userService.getUsersById(1).then((response) => {
+      setUsers(response.data);
+      console.log(response.data);
+    });
+  }, []);
+
   const removeImage = () => {
     setFile(null);
   };
@@ -22,11 +31,7 @@ const Share = () => {
     <div className="share">
       <div className="shareWrapper">
         <div className="shareTop">
-          <img
-            src="./assets/person/user.jpg"
-            alt=""
-            className="shareProfileImg"
-          />
+          <img src={user.profilePic} alt="" className="shareProfileImg" />
           <input
             type="text"
             placeholder="What's happening?"

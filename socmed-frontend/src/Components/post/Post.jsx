@@ -9,6 +9,11 @@ import {
 } from "@mui/icons-material";
 import { Link } from "react-router-dom";
 import ModalImage from "react-modal-image";
+import * as postService from "../../Service/post";
+import { useNavigate } from "react-router-dom";
+import ScreenRotationAltIcon from "@mui/icons-material/ScreenRotationAlt";
+import StarIcon from "@mui/icons-material/Star";
+import StarBorderPurple500SharpIcon from "@mui/icons-material/StarBorderPurple500Sharp";
 
 const Post = ({ post }) => {
   return (
@@ -49,8 +54,10 @@ const Post = ({ post }) => {
         </div>
         <div className="postBottom">
           <div className="postBottomLeft">
-            <Favorite className="bottomLeftIcon" style={{ color: "red" }} />
-            <ThumbUp className="bottomLeftIcon" style={{ color: "#011631" }} />
+            <StarIcon className="bottomLeftIcon" style={{ color: "#E1AD01" }} />
+            <div className="footerText">
+              <b>99</b>
+            </div>
             <div className="postLikeCounter">{post.like}</div>
           </div>
           <div className="postBottomRight">
@@ -63,8 +70,8 @@ const Post = ({ post }) => {
         <hr className="footerHr" />
         <div className="postBottomFooter">
           <div className="postBottomFooterItem">
-            <ThumbUpAltOutlined className="footerIcon" />
-            <div className="footerText">Like</div>
+            <StarBorderPurple500SharpIcon className="footerIcon" />
+            <div className="footerText">Appreciate</div>
           </div>
           <Link
             to={`/post/id/${post.postId}`}
@@ -82,7 +89,7 @@ const Post = ({ post }) => {
             </IconButton>
           </Link>
           <div className="postBottomFooterItem">
-            <ShareOutlined className="footerIcon" />
+            <ScreenRotationAltIcon className="footerIcon" />
             <div className="footerText">Share</div>
           </div>
         </div>
