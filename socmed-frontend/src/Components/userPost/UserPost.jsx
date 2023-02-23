@@ -12,11 +12,10 @@ import { Link } from "react-router-dom";
 import ModalImage from "react-modal-image";
 import * as postService from "../../Service/post";
 import { useNavigate } from "react-router-dom";
-
+import Swal from "sweetalert2";
 const UserPost = ({ post }) => {
   const [anchorEl, setAnchorEl] = useState(null);
   const navigate = useNavigate();
-
   const open = Boolean(anchorEl);
 
   const handleOpenMenu = (event) => {
@@ -27,9 +26,29 @@ const UserPost = ({ post }) => {
   };
 
   const handleDeletePost = async (postId) => {
-    await postService.deletePost(postId);
-    navigate("/profile");
+    if (postId) {
+      Swal.fire({
+        title: "Are you sure?",
+        text: "You won't be able to revert this!",
+        icon: "warning",
+        showCancelButton: true,
+        confirmButtonColor: "#3085d6",
+        cancelButtonColor: "#d33",
+        confirmButtonText: "Yes, delete it!",
+      }).then((result) => {
+        if (result.isConfirmed) {
+          postService.deletePost(postId);
+          Swal.fire("Deleted!", "Your post has been deleted.", "success");
+        }
+        navigate(0);
+      });
+    }
   };
+  // refreshPage();
+  // const refreshPage = () => {
+  //   window.location.reload(false);
+  // };
+
   return (
     <div className="post">
       <div className="postWrapper">

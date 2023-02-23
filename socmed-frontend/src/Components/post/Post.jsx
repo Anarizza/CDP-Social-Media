@@ -1,8 +1,7 @@
-import React, { useState } from "react";
+import React from "react";
 import "./Post.css";
-import { IconButton, MenuItem, Menu } from "@mui/material";
+import { IconButton } from "@mui/material";
 import {
-  MoreVert,
   Favorite,
   ThumbUp,
   ThumbUpAltOutlined,
@@ -10,26 +9,8 @@ import {
 } from "@mui/icons-material";
 import { Link } from "react-router-dom";
 import ModalImage from "react-modal-image";
-import * as postService from "../../Service/post";
-import { useNavigate } from "react-router-dom";
 
 const Post = ({ post }) => {
-  const [anchorEl, setAnchorEl] = useState(null);
-  const navigate = useNavigate();
-
-  const open = Boolean(anchorEl);
-
-  const handleOpenMenu = (event) => {
-    setAnchorEl(event.currentTarget);
-  };
-  const handleCloseMenu = () => {
-    setAnchorEl(null);
-  };
-
-  const handleDeletePost = async (postId) => {
-    await postService.deletePost(postId);
-    navigate("/profile");
-  };
   return (
     <div className="post">
       <div className="postWrapper">
@@ -47,27 +28,17 @@ const Post = ({ post }) => {
             </div>
             <div className="postUsername">@{post.users.username}</div>
           </div>
-
-          <div className="postTopRight">
-            <IconButton onClick={handleOpenMenu}>
-              <MoreVert className="postVertButton" />
-            </IconButton>
-            <Menu
-              id="basic-menu"
-              anchorEl={anchorEl}
-              open={open}
-              onClose={handleCloseMenu}
-            >
-              <MenuItem>Edit</MenuItem>
-              <MenuItem onClick={() => handleDeletePost(post.postId)}>
-                Delete
-              </MenuItem>
-            </Menu>
-          </div>
         </div>
-        <div className="postDate" style={{marginTop: '-10px', color: 'grey', fontSize: '100%'}}>{post.created_date}</div>
+        <div
+          className="postDate"
+          style={{ marginTop: "-10px", color: "grey", fontSize: "100%" }}
+        >
+          {post.created_date}
+        </div>
         <div className="postCenter">
-          <div className="postText" style={{fontSize:'115%'}}>{post.post_text}</div>
+          <div className="postText" style={{ fontSize: "115%" }}>
+            {post.post_text}
+          </div>
 
           <ModalImage
             className="postImg"
@@ -101,7 +72,12 @@ const Post = ({ post }) => {
           >
             <IconButton>
               <div className="postBottomFooterItem">
-                <div className="footerText"  style={{fontSize: '11px', color: 'black'}}>See More..</div>
+                <div
+                  className="footerText"
+                  style={{ fontSize: "11px", color: "black" }}
+                >
+                  See More..
+                </div>
               </div>
             </IconButton>
           </Link>

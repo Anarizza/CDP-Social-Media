@@ -55,7 +55,7 @@ public class PostController {
 	}
 	
 	@CrossOrigin(originPatterns = "http://localhost:3000")
-	@RequestMapping(path = "update/status", method = RequestMethod.POST)
+	@RequestMapping(path = "update/status", method = RequestMethod.PUT)
 	public String updatePost(@RequestBody Post updatePost) {
 		return postService.updatePost(updatePost);
 	}
