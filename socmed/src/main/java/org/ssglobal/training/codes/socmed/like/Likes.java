@@ -3,6 +3,8 @@ package org.ssglobal.training.codes.socmed.like;
 import org.ssglobal.training.codes.socmed.post.Post;
 import org.ssglobal.training.codes.socmed.users.Users;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -20,29 +22,31 @@ public class Likes {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer likeId;
 	
+
 	@ManyToOne(cascade = CascadeType.MERGE)
 	@JoinColumn(name = "post",referencedColumnName = "postId")
 	private Post post;
+	
 	
 	@ManyToOne(cascade = CascadeType.MERGE)
 	@JoinColumn(name = "users",referencedColumnName = "userId")
 	private Users users;
 	
-	private String date_created;
+	private String dateCreated;
 	
 	public Likes() {}
 
-	public Likes(Integer likeId, Post post, Users users, String date_created) {
+	public Likes(Integer likeId, Post post, Users users, String dateCreated) {
 		this.likeId = likeId;
 		this.post = post;
 		this.users = users;
-		this.date_created = date_created;
+		this.dateCreated = dateCreated;
 	}
 
-	public Likes(Post post, Users users, String date_created) {
+	public Likes(Post post, Users users, String dateCreated) {
 		this.post = post;
 		this.users = users;
-		this.date_created = date_created;
+		this.dateCreated = dateCreated;
 	}
 
 	public Integer getLikeId() {
@@ -69,12 +73,12 @@ public class Likes {
 		this.users = userId;
 	}
 
-	public String getDate_created() {
-		return date_created;
+	public String getDateCreated() {
+		return dateCreated;
 	}
 
-	public void setDate_created(String date_created) {
-		this.date_created = date_created;
+	public void setDateCreated(String dateCreated) {
+		this.dateCreated = dateCreated;
 	}
 	
 }

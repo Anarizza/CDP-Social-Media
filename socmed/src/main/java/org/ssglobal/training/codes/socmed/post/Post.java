@@ -7,6 +7,7 @@ import org.ssglobal.training.codes.socmed.comment.Comment;
 import org.ssglobal.training.codes.socmed.like.Likes;
 import org.ssglobal.training.codes.socmed.users.Users;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import jakarta.persistence.CascadeType;
@@ -28,6 +29,7 @@ public class Post {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer postId;
 	
+	
 	@ManyToOne(cascade = CascadeType.MERGE)
 	@JoinColumn(name = "users",referencedColumnName = "userId")
 	private Users users;
@@ -37,7 +39,8 @@ public class Post {
 	
 	@Column(nullable = true)
 	private String image;
-	private String created_date;
+	
+	private String createdDate;
 	
 	@JsonIgnore
 	@OneToMany(mappedBy = "post", cascade = CascadeType.ALL, orphanRemoval = true)
@@ -49,27 +52,27 @@ public class Post {
 	
 	public Post() {}
 
-	public Post(Integer postId, Users users, String posttext, String image, String created_date) {
+	public Post(Integer postId, Users users, String posttext, String image, String createdDate) {
 		this.postId = postId;
 		this.users = users;
 		this.posttext = posttext;
 		this.image = image;
-		this.created_date = created_date;
+		this.createdDate = createdDate;
 	}
 	
 	
-	public Post(Integer postId, Users users, String posttext, String created_date) {
+	public Post(Integer postId, Users users, String posttext, String createdDate) {
 		this.postId = postId;
 		this.users = users;
 		this.posttext = posttext;
-		this.created_date = created_date;
+		this.createdDate = createdDate;
 	}
 
-	public Post(Users users, String posttext, String image, String created_date) {
+	public Post(Users users, String posttext, String image, String createdDate) {
 		this.users = users;
 		this.posttext = posttext;
 		this.image = image;
-		this.created_date = created_date;
+		this.createdDate = createdDate;
 	}
 
 	public Integer getPostId() {
@@ -88,11 +91,11 @@ public class Post {
 		this.users = users;
 	}
 
-	public String getPost_text() {
+	public String getPosttext() {
 		return posttext;
 	}
 
-	public void setPost_text(String posttext) {
+	public void setPosttext(String posttext) {
 		this.posttext = posttext;
 	}
 
@@ -104,12 +107,12 @@ public class Post {
 		this.image = image;
 	}
 
-	public String getCreated_date() {
-		return created_date;
+	public String getCreatedDate() {
+		return createdDate;
 	}
 
-	public void setCreated_date(String created_date) {
-		this.created_date = created_date;
+	public void setCreatedDate(String createdDate) {
+		this.createdDate = createdDate;
 	}
 	
 }

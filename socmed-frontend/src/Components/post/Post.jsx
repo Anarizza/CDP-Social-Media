@@ -38,11 +38,11 @@ const Post = ({ post }) => {
           className="postDate"
           style={{ marginTop: "-10px", color: "grey", fontSize: "100%" }}
         >
-          {post.created_date}
+          {post.createdDate}
         </div>
         <div className="postCenter">
           <div className="postText" style={{ fontSize: "115%" }}>
-            {post.post_text}
+            {post.posttext}
           </div>
 
           <ModalImage

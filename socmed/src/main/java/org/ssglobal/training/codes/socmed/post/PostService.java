@@ -43,7 +43,7 @@ public class PostService {
 	
 	public String updatePost(Post newPost) {
 		Post rec = postRepository.findById(newPost.getPostId()).get();
-		rec.setPost_text(newPost.getPost_text());
+		rec.setPosttext(newPost.getPosttext());
 		rec.setImage(newPost.getImage());
 		postRepository.save(rec);
 		return "Done updating post!";

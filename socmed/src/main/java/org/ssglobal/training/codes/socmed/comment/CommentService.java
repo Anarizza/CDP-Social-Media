@@ -23,7 +23,7 @@ public class CommentService {
 	
 	public String updateComment(Comment newComm) {
 		Comment rec = commentRepository.findById(newComm.getCommentId()).get();
-		rec.setComment_text(newComm.getComment_text());
+		rec.setCommenttext(newComm.getCommenttext());
 		commentRepository.save(rec);
 		return "Done updating comment!";
 	}

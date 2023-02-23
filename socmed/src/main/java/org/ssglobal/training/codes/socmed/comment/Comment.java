@@ -3,6 +3,8 @@ package org.ssglobal.training.codes.socmed.comment;
 import org.ssglobal.training.codes.socmed.post.Post;
 import org.ssglobal.training.codes.socmed.users.Users;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -20,32 +22,34 @@ public class Comment {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer commentId;
 	
+	
 	@ManyToOne(cascade = CascadeType.MERGE)
 	@JoinColumn(name = "post",referencedColumnName = "postId")
 	private Post post;
 	
+
 	@ManyToOne(cascade = CascadeType.MERGE)
 	@JoinColumn(name = "users",referencedColumnName = "userId")
 	private Users users;
 	
-	private String comment_text;
-	private String date_created;
+	private String commenttext;
+	private String dateCreated;
 	
 	public Comment() {}
 
-	public Comment(Integer commentId, Post post, Users users, String comment_text, String date_created) {
+	public Comment(Integer commentId, Post post, Users users, String commenttext, String dateCreated) {
 		this.commentId = commentId;
 		this.post = post;
 		this.users = users;
-		this.comment_text = comment_text;
-		this.date_created = date_created;
+		this.commenttext = commenttext;
+		this.dateCreated = dateCreated;
 	}
 
-	public Comment(Post post, Users users, String comment_text, String date_created) {
+	public Comment(Post post, Users users, String commenttext, String dateCreated) {
 		this.post = post;
 		this.users = users;
-		this.comment_text = comment_text;
-		this.date_created = date_created;
+		this.commenttext = commenttext;
+		this.dateCreated = dateCreated;
 	}
 
 	public Integer getCommentId() {
@@ -72,20 +76,20 @@ public class Comment {
 		this.users = users;
 	}
 
-	public String getComment_text() {
-		return comment_text;
+	public String getCommenttext() {
+		return commenttext;
 	}
 
-	public void setComment_text(String comment_text) {
-		this.comment_text = comment_text;
+	public void setCommenttext(String commenttext) {
+		this.commenttext = commenttext;
 	}
 
-	public String getDate_created() {
-		return date_created;
+	public String getDateCreated() {
+		return dateCreated;
 	}
 
-	public void setDate_created(String date_created) {
-		this.date_created = date_created;
+	public void setDateCreated(String dateCreated) {
+		this.dateCreated = dateCreated;
 	}
 	
 }
