@@ -40,11 +40,17 @@ public class UsersService {
 			sb.append("is already taken");
 		} else {
 			Users temp = new Users();
+			temp.setProfilePic(user.getProfilePic());
 			temp.setGivenName(user.getGivenName());
 			temp.setSurname(user.getSurname());
-			temp.setPassword(user.getPassword());
 			temp.setUsername(user.getUsername());
+			temp.setPassword(user.getPassword());
 			temp.setPhoneNumber(user.getPhoneNumber());
+			temp.setEmail(user.getEmail());
+			temp.setPassword(user.getPassword());
+			temp.setBrgy(user.getBrgy());
+			temp.setCity(user.getCity());
+			temp.setProvince(user.getProvince());
 			temp.setDot(user.getDot());
 			usersRepository.save(temp);
 			sb.append("User registered!");

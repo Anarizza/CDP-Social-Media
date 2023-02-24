@@ -38,22 +38,22 @@ function Register() {
     onSubmit(users);
   };
 
- 
-
-
   const handleChange = (event) => {
      setUsers({ 
             ...users, 
             [event.currentTarget.name]: event.currentTarget.value
           });
+       
   };
 
   useEffect(() => {
     userService.registerUser(users).then((response) => {
       setUsers(response.data);
-      console.log(response.data);
     });
   }, []);
+
+  
+
 
   return (
     <Components.Outer>
@@ -68,7 +68,7 @@ function Register() {
                   name="profilePic"
                   value={users.profilePic}
                   type="text"
-                  placeholder="Profile pic"
+                  placeholder="Profile picture"
                   onChange={handleChange}
                 />
               </div>
