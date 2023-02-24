@@ -21,18 +21,17 @@ const Profile = () => {
 
   const fullname = user.givenName + " " + user.surname;
 
-
-  const a = JSON.parse(localStorage.getItem("theme"));
+  // const a = JSON.parse(localStorage.getItem("theme"));
   return (
     <div className="profile">
       <NavBar />
-      <div className="profileWrapper" id={a}>
+      <div className="profileWrapper">
         <Sidebar />
         <div className="profileRight">
           <div className="profileRightTop">
             <div className="profileCover">
-            <img src={user.profilePic} alt="" className="profileCoverImg" />
-            <img src={user.profilePic} alt="" className="profileUserImg" />
+              <img src={user.profilePic} alt="" className="profileCoverImg" />
+              <img src={user.profilePic} alt="" className="profileUserImg" />
             </div>
             <div className="profileInfo">
               <h4 className="profileInfoName">{fullname}</h4>
@@ -40,7 +39,7 @@ const Profile = () => {
             </div>
           </div>
           <div className="profileRightBottom">
-            <UserFeed/>
+            <UserFeed />
             <Rightbar profile />
           </div>
         </div>

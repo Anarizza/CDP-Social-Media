@@ -39,9 +39,9 @@ const UserPost = ({ post }) => {
       }).then((result) => {
         if (result.isConfirmed) {
           postService.deletePost(postId);
-          Swal.fire("Deleted!", "Your post has been deleted.", "success");
+          navigate(0);
+
         }
-        navigate(0);
       });
     }
   };
