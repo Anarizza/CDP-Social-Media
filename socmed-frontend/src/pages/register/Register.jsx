@@ -10,40 +10,22 @@ import { useNavigate } from "react-router-dom";
 function Register() {
   const navigate = useNavigate();
   const [signIn, toggle] = useState(true);
-  const { user, setUser } = useState({
+
+  const [ users, setUsers ] = useState({
     profilePic: "",
     givenName: "",
-    surName: "",
-    signInUsername: "",
-    signUpUsername: "",
+    surname: "",
+    username: "",
+    phoneNumber: "",
     email: "",
-    phone: "",
-    address: "",
-    birthDate: "",
-    signUpPassword: "",
-    signInPassword: "",
-    confirmPassword: "",
+    password: "",
+    brgy: "",
+    city: "",
+    province: "",
+    dot: "",
   });
 
-  const {
-    profilePic,
-    givenName,
-    surName,
-    signInUsername,
-    signUpUsername,
-    email,
-    phone,
-    address,
-    birthDate,
-    signUpPassword,
-    signInPassword,
-    confirmPassword,
-  } = user;
-
-  const onInputChange = (e) => {
-    setUser({ ...user, [e.currentTarget.name]: e.currentTarget.value });
-  };
-
+ 
   const onSubmit = (user) => {
     userService.registerUser(user).then((response) => {
       console.log(response);
@@ -53,12 +35,22 @@ function Register() {
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    onSubmit(user);
+    onSubmit(users);
+  };
+
+ 
+
+
+  const handleChange = (event) => {
+     setUsers({ 
+            ...users, 
+            [event.currentTarget.name]: event.currentTarget.value
+          });
   };
 
   useEffect(() => {
-    userService.registerUser(user).then((response) => {
-      setUser(response.data);
+    userService.registerUser(users).then((response) => {
+      setUsers(response.data);
       console.log(response.data);
     });
   }, []);
@@ -74,10 +66,10 @@ function Register() {
               <div className="givenName">
                 <Components.NameInput
                   name="profilePic"
-                  value={user.profilePic}
+                  value={users.profilePic}
                   type="text"
-                  placeholder="First Name"
-                  onChange={(e) => onInputChange(e)}
+                  placeholder="Profile pic"
+                  onChange={handleChange}
                 />
               </div>
             </div>
@@ -85,65 +77,93 @@ function Register() {
               <div className="givenName">
                 <Components.NameInput
                   name="givenName"
-                  value={user.givenName}
+                  value={users.givenName}
                   type="text"
                   placeholder="First Name"
-                  onChange={(e) => onInputChange(e)}
+                  onChange={handleChange}
                 />
               </div>
 
               <div className="surName">
                 <Components.NameInput
-                  name="surName"
-                  value={user.surName}
+                  name="surname"
+                  value={users.surname}
                   type="text"
                   placeholder="Last Name"
-                  onChange={(e) => onInputChange(e)}
+                  onChange={handleChange}
                 />
               </div>
             </div>
 
             <div>
               <Components.SignUpInput
-                name="signUpUsername"
-                value={user.signUpUsername}
+                name="username"
+                value={users.username}
                 type="text"
-                placeholder="Username"
-                onChange={(e) => onInputChange(e)}
+                placeholder="username"
+                onChange={handleChange}
+              />
+            </div>
+
+            <div>
+              <Components.SignUpInput
+                name="phoneNumber"
+                value={users.phoneNumber}
+                type="text"
+                onChange={handleChange}
+                placeholder="Phone Number(+63)"
               />
             </div>
 
             <div>
               <Components.SignUpInput
                 name="email"
-                value={user.email}
-                type="email"
+                value={users.email}
+                type="text"
                 placeholder="Email"
-                onChange={(e) => onInputChange(e)}
+                onChange={handleChange}
               />
             </div>
 
             <div>
               <Components.SignUpInput
-                name="phone"
-                value={user.phone}
+                name="password"
+                value={users.password}
                 type="text"
-                onChange={(e) => onInputChange(e)}
-                placeholder="Phone Number(+63)"
+                placeholder="Password"
+                onChange={handleChange}
               />
             </div>
+
 
             <div>
               {/* <Components.LabelBrgy>Barangay</Components.LabelBrgy>
             <Components.LabelProvince>Province</Components.LabelProvince>
             <Components.LabelCity>City</Components.LabelCity> */}
               <Components.SignUpInput
-                name="address"
-                value={user.address}
+                name="brgy"
+                value={users.brgy}
                 type="text"
-                placeholder="Address"
-                address="address"
-                onChange={(e) => onInputChange(e)}
+                placeholder="Brgy"
+                onChange={handleChange}
+              />
+            </div>
+            <div>
+              <Components.SignUpInput
+                name="city"
+                value={users.city}
+                type="text"
+                placeholder="City"
+                onChange={handleChange}
+              />
+            </div>
+            <div>
+              <Components.SignUpInput
+                name="province"
+                value={users.province}
+                type="text"
+                placeholder="Province"
+                onChange={handleChange}
               />
             </div>
 
@@ -154,34 +174,16 @@ function Register() {
 
               <div className="bDateInput">
                 <Components.SignUpBDate
-                  name="birthDate"
-                  value={user.birthDate}
+                  name="dot"
+                  value={users.birthDate}
                   type="date"
                   placeholder="Birthdate"
-                  onChange={(e) => onInputChange(e)}
+                  onChange={handleChange}
                 />
               </div>
             </div>
 
-            <div>
-              <Components.SignUpInput
-                name="signUpPassword"
-                value={user.signUpPassword}
-                type="password"
-                placeholder="Password"
-                onChange={(e) => onInputChange(e)}
-              />
-            </div>
-
-            <div>
-              <Components.SignUpInput
-                name="confirmPassword"
-                value={user.confirmPassword}
-                type="password"
-                placeholder="Confirm Password"
-                onChange={(e) => onInputChange(e)}
-              />
-            </div>
+        
 
             <Components.Button type="submit">Sign Up</Components.Button>
           </Components.Form>
@@ -196,18 +198,18 @@ function Register() {
             <Components.Title>Sign in</Components.Title>
             <Components.SignInInput
               name="signInUsername"
-              value={user.signInUsername}
+              value={users.username}
               type="text"
               placeholder="Enter username"
-              onChange={(e) => onInputChange(e)}
+              onChange={handleChange}
             />
 
             <Components.SignInInput
               name="signInPassword"
-              value={user.signInPassword}
+              value={users.password}
               type="password"
               placeholder="Password"
-              onChange={(e) => onInputChange(e)}
+              onChange={handleChange}
             />
 
             <Components.Anchor href="#">
