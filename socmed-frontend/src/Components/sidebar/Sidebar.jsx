@@ -9,6 +9,8 @@ import Friends from "../friends/Friends";
 import * as usersService from "../../Service/users";
 import BookmarkIcon from "@mui/icons-material/Bookmark";
 import "../../style/dark.css";
+import StarBorderPurple500SharpIcon from "@mui/icons-material/StarBorderPurple500Sharp";
+import { Link } from "react-router-dom";
 
 const Sidebar = () => {
   const [users, setUsers] = useState([]);
@@ -37,6 +39,11 @@ const Sidebar = () => {
       <div className="sidebarWrapper">
         <MenuLink Icon={<RssFeedIcon />} text="Feed" />
         <MenuLink Icon={<BookmarkIcon />} text="Saved" />
+
+          {/*Temposry lang yung parameter na 1 kas dapat userId yun since wala pang login*/}
+        <Link to={`/appreciate/${1}`} style={{ textDecoration: "none", color: 'black'}}>
+          <MenuLink Icon={ <StarBorderPurple500SharpIcon/> } text="Appreciate" />
+        </Link>
         <div onClick={handleClick}>
           {theme ? "" : ""}
           <MenuLink Icon={<Brightness4Icon />} text="Theme" />

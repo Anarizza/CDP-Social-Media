@@ -30,3 +30,7 @@ export function deletePost(postId) {
 export function selectPostByUsersUserId(userId) {
   return http.get(`/post/userid/${userId}`);
 }
+
+export function fetchPostByUsersUserId(id) {
+  return http.get(`/likes/${id}`);
+}

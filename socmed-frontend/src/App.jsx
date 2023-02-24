@@ -6,6 +6,7 @@ import Login from "./pages/login/Login";
 import Register from "./pages/register/Register";
 import Profile from "./pages/profile/Profile";
 import DetailsPageConnector from "./pages/detailsPage/DetailsPageConnector";
+import LikesConnector from "./pages/likes/LikesConnector";
 import "./style/dark.css";
 const App = () => {
   return (
@@ -18,6 +19,7 @@ const App = () => {
             <Route path="/register" element={<Register />} />
             <Route path="/profile" element={<Profile />} />
             <Route path="/post/id/:id" element={<DetailsPageConnector />} /> 
+            <Route path="/appreciate/:id" element={<LikesConnector />} />
 
           </Routes>
       </CssBaseline>
