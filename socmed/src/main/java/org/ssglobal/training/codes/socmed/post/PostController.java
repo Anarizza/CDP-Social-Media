@@ -1,6 +1,9 @@
 package org.ssglobal.training.codes.socmed.post;
 
-import java.util.List; 
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -10,16 +13,20 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
+import org.ssglobal.training.codes.socmed.users.Users;
+import org.ssglobal.training.codes.socmed.users.UsersRepository;
 
 @RestController
 @RequestMapping(path = "timelineapi/post")
 public class PostController {
 	
 	private final PostService postService;
+	private final UsersRepository usersRepository;
 
 	@Autowired
-	public PostController(PostService postService) {
+	public PostController(PostService postService, UsersRepository usersRepository) {
 		this.postService = postService;
+		this.usersRepository = usersRepository;
 	}
 
 
@@ -30,8 +37,17 @@ public class PostController {
 	}
 	
 	@CrossOrigin(originPatterns = "http://localhost:3000")
-	@RequestMapping(path = "new", method = RequestMethod.POST)
-	public Post addToPost(@RequestBody Post post) {
+	@RequestMapping(path = "new/{userId}", method = RequestMethod.POST)
+	public Post addToPost(@PathVariable ("userId") Integer userId, @RequestBody Post post) {
+		
+		 DateTimeFormatter dtf = DateTimeFormatter.ofPattern("MMMM dd, yyyy hh:mm:ss a");  
+		 LocalDateTime now = LocalDateTime.now();
+		 String date = dtf.format(now);
+		
+		Optional<Users> userOptional = usersRepository.findById(userId);
+		Users user=userOptional.get();
+		post.setUsers(user);
+		post.setCreatedDate(date);
 		return postService.addPost(post);
 	}
 	

@@ -4,9 +4,21 @@ export function getPosts() {
   return http.get("/post/all");
 }
 
-export function addPost() {
-  return http.post("/post/new");
+export function addPost(userId, post) {
+  const postClone = { ...post};
+  Object.keys(postClone).forEach((key) => {
+    if (
+      postClone[key] === "" ||
+      postClone[key] === null ||
+      postClone[key] === undefined
+    ) {
+      delete postClone[key];
+    }
+  });
+
+  return http.post(`/post/new/${userId}`, postClone);
 }
+
 
 export function fetchPostById(id) {
   return http.get(`/post/id/${id}`);
