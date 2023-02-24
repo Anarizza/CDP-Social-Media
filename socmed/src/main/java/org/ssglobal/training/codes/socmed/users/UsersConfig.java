@@ -50,8 +50,8 @@ public class UsersConfig {
 			commRepo.saveAll(List.of(c1, c2, c3, c4, c5));
 			
 			Likes l1 = new Likes(1, p1, user1, "");
-			Likes l2 = new Likes(p1, user1, "");
-			Likes l3 = new Likes(p1, user2, "");
+			Likes l2 = new Likes(p2, user1, "");
+			Likes l3 = new Likes(p7, user2, "");
 			Likes l4 = new Likes(p1, user3, "");
 			Likes l5 = new Likes(p1, user3, "");
 			likerepo.saveAll(List.of(l1, l2, l3, l4, l5));
