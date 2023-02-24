@@ -3,48 +3,65 @@ import * as Components from "./Components";
 import "./formInput.css";
 import { useFormik } from "formik";
 import { formSchema } from "./schemas";
-import * as authService from "../../Service/auth/auth";
+import * as userService from "../../Service/users";
+import { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 
 function Register() {
-  const [signIn, toggle] = React.useState(true);
-  const { values, errors, touched, isSubmitting, handleBlur, handleChange } =
-    useFormik({
-      initialValues: {
-        givenName: "",
-        surName: "",
-        signInUsername: "",
-        signUpUsername: "",
-        email: "",
-        phone: "",
-        address: "",
-        birthDate: "",
-        signUpPassword: "",
-        signInPassword: "",
-        confirmPassword: "",
-      },
-      validationSchema: formSchema,
-    });
+  const navigate = useNavigate();
+  const [signIn, toggle] = useState(true);
+  const { user, setUser } = useState({
+    profilePic: "",
+    givenName: "",
+    surName: "",
+    signInUsername: "",
+    signUpUsername: "",
+    email: "",
+    phone: "",
+    address: "",
+    birthDate: "",
+    signUpPassword: "",
+    signInPassword: "",
+    confirmPassword: "",
+  });
 
-  const handleSubmit = async (event) => {
-    event.preventDefault();
+  const {
+    profilePic,
+    givenName,
+    surName,
+    signInUsername,
+    signUpUsername,
+    email,
+    phone,
+    address,
+    birthDate,
+    signUpPassword,
+    signInPassword,
+    confirmPassword,
+  } = user;
 
-    try {
-      const response = await authService.register(
-        signIn.givenName,
-        signIn.surName,
-        signIn.signUpUsername,
-        signIn.email,
-        signIn.phone,
-        signIn.address,
-        signIn.birthDate,
-        signIn.signUpPassword
-      );
-    } catch (error) {
-      console.log(error);
-    }
-    await new Promise((resolve) => setTimeout(resolve, 1000));
-    event.resetForm();
+  const onInputChange = (e) => {
+    setUser({ ...user, [e.currentTarget.name]: e.currentTarget.value });
   };
+
+  const onSubmit = (user) => {
+    userService.registerUser(user).then((response) => {
+      console.log(response);
+      navigate("/");
+    });
+  };
+
+  const handleSubmit = (event) => {
+    event.preventDefault();
+    onSubmit(user);
+  };
+
+  useEffect(() => {
+    userService.registerUser(user).then((response) => {
+      setUser(response.data);
+      console.log(response.data);
+    });
+  }, []);
 
   return (
     <Components.Outer>
@@ -53,89 +70,67 @@ function Register() {
           <Components.Form onSubmit={handleSubmit} autoComplete="off">
             {/* SignUp starts here... */}
             <Components.Title>Create Account</Components.Title>
+            <div className="profilePic">
+              <div className="givenName">
+                <Components.NameInput
+                  name="profilePic"
+                  value={user.profilePic}
+                  type="text"
+                  placeholder="First Name"
+                  onChange={(e) => onInputChange(e)}
+                />
+              </div>
+            </div>
             <div className="nameContainer">
               <div className="givenName">
                 <Components.NameInput
-                  value={values.givenName}
-                  onChange={handleChange}
-                  id="givenName"
+                  name="givenName"
+                  value={user.givenName}
                   type="text"
                   placeholder="First Name"
-                  onBlur={handleBlur}
-                  className={
-                    errors.givenName && touched.givenName ? "signup-error" : ""
-                  }
+                  onChange={(e) => onInputChange(e)}
                 />
-                {errors.givenName && touched.givenName && (
-                  <p className="signupError">{errors.givenName}</p>
-                )}
               </div>
 
               <div className="surName">
                 <Components.NameInput
-                  value={values.surName}
-                  onChange={handleChange}
-                  id="surName"
+                  name="surName"
+                  value={user.surName}
                   type="text"
                   placeholder="Last Name"
-                  onBlur={handleBlur}
-                  className={
-                    errors.surName && touched.surName ? "signup-error" : ""
-                  }
+                  onChange={(e) => onInputChange(e)}
                 />
-                {errors.surName && touched.surName && (
-                  <p className="signupError">{errors.surName}</p>
-                )}
               </div>
             </div>
 
             <div>
               <Components.SignUpInput
-                value={values.signUpUsername}
-                onChange={handleChange}
-                id="signUpUsername"
+                name="signUpUsername"
+                value={user.signUpUsername}
                 type="text"
                 placeholder="Username"
-                onBlur={handleBlur}
-                className={
-                  errors.signUpUsername && touched.signUpUsername
-                    ? "signup-error"
-                    : ""
-                }
+                onChange={(e) => onInputChange(e)}
               />
-              {errors.signUpUsername && touched.signUpUsername && (
-                <p className="signupError">{errors.signUpUsername}</p>
-              )}
             </div>
 
             <div>
               <Components.SignUpInput
-                value={values.email}
-                onChange={handleChange}
-                id="email"
+                name="email"
+                value={user.email}
                 type="email"
                 placeholder="Email"
-                onBlur={handleBlur}
-                className={errors.email && touched.email ? "signup-error" : ""}
+                onChange={(e) => onInputChange(e)}
               />
-              {errors.email && touched.email && (
-                <p className="signupError">{errors.email}</p>
-              )}
             </div>
 
             <div>
               <Components.SignUpInput
-                value={values.phone}
-                onChange={handleChange}
-                id="phone"
+                name="phone"
+                value={user.phone}
                 type="text"
+                onChange={(e) => onInputChange(e)}
                 placeholder="Phone Number(+63)"
-                onBlur={handleBlur}
-                className={errors.phone && touched.phone ? "signup-error" : ""}
               />
-              {errors.phone && touched.phone && (
-                <p className="signupError">{errors.phone}</p>
-              )}
             </div>
 
             <div>
@@ -143,20 +138,13 @@ function Register() {
             <Components.LabelProvince>Province</Components.LabelProvince>
             <Components.LabelCity>City</Components.LabelCity> */}
               <Components.SignUpInput
-                value={values.address}
-                onChange={handleChange}
-                id="address"
+                name="address"
+                value={user.address}
                 type="text"
                 placeholder="Address"
                 address="address"
-                onBlur={handleBlur}
-                className={
-                  errors.address && touched.address ? "signup-error" : ""
-                }
+                onChange={(e) => onInputChange(e)}
               />
-              {errors.address && touched.address && (
-                <p className="signupError">{errors.address}</p>
-              )}
             </div>
 
             <div className="bDateContainer">
@@ -166,63 +154,36 @@ function Register() {
 
               <div className="bDateInput">
                 <Components.SignUpBDate
-                  value={values.birthDate}
-                  onChange={handleChange}
-                  id="birthDate"
+                  name="birthDate"
+                  value={user.birthDate}
                   type="date"
                   placeholder="Birthdate"
-                  onBlur={handleBlur}
-                  className={
-                    errors.birthDate && touched.birthDate ? "signup-error" : ""
-                  }
+                  onChange={(e) => onInputChange(e)}
                 />
-                {errors.birthDate && touched.birthDate && (
-                  <p className="signupError">{errors.birthDate}</p>
-                )}
               </div>
             </div>
 
             <div>
               <Components.SignUpInput
-                value={values.signUpPassword}
-                onChange={handleChange}
-                id="signUpPassword"
+                name="signUpPassword"
+                value={user.signUpPassword}
                 type="password"
                 placeholder="Password"
-                onBlur={handleBlur}
-                className={
-                  errors.signUpPassword && touched.signUpPassword
-                    ? "signup-error"
-                    : ""
-                }
+                onChange={(e) => onInputChange(e)}
               />
-              {errors.signUpPassword && touched.signUpPassword && (
-                <p className="signupError">{errors.signUpPassword}</p>
-              )}
             </div>
 
             <div>
               <Components.SignUpInput
-                value={values.confirmPassword}
-                onChange={handleChange}
-                id="confirmPassword"
+                name="confirmPassword"
+                value={user.confirmPassword}
                 type="password"
                 placeholder="Confirm Password"
-                onBlur={handleBlur}
-                className={
-                  errors.confirmPassword && touched.confirmPassword
-                    ? "signup-error"
-                    : ""
-                }
+                onChange={(e) => onInputChange(e)}
               />
-              {errors.confirmPassword && touched.confirmPassword && (
-                <p className="signupError">{errors.confirmPassword}</p>
-              )}
             </div>
 
-            <Components.Button type="submit" disabled={isSubmitting}>
-              Sign Up
-            </Components.Button>
+            <Components.Button type="submit">Sign Up</Components.Button>
           </Components.Form>
         </Components.SignUpContainer>
 
@@ -234,37 +195,20 @@ function Register() {
           <Components.Form>
             <Components.Title>Sign in</Components.Title>
             <Components.SignInInput
-              value={values.signInUsername}
-              onChange={handleChange}
-              id="signInUsername"
+              name="signInUsername"
+              value={user.signInUsername}
               type="text"
               placeholder="Enter username"
-              onBlur={handleBlur}
-              className={
-                errors.signInUsername && touched.signInUsername
-                  ? "signin-error"
-                  : ""
-              }
+              onChange={(e) => onInputChange(e)}
             />
-            {errors.signInUsername && touched.signInUsername && (
-              <p className="signinError">{errors.signInUsername}</p>
-            )}
+
             <Components.SignInInput
-              value={values.signInPassword}
-              onChange={handleChange}
-              id="signInPassword"
+              name="signInPassword"
+              value={user.signInPassword}
               type="password"
               placeholder="Password"
-              onBlur={handleBlur}
-              className={
-                errors.signInPassword && touched.signInPassword
-                  ? "signin-error"
-                  : ""
-              }
+              onChange={(e) => onInputChange(e)}
             />
-            {errors.signInPassword && touched.signInPassword && (
-              <p className="signinError">{errors.signInPassword}</p>
-            )}
 
             <Components.Anchor href="#">
               Forgot your password?

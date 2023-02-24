@@ -42,7 +42,7 @@ public class UsersController {
 		return user;
 	}
 	
-	@CrossOrigin(originPatterns = "http://localhost:3000")
+	@CrossOrigin(originPatterns = "http://localhost:3000")	
 	@RequestMapping(path = "users/surename/{surename}", method = RequestMethod.GET)
 	public Users selectUsersBySurname(@PathVariable("surename") String surname) {
 		Users user =usersService.getUsersBySurname(surname);
