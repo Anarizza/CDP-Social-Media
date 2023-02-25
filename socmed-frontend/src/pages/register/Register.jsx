@@ -175,15 +175,13 @@ function Register() {
               <div className="bDateInput">
                 <Components.SignUpBDate
                   name="dot"
-                  value={users.birthDate}
+                  value={users.dot}
                   type="date"
                   placeholder="Birthdate"
                   onChange={handleChange}
                 />
               </div>
             </div>
-
-        
 
             <Components.Button type="submit">Sign Up</Components.Button>
           </Components.Form>

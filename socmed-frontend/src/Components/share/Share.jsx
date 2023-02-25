@@ -16,8 +16,9 @@ import {
 } from "@mui/material";
 import { useNavigate } from "react-router-dom";
 
-const Share = () => {
-// FIGHTINGGGG
+const Share = () => { 
+  
+  // FIGHTINGGGG
   // const [posttext, setText] = useState("");
   // const [image, setImage] = useState("");
   
@@ -53,6 +54,7 @@ const Share = () => {
 
   const navigate = useNavigate();
   
+  //ito yung sa axios/service
   const onSubmit = (post) => {
     postService
       .addPost(2, post)
@@ -62,6 +64,7 @@ const Share = () => {
       })
   };
 
+  //ito yung mag sasave sa database
   const handleSubmit = (event) => {
     event.preventDefault();
     onSubmit(form);
@@ -102,6 +105,8 @@ const Share = () => {
     setForm({
       ...form,
       posttext: event.currentTarget.value,
+      image: URL.createObjectURL(file),
+
      // image: event.target.files[0],
      
       
@@ -110,6 +115,18 @@ const Share = () => {
 
 
   //******************************************* */
+
+  //#################### SECOND TRY ############################
+
+ //const [file2, setFile2] = useState()
+ 
+ //onChange ito
+  function handleFile(event){
+    setFile(event.target.files[0])
+    console.log(event.target.files[0]);
+ }
+ 
+  //################################################
   const [file, setFile] = useState(null);
   const [posts, setPosts] = useState([]);
 
@@ -151,27 +168,37 @@ const Share = () => {
           />
         </div>
         <hr className="shareHr" />
+     
       
         {file && (
           <div className="shareImgContainer">
-            <img  src={URL.createObjectURL(file)} alt="" className="shareImg" value={form.image} onChange={handleChange2}/>
+            <img  src={URL.createObjectURL(file)} alt="" className="shareImg" />
             <Close className="shareCancelImg" onClick={removeImage} />
           </div>
         )}
+      
        
         <div className="shareBottom">
           <div className="shareOptions">
+           
+
+           
             <label htmlFor="file" className="shareOption">
               <PermMedia className="shareIcon" style={{ color: "#2e0196f1" }} />
               <div className="shareOptionText">Image</div>
               <input
                 type="file"
+                name="image"
                 id="file"
                 accept=".png,.jpeg,.jpg"
                 style={{ display: "none" }}
-                onChange={(e) => setFile(e.target.files[0])}
+                onChange={handleFile}
               />
             </label>
+
+
+
+
             <div className="shareOption">
               <EmojiEmotions
                 className="shareIcon"
