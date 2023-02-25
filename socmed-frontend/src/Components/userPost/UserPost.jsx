@@ -15,6 +15,7 @@ import * as postService from "../../Service/post";
 import { useNavigate } from "react-router-dom";
 import Swal from "sweetalert2";
 const UserPost = ({ post }) => {
+  
   const [anchorEl, setAnchorEl] = useState(null);
   const navigate = useNavigate();
   const open = Boolean(anchorEl);

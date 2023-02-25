@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useState, useEffect} from "react";
 import "./Post.css";
 import { IconButton } from "@mui/material";
 import {
@@ -10,12 +10,25 @@ import {
 import { Link } from "react-router-dom";
 import ModalImage from "react-modal-image";
 import * as postService from "../../Service/post";
-import { useNavigate } from "react-router-dom";
 import ScreenRotationAltIcon from "@mui/icons-material/ScreenRotationAlt";
 import StarIcon from "@mui/icons-material/Star";
 import StarBorderPurple500SharpIcon from "@mui/icons-material/StarBorderPurple500Sharp";
+import * as commentService from "../../Service/comment";
+import { useParams } from "react-router-dom";
 
 const Post = ({ post }) => {
+  // const params = useParams();
+
+  // const [comment, setComment] = useState([]);
+
+  // useEffect(() => {
+  //   commentService.getCommentByPostPostId(params.id).then((response) => {
+  //     setComment(response.data);
+  //     console.log(response.data); // hazeeeell
+  //   });
+  // }, [params.id]);
+
+
   return (
     <div className="post">
       <div className="postWrapper">
@@ -62,7 +75,7 @@ const Post = ({ post }) => {
           </div>
           <div className="postBottomRight">
             <div className="postCommentText">
-              {post.comment} · comments · share
+              {/* {comment.length} · comments · share */}
             </div>
           </div>
         </div>
@@ -97,5 +110,6 @@ const Post = ({ post }) => {
     </div>
   );
 };
+
 
 export default Post;

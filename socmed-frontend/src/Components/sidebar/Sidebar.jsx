@@ -17,7 +17,7 @@ const Sidebar = () => {
   useEffect(() => {
     usersService.getUsers().then((response) => {
       setUsers(response.data);
-      console.log(response.data);
+      // console.log(response.data);
     });
   }, []);
 

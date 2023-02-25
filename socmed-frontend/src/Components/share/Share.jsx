@@ -17,6 +17,29 @@ import {
 import { useNavigate } from "react-router-dom";
 
 const Share = () => {
+// FIGHTINGGGG
+  // const [posttext, setText] = useState("");
+  // const [image, setImage] = useState("");
+  
+  // const handleSubmit = async (e) => {
+  //   e.preventDefault();
+  //   try {
+  //     const body = { posttext , image};
+  //     const response = await fetch(
+  //       "http://localhost:8080/timelineapi/post/new",
+  //       {
+  //         method: "POST",
+  //         headers: { "Content-Type": "application/json" },
+  //         body: JSON.stringify(body),
+  //       }
+  //     );
+  //     console.log(response);
+  //     setImage(response.data);
+  //     setText(response.data)
+  //   } catch (err) {
+  //     console.error(err.message);
+  //   }
+  // };
 
   //**********************************************
 
