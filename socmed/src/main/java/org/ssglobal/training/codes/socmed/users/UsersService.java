@@ -40,7 +40,11 @@ public class UsersService {
 			sb.append("is already taken");
 		} else {
 			Users temp = new Users();
-			temp.setProfilePic(user.getProfilePic());
+			if(user.getProfilePic() == "" || user.getProfilePic() == null) {
+				temp.setProfilePic("/assets/profileCover/DefaultProfile.jpg");
+			}else {
+				temp.setProfilePic(user.getProfilePic());
+			}
 			temp.setGivenName(user.getGivenName());
 			temp.setSurname(user.getSurname());
 			temp.setUsername(user.getUsername());
