@@ -35,6 +35,13 @@ public class LikesController {
 	}
 	
 	@CrossOrigin(originPatterns = "http://localhost:3000")
+	@RequestMapping(path = "post/{like}", method = RequestMethod.GET)
+	public List<Likes> selectLikesByPostPostId(@PathVariable("like") Integer postId) {
+		 List<Likes> like =  likeService.getLikesByPostPostId(postId);
+		 return like;
+	}
+	
+	@CrossOrigin(originPatterns = "http://localhost:3000")
 	@RequestMapping(path = "removelikes/{likeId}", method = RequestMethod.POST)
 	public String RemoveFromLikesByLikeId(@PathVariable("likeId") Integer likeId) {
 		return likeService.deleteFromLikesByUsersUserId(likeId).toString();

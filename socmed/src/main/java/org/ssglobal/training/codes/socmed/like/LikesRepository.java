@@ -9,5 +9,6 @@ import org.springframework.stereotype.Repository;
 public interface LikesRepository extends JpaRepository<Likes, Integer>{
 	
 	List<Likes> findByUsersUserId(Integer userId);
+	List<Likes> findByPostPostId(Integer userId);
 
 }

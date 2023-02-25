@@ -21,6 +21,10 @@ public class LikesService {
 		return likesRepository.findByUsersUserId(post);
 	}
 	
+	public List<Likes> getLikesByPostPostId(Integer post) {
+		return likesRepository.findByPostPostId(post);
+	}
+	
 	public String deleteFromLikesByUsersUserId(Integer likeId) {
 		likesRepository.deleteById(likeId);
 		return "Comment Deleted!";
