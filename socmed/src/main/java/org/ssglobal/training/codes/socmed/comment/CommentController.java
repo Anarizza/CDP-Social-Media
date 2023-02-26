@@ -1,5 +1,7 @@
 package org.ssglobal.training.codes.socmed.comment;
 
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -32,6 +34,11 @@ public class CommentController {
 	@CrossOrigin(originPatterns = "http://localhost:3000")
 	@RequestMapping(path = "new", method = RequestMethod.POST)
 	public Comment newPost(@RequestBody Comment comm) {
+		
+		 DateTimeFormatter dtf = DateTimeFormatter.ofPattern("MMMM dd, yyyy hh:mm:ss a");  
+		 LocalDateTime now = LocalDateTime.now();
+		 String date = dtf.format(now);
+		 comm.setDateCreated(date);
 		return commentService.addComment(comm);
 	}
 	

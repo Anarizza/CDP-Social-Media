@@ -12,6 +12,7 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
+import jakarta.persistence.SequenceGenerator;
 import jakarta.persistence.Table;
 
 @Entity
@@ -19,7 +20,15 @@ import jakarta.persistence.Table;
 public class Comment {
 	
 	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@SequenceGenerator(
+			  name = "comm_sequence",
+			  sequenceName = "comm_sequence",
+			  allocationSize = 1
+	)
+	@GeneratedValue(
+			strategy = GenerationType.SEQUENCE,
+			generator = "comm_sequence"
+	)
 	private Integer commentId;
 	
 	
