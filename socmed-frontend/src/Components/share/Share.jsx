@@ -4,7 +4,7 @@ import "./Share.css";
 import SendIcon from "@mui/icons-material/Send";
 import * as postService from "../../Service/post";
 import * as userService from "../../Service/users";
-import Joi from 'joi';
+import Joi, { optional } from 'joi';
 import {
   Button,
   Card,
@@ -18,32 +18,6 @@ import { useNavigate } from "react-router-dom";
 
 const Share = () => { 
   
-  // FIGHTINGGGG
-  // const [posttext, setText] = useState("");
-  // const [image, setImage] = useState("");
-  
-  // const handleSubmit = async (e) => {
-  //   e.preventDefault();
-  //   try {
-  //     const body = { posttext , image};
-  //     const response = await fetch(
-  //       "http://localhost:8080/timelineapi/post/new",
-  //       {
-  //         method: "POST",
-  //         headers: { "Content-Type": "application/json" },
-  //         body: JSON.stringify(body),
-  //       }
-  //     );
-  //     console.log(response);
-  //     setImage(response.data);
-  //     setText(response.data)
-  //   } catch (err) {
-  //     console.error(err.message);
-  //   }
-  // };
-
-  //**********************************************
-
   const [form, setForm] = useState(
      {
       posttext: "",
@@ -101,17 +75,21 @@ const Share = () => {
   };
 
   const handleChange2 = (event) => {
+   
     console.log(event.currentTarget.value);
     setForm({
-      ...form,
-      posttext: event.currentTarget.value,
-      image: URL.createObjectURL(file),
 
-     // image: event.target.files[0],
+
+      ...form,
+        posttext: event.currentTarget.value,
+        image: file == null ? "" : URL.createObjectURL(file),
      
-      
     })
   }
+
+ // ...form,
+  //posttext: event.currentTarget.value,
+  //mage: URL.createObjectURL(file),
 
 
   //******************************************* */
