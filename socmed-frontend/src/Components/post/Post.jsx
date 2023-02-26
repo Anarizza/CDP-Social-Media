@@ -16,20 +16,10 @@ import StarBorderPurple500SharpIcon from "@mui/icons-material/StarBorderPurple50
 import * as commentService from "../../Service/comment";
 import { useParams } from "react-router-dom";
 
-const Post = ({ post }) => {
-  // const params = useParams();
-
-  // const [comment, setComment] = useState([]);
-
-  // useEffect(() => {
-  //   commentService.getCommentByPostPostId(params.id).then((response) => {
-  //     setComment(response.data);
-  //     console.log(response.data); // hazeeeell
-  //   });
-  // }, [params.id]);
-
-
+const Post = ({ posts }) => {
+ 
   return (
+    [...posts].reverse().map((post) => 
     <div className="post">
       <div className="postWrapper">
         <div className="postTop">
@@ -108,6 +98,7 @@ const Post = ({ post }) => {
         </div>
       </div>
     </div>
+    )
   );
 };
 

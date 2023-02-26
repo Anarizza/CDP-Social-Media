@@ -31,7 +31,7 @@ const Share = () => {
   //ito yung sa axios/service
   const onSubmit = (post) => {
     postService
-      .addPost(2, post)
+      .addPost(1, post)
       .then((response) => {
         console.log(response);
         navigate("/");

@@ -20,9 +20,9 @@ const Feed = () => {
       <div className="feedWrapper">
         {/* <Stories /> */}
         <Share />
-        {posts.map((p) => (
-          <Post key={p.id} post={p} />
-        ))}
+      
+          <Post posts={posts} />
+      
       </div>
     </div>
   );
