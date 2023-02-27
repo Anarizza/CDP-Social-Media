@@ -44,8 +44,8 @@ const Share = () => {
     onSubmit(form);
   };
 
+  /*
   const [errors, setErrors] = useState({});
-
   const handleChange = ({ currentTarget: input }) => {
     setForm({
     
@@ -63,6 +63,7 @@ const Share = () => {
       setErrors(errors);
     }
   };
+  */
 
   const schema = Joi.object({
     posttext: Joi.string().min(1).max(100).required(),
@@ -75,11 +76,7 @@ const Share = () => {
   };
 
   const handleChange2 = (event) => {
-   
-    console.log(event.currentTarget.value);
     setForm({
-
-
       ...form,
         posttext: event.currentTarget.value,
         image: file == null ? "" : URL.createObjectURL(file),

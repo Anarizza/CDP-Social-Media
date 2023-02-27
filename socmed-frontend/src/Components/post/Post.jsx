@@ -13,10 +13,15 @@ import * as postService from "../../Service/post";
 import ScreenRotationAltIcon from "@mui/icons-material/ScreenRotationAlt";
 import StarIcon from "@mui/icons-material/Star";
 import StarBorderPurple500SharpIcon from "@mui/icons-material/StarBorderPurple500Sharp";
-import * as likestService from "../../Service/likes";
+import * as likesService from "../../Service/likes";
 import * as commentService from "../../Service/comment";
 import { useParams } from "react-router-dom";
 import ChatOutlinedIcon from '@mui/icons-material/ChatOutlined';
+import StarBorderOutlinedIcon from '@mui/icons-material/StarBorderOutlined';
+import * as userService from "../../Service/users";
+import Grid from "@mui/material/Grid";
+import { useNavigate } from "react-router-dom";
+
 
 
 
@@ -32,10 +37,12 @@ const Post = ({ post }) => {
   //   });
   // }, [params.id]);
 
+
+
   const [likes, setLikes] = useState([]);
 
   useEffect(() => {
-    likestService.getLikes(post.postId).then((response) => {
+    likesService.getLikes(post.postId).then((response) => {
       setLikes(response.data);
       console.log(response.data);
     });
@@ -50,9 +57,61 @@ const Post = ({ post }) => {
     });
   }, []);
 
+  //------------THIS IS FOR LIKES BUTTON--------------------
+//sample palang tong user since wala pang login 
 
 
+const [user, setUsers] = useState([]);
+//dapat useParam yung parameter pero wala pan login so hardcode value muna
+useEffect(() => {
+  userService.getUsersById(1).then((response) => {
+    setUsers(response.data);
+    console.log(response.data);
+  });
+}, []);
 
+  const [isActive, setActive] = useState(false);
+
+  const [likesForm, setLikesForm] = useState(
+    {
+      createdDate: "none",
+    }
+  );
+
+ 
+  /*
+  useEffect(() => {
+    likestService.addLikes(likes2, post.postId, user.userId).then((response) => {
+      setLikes2(response.data);
+      console.log(response.data);
+    });
+  }, []);
+  */
+
+  const navigate = useNavigate();
+
+  const onSubmit = (layk) => {
+    likesService
+      .addLikes(user.userId, post.postId, layk)
+      .then((response) => {
+        console.log(response);
+        navigate("/");
+      })
+  };
+
+  const handleSubmit = (event) => {
+    event.preventDefault();
+    onSubmit(likesForm);
+  };
+/*
+  const [ok, setOk] = useState([])
+
+  const isUserLiked = () => {
+    if (user.userId === post.users.userId){
+
+    }
+  };
+  */
 
   return (
     
@@ -106,10 +165,17 @@ const Post = ({ post }) => {
 
         <hr className="footerHr" />
         <div className="postBottomFooter">
+         <Grid>
           <div className="postBottomFooterItem">
-            <StarBorderPurple500SharpIcon className="footerIcon" />
+            <Grid  component="form" onSubmit={handleSubmit}>
+              <IconButton type="submit" onClick={() => setActive(!isActive)} >
+                <div>{isActive ? <StarIcon sx={{color: '#E1AD01'}}/> : <StarBorderOutlinedIcon/> }</div>
+              </IconButton>
+            </Grid>
             <div className="footerText">Appreciate</div>
           </div>
+          </Grid>
+
           <Link
             to={`/post/id/${post.postId}`}
             style={{ textDecoration: "none" }}

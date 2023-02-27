@@ -12,6 +12,7 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
+import jakarta.persistence.SequenceGenerator;
 import jakarta.persistence.Table;
 
 @Entity
@@ -19,7 +20,15 @@ import jakarta.persistence.Table;
 public class Likes {
 	
 	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@SequenceGenerator(
+			  name = "like_sequence",
+			  sequenceName = "like_sequence",
+			  allocationSize = 1
+	)
+	@GeneratedValue(
+			strategy = GenerationType.SEQUENCE,
+			generator = "like_sequence"
+	)
 	private Integer likeId;
 	
 
@@ -65,11 +74,11 @@ public class Likes {
 		this.post = post;
 	}
 
-	public Users getUserId() {
+	public Users getUsers() {
 		return users;
 	}
 
-	public void setUserId(Users userId) {
+	public void setUsers(Users userId) {
 		this.users = userId;
 	}
 
