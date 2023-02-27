@@ -21,17 +21,21 @@ const Sidebar = () => {
     });
   }, []);
 
-  const [theme, setTheme] = useState(false);
+  const [theme, setTheme] = useState("light");
 
   const handleClick = () => {
-    setTheme(!theme);
+    localStorage.setItem("theme",JSON.stringify(theme=== "light" ? "dark" : "light"));
+    setTheme((prevTheme) => prevTheme === "light" ? "dark" : "light");
   };
   useEffect(() => {
-    if (theme === true) {
+    if (theme === "dark") {
       document.body.classList.add("dark");
     } else {
       document.body.classList.remove("dark");
     }
+    if(localStorage.getItem("theme")){
+      setTheme(JSON.parse(localStorage.getItem("theme")))
+     }
   });
 
   return (
@@ -45,7 +49,6 @@ const Sidebar = () => {
           <MenuLink Icon={ <StarBorderPurple500SharpIcon/> } text="Appreciate" />
         </Link>
         <div onClick={handleClick}>
-          {theme ? "" : ""}
           <MenuLink Icon={<Brightness4Icon />} text="Theme" />
         </div>
         <MenuLink Icon={<ExitToAppOutlinedIcon />} text="Logout" />
