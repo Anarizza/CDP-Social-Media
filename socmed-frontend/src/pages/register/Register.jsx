@@ -1,8 +1,6 @@
 import React from "react";
 import * as Components from "./Components";
 import "./formInput.css";
-import { useFormik } from "formik";
-import { formSchema } from "./schemas";
 import * as userService from "../../Service/users";
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
@@ -11,7 +9,7 @@ function Register() {
   const navigate = useNavigate();
   const [signIn, toggle] = useState(true);
 
-  const [ users, setUsers ] = useState({
+  const [users, setUsers] = useState({
     profilePic: "",
     givenName: "",
     surname: "",
@@ -25,7 +23,6 @@ function Register() {
     dot: "",
   });
 
- 
   const onSubmit = (user) => {
     userService.registerUser(user).then((response) => {
       console.log(response);
@@ -39,11 +36,10 @@ function Register() {
   };
 
   const handleChange = (event) => {
-     setUsers({ 
-            ...users, 
-            [event.currentTarget.name]: event.currentTarget.value
-          });
-       
+    setUsers({
+      ...users,
+      [event.currentTarget.name]: event.currentTarget.value,
+    });
   };
 
   useEffect(() => {
@@ -52,8 +48,38 @@ function Register() {
     });
   }, []);
 
-  
+  const [loginDetails, setLoginDetails] = useState({
+    username: "",
+    password: "",
+  });
 
+  const handleSubmitLogin = (event) => {
+    event.preventDefault();
+    if (loginDetails.username === "" || loginDetails.password === "") {
+      console.log("Username and password is required!");
+      return;
+    }
+
+    const userName1 = "";
+    const userPassword1 = "";
+
+    //userService.getUsers;
+    navigate("/");
+  };
+
+  const handleChangeLogin = (event) => {
+    setLoginDetails({
+      ...loginDetails,
+      [event.currentTarget.name]: event.currentTarget.value,
+    });
+  };
+
+  useEffect(() => {
+    userService.getUsers().then((response) => {
+      setLoginDetails(response.data);
+      console.log(response.data);
+    });
+  }, []);
 
   return (
     <Components.Outer>
@@ -135,7 +161,6 @@ function Register() {
               />
             </div>
 
-
             <div>
               {/* <Components.LabelBrgy>Barangay</Components.LabelBrgy>
             <Components.LabelProvince>Province</Components.LabelProvince>
@@ -192,22 +217,22 @@ function Register() {
         {/* Sign In starts here... */}
 
         <Components.SignInContainer signinIn={signIn}>
-          <Components.Form>
+          <Components.Form onSubmit={handleSubmitLogin} autoComplete="off">
             <Components.Title>Sign in</Components.Title>
             <Components.SignInInput
               name="signInUsername"
-              value={users.username}
+              value={loginDetails.username}
               type="text"
               placeholder="Enter username"
-              onChange={handleChange}
+              onChange={handleChangeLogin}
             />
 
             <Components.SignInInput
               name="signInPassword"
-              value={users.password}
+              value={loginDetails.password}
               type="password"
               placeholder="Password"
-              onChange={handleChange}
+              onChange={handleChangeLogin}
             />
 
             <Components.Anchor href="#">
