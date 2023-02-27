@@ -9,6 +9,9 @@ public class CommentService {
 	
 	private final CommentRepository commentRepository;
 
+	public List<Comment> getComment(){
+		return commentRepository.findAll();
+	}
 	public CommentService(CommentRepository commentRepository) {
 		this.commentRepository = commentRepository;
 	}

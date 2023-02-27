@@ -15,6 +15,9 @@ import {
   ShareOutlined,
 } from "@mui/icons-material";
 import * as commentService from "../../Service/comment";
+// import * as likeService from "../../Service/like";
+import Joi from 'joi';
+
 import Swal from "sweetalert2";
 
 const DetailsPage = () => {
@@ -38,15 +41,69 @@ const DetailsPage = () => {
   const [comment, setComment] = useState([]);
   const [commentOpen, setCommentOpen] = useState(false);
   const [commentBoxVisible, setCommentBoxVisible] = useState(false);
-  const [input, setInput] = useState("");
 
+  const [likes, setLikes] = useState([]);
+
+// add comment
   const [form, setForm] = useState(
     {
-     posttext: "",
-     image: "",
+      commenttext: "",
    
    }
  );
+// add function in service
+ const onSubmit = (comm) => {
+  commentService
+    .addComment(2, comm)
+    .then((response) => {
+      console.log(response);
+    })
+    navigate("/");
+
+};
+
+const handleSubmit = (event) => {
+  event.preventDefault();
+  onSubmit(form);
+};
+const [errors, setErrors] = useState({});
+
+const handleChange = ({ currentTarget: input }) => {
+  setForm({
+  
+    [input.name]: input.value,
+  });
+
+  const result = schema.extract(input.name).label(input.name).validate(input.value);
+
+  if (result.error){
+    setErrors({...errors,
+        [input.name]: result.error.details[0].message
+    });
+  } else {
+    delete errors[input.name];
+    setErrors(errors);
+  }
+};
+const schema = Joi.object({
+  commenttext: Joi.string().min(1).max(100).required(),
+});
+
+const isFormInvalid = () => {
+  const result = schema.validate(form);
+  return !!result.error;
+};
+
+
+const handleChange2 = (event) => {
+  console.log(event.currentTarget.value);
+  setForm({
+    ...form,
+    commenttext: event.currentTarget.value
+    
+  })
+}
+
 
   const handleDeleteComment = async (commentId) => {
     if (commentId) {
@@ -66,14 +123,12 @@ const DetailsPage = () => {
     }
   };
 
-  const handleComment = () => {};
-
   useEffect(() => {
     setLoading(true);
     postService.fetchPostById(params.id).then((response) => {
       setPosts(response.data);
       setLoading(false);
-      console.log(response.data); // polaaaaaa
+      // console.log(response.data); // polaaaaaa
     });
   }, [params.id]);
 
@@ -82,9 +137,18 @@ const DetailsPage = () => {
     commentService.getCommentByPostPostId(params.id).then((response) => {
       setComment(response.data);
       setLoading(false);
-      console.log(response.data); // hazeeeell
+      // console.log(response.data); // hazeeeell
     });
   }, [params.id]);
+
+  // useEffect(() => {
+  //   setLoading(true);
+  //   likeService.getLikesByUsersUserId(params.id).then((response) => {
+  //     setLikes(response.data);
+  //     setLoading(false);
+  //     console.log(response.data); // hazeeeell
+  //   });
+  // }, [params.id]);
 
   if (loading) {
     return <h1>Loading...</h1>;
@@ -140,7 +204,7 @@ const DetailsPage = () => {
                 className="bottomLeftIcon"
                 style={{ color: "#011631" }}
               />
-              <div className="postLikeCounter">{posts.like}</div>
+              <div className="postLikeCounter">{likes}</div>
             </div>
             <div className="postBottomRight">
               <div
@@ -173,17 +237,20 @@ const DetailsPage = () => {
           </div>
         </div>
         {commentBoxVisible && (
-          <form onSubmit={handleComment} className="commentBox">
-            <textarea
+          <form className="commentBox"    onSubmit={handleSubmit}      
+          >
+            <input
+              name="commenttext"
               type="text"
-              placeholder="Write a comment ..."
-              className="commentInput"
               rows={1}
               style={{ resize: "none" }}
-              value={input}
-              onChange={(e) => setInput(e.target.value)}
+              value={form.commenttext}
+              onChange={handleChange2}
+              placeholder="Write a comment ..."
+              className="commentInput"
+
             />
-            <button type="submit" disabled={!input} className="commentPost">
+            <button type="submit" className="commentPost" disabled={isFormInvalid()} >
               Comment
             </button>
           </form>
@@ -203,11 +270,11 @@ const DetailsPage = () => {
                       open={open}
                       onClose={handleCloseMenu}
                     >
-                      <MenuItem>Edit</MenuItem>
+                      <MenuItem>Edit Comment</MenuItem>
                       <MenuItem
                         onClick={() => handleDeleteComment(c.commentId)}
                       >
-                        Delete
+                        Delete Comment
                       </MenuItem>
                     </Menu>
                   </div>
