@@ -1,4 +1,4 @@
-import React, {useState, useEffect} from "react";
+import React, { useState, useEffect } from "react";
 import "./Post.css";
 import { IconButton } from "@mui/material";
 import {
@@ -17,9 +17,18 @@ import * as commentService from "../../Service/comment";
 import { useParams } from "react-router-dom";
 
 const Post = ({ posts }) => {
- 
-  return (
-    [...posts].reverse().map((post) => 
+  // const params = useParams();
+
+  // const [comment, setComment] = useState([]);
+
+  // useEffect(() => {
+  //   commentService.getCommentByPostPostId(params.id).then((response) => {
+  //     setComment(response.data);
+  //     console.log(response.data); // hazeeeell
+  //   });
+  // }, [params.id]);
+
+  return [...posts].reverse().map((post) => (
     <div className="post">
       <div className="postWrapper">
         <div className="postTop">
@@ -86,7 +95,7 @@ const Post = ({ posts }) => {
                   className="footerText"
                   style={{ fontSize: "11px", color: "black" }}
                 >
-                  See More..
+                  See More...
                 </div>
               </div>
             </IconButton>
@@ -98,9 +107,7 @@ const Post = ({ posts }) => {
         </div>
       </div>
     </div>
-    )
-  );
+  ));
 };
-
 
 export default Post;

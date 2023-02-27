@@ -1,5 +1,4 @@
-
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import "./Post.css";
 import { IconButton, MenuItem, Menu } from "@mui/material";
 import {
@@ -9,13 +8,13 @@ import {
   ThumbUpAltOutlined,
   ShareOutlined,
 } from "@mui/icons-material";
-import { Link } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import ModalImage from "react-modal-image";
 import * as postService from "../../Service/post";
 import { useNavigate } from "react-router-dom";
 import Swal from "sweetalert2";
+import EditPost from "../editPost/EditPost";
 const UserPost = ({ post }) => {
-  
   const [anchorEl, setAnchorEl] = useState(null);
   const navigate = useNavigate();
   const open = Boolean(anchorEl);
@@ -41,12 +40,12 @@ const UserPost = ({ post }) => {
         if (result.isConfirmed) {
           postService.deletePost(postId);
           navigate(0);
-
         }
       });
     }
   };
 
+  //if (user)
   return (
     <div className="post">
       <div className="postWrapper">
