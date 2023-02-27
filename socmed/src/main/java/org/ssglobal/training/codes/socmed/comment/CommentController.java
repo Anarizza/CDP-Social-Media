@@ -17,7 +17,7 @@ import org.ssglobal.training.codes.socmed.users.Users;
 import org.ssglobal.training.codes.socmed.users.UsersRepository;
 
 @RestController
-@RequestMapping(path = "timelineapi/comment")
+@RequestMapping(path = "timelineapi/comment") 
 public class CommentController {
 
 	private final CommentService commentService;
@@ -31,8 +31,8 @@ public class CommentController {
 	}
 
 	@CrossOrigin(originPatterns = "http://localhost:3000")
-	@RequestMapping(path = "{post}", method = RequestMethod.GET)
-	public List<Comment> selectCommentByPostPostId(@PathVariable("post") Integer postId) {
+	@RequestMapping(path = "{postId}", method = RequestMethod.GET)
+	public List<Comment> selectCommentByPostPostId(@PathVariable("postId") Integer postId) {
 		List<Comment> comment = commentService.getCommentByPostPostId(postId);
 		return comment;
 	}

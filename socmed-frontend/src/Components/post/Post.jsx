@@ -13,10 +13,14 @@ import * as postService from "../../Service/post";
 import ScreenRotationAltIcon from "@mui/icons-material/ScreenRotationAlt";
 import StarIcon from "@mui/icons-material/Star";
 import StarBorderPurple500SharpIcon from "@mui/icons-material/StarBorderPurple500Sharp";
+import * as likestService from "../../Service/likes";
 import * as commentService from "../../Service/comment";
 import { useParams } from "react-router-dom";
+import ChatOutlinedIcon from '@mui/icons-material/ChatOutlined';
 
-const Post = ({ posts }) => {
+
+
+const Post = ({ post }) => {
   // const params = useParams();
 
   // const [comment, setComment] = useState([]);
@@ -28,7 +32,31 @@ const Post = ({ posts }) => {
   //   });
   // }, [params.id]);
 
-  return [...posts].reverse().map((post) => (
+  const [likes, setLikes] = useState([]);
+
+  useEffect(() => {
+    likestService.getLikes(post.postId).then((response) => {
+      setLikes(response.data);
+      console.log(response.data);
+    });
+  }, []);
+
+  const [comment, setComment] = useState([]);
+
+  useEffect(() => {
+    commentService.getCommentByPostPostId(post.postId).then((response) => {
+      setComment(response.data);
+      console.log(response.data);
+    });
+  }, []);
+
+
+
+
+
+  return (
+    
+
     <div className="post">
       <div className="postWrapper">
         <div className="postTop">
@@ -66,11 +94,8 @@ const Post = ({ posts }) => {
         </div>
         <div className="postBottom">
           <div className="postBottomLeft">
-            <StarIcon className="bottomLeftIcon" style={{ color: "#E1AD01" }} />
-            <div className="footerText">
-              <b>99</b>
-            </div>
-            <div className="postLikeCounter">{post.like}</div>
+            <StarIcon className="bottomLeftIcon" style={{ color: "#E1AD01" }} /><b>{likes.length}</b>
+            <div className="postLikeCounter" sx={{fontSize: "1%"}}><ChatOutlinedIcon  sx={{marginRight: "7px"}}/>{comment.length}</div>
           </div>
           <div className="postBottomRight">
             <div className="postCommentText">
@@ -107,7 +132,8 @@ const Post = ({ posts }) => {
         </div>
       </div>
     </div>
-  ));
+  );
+
 };
 
 export default Post;

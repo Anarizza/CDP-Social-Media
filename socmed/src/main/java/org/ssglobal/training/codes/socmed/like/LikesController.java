@@ -35,8 +35,8 @@ public class LikesController {
 	}
 	
 	@CrossOrigin(originPatterns = "http://localhost:3000")
-	@RequestMapping(path = "post/{like}", method = RequestMethod.GET)
-	public List<Likes> selectLikesByPostPostId(@PathVariable("like") Integer postId) {
+	@RequestMapping(path = "post/{postId}", method = RequestMethod.GET)	
+	public List<Likes> selectLikesByPostPostId(@PathVariable("postId") Integer postId) {
 		 List<Likes> like =  likeService.getLikesByPostPostId(postId);
 		 return like;
 	}
