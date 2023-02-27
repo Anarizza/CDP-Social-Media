@@ -48,28 +48,3 @@
 .profileRightBottom {
   display: flex;
 }
-
-#light {
-  background-color: #ffffff;
-}
-
-#dark {
-  background-color: #35a598;
-}
-
-.switch {
-  width: 100vw;
-  height: 100px;
-}
-
-.switch label {
-  margin: 20px;
-}
-
-#light .switch label {
-  color: black;
-}
-
-#dark .switch label {
-  color: white;
-}

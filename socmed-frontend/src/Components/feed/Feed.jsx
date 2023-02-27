@@ -20,8 +20,10 @@ const Feed = () => {
       <div className="feedWrapper">
         {/* <Stories /> */}
         <Share />
-      
-          <Post posts={posts} />
+
+        {[...posts].reverse().map((p) => (
+          <Post  post={p} />
+        ))}
       
       </div>
     </div>
