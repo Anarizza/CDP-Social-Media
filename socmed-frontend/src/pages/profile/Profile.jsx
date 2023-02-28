@@ -7,10 +7,8 @@ import Rightbar from "../../Components/rightbar/Rightbar";
 import Sidebar from "../../Components/sidebar/Sidebar";
 import { Users } from "../../data/data";
 import * as userService from "../../Service/users";
-import { createContext, useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 import UserFeed from "../../Components/userFeed/UserFeed";
-
-export const ThemeContext = createContext(null);
 
 const Profile = () => {
   const [user, setUsers] = useState([]);
@@ -23,11 +21,10 @@ const Profile = () => {
 
   const fullname = user.givenName + " " + user.surname;
 
-  const a = JSON.parse(localStorage.getItem("theme"));
   return (
     <div className="profile" >
       <NavBar />
-      <div className="profileWrapper" id={a}>
+      <div className="profileWrapper">
         <Sidebar />
         <div className="profileRight">
           <div className="profileRightTop">

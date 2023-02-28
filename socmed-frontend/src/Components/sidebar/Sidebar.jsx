@@ -22,9 +22,8 @@ const Sidebar = () => {
   }, []);
 
   const [theme, setTheme] = useState("light");
-
   const handleClick = () => {
-    localStorage.setItem("theme",JSON.stringify(theme=== "light" ? "dark" : "light"));
+    localStorage.setItem("theme", JSON.stringify(theme === "light" ? "dark" : "light"));
     setTheme((prevTheme) => prevTheme === "light" ? "dark" : "light");
   };
   useEffect(() => {
@@ -45,7 +44,7 @@ const Sidebar = () => {
         <MenuLink Icon={<BookmarkIcon />} text="Saved" />
 
           {/*Temposry lang yung parameter na 1 kas dapat userId yun since wala pang login*/}
-        <Link to={`/appreciate/${1}`} style={{ textDecoration: "none", color: 'black'}}>
+        <Link to={`/appreciate/${1}`} style={{ textDecoration: "none", color: theme === "light" ? "black" : "white"}}>
           <MenuLink Icon={ <StarBorderPurple500SharpIcon/> } text="Appreciate" />
         </Link>
         <div onClick={handleClick}>
