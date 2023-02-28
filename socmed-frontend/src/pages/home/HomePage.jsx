@@ -8,7 +8,6 @@ import "./HomePage.css";
 const HomePage = () => {
   return (
     <div className="home">
-      <NavBar />
       <div className="homeContainer">
         <Sidebar />
         <Feed className="feed" />

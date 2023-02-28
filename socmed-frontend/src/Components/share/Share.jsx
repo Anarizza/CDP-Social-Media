@@ -4,7 +4,7 @@ import "./Share.css";
 import SendIcon from "@mui/icons-material/Send";
 import * as postService from "../../Service/post";
 import * as userService from "../../Service/users";
-import Joi, { optional } from 'joi';
+import Joi, { optional } from "joi";
 import {
   Button,
   Card,
@@ -16,26 +16,20 @@ import {
 } from "@mui/material";
 import { useNavigate } from "react-router-dom";
 
-const Share = () => { 
-  
-  const [form, setForm] = useState(
-     {
-      posttext: "",
-      image: "",
-    
-    }
-  );
+const Share = () => {
+  const [form, setForm] = useState({
+    posttext: "",
+    image: "",
+  });
 
   const navigate = useNavigate();
-  
+
   //ito yung sa axios/service
   const onSubmit = (post) => {
-    postService
-      .addPost(1, post)
-      .then((response) => {
-        console.log(response);
-        navigate("/");
-      })
+    postService.addPost(1, post).then((response) => {
+      console.log(response);
+      navigate("/");
+    });
   };
 
   //ito yung mag sasave sa database
@@ -78,29 +72,27 @@ const Share = () => {
   const handleChange2 = (event) => {
     setForm({
       ...form,
-        posttext: event.currentTarget.value,
-        image: file == null ? "" : URL.createObjectURL(file),
-     
-    })
-  }
+      posttext: event.currentTarget.value,
+      image: file == null ? "" : URL.createObjectURL(file),
+    });
+  };
 
- // ...form,
+  // ...form,
   //posttext: event.currentTarget.value,
   //mage: URL.createObjectURL(file),
-
 
   //******************************************* */
 
   //#################### SECOND TRY ############################
 
- //const [file2, setFile2] = useState()
- 
- //onChange ito
-  function handleFile(event){
-    setFile(event.target.files[0])
+  //const [file2, setFile2] = useState()
+
+  //onChange ito
+  function handleFile(event) {
+    setFile(event.target.files[0]);
     console.log(event.target.files[0]);
- }
- 
+  }
+
   //################################################
   const [file, setFile] = useState(null);
   const [posts, setPosts] = useState([]);
@@ -124,73 +116,64 @@ const Share = () => {
     setFile(null);
   };
   return (
-    <Grid  
-    container
-    component="form" 
-    onSubmit={handleSubmit}
-    >
-    <div className="share">
-      <div className="shareWrapper">
-        <div className="shareTop">
-          <img src={user.profilePic} alt="" className="shareProfileImg" />
-          <input
-            name="posttext"
-            variant="standard"
-            value={form.posttext}
-            onChange={handleChange2}
-            placeholder="What's happening?"
-            className="shareInput"
-          />
-        </div>
-        <hr className="shareHr" />
-     
-      
-        {file && (
-          <div className="shareImgContainer">
-            <img  src={URL.createObjectURL(file)} alt="" className="shareImg" />
-            <Close className="shareCancelImg" onClick={removeImage} />
+    <Grid container component="form" onSubmit={handleSubmit}>
+      <div className="share">
+        <div className="shareWrapper">
+          <div className="shareTop">
+            <img src={user.profilePic} alt="" className="shareProfileImg" />
+            <input
+              name="posttext"
+              variant="standard"
+              value={form.posttext}
+              onChange={handleChange2}
+              placeholder="What's happening?"
+              className="shareInput"
+            />
           </div>
-        )}
-      
-       
-        <div className="shareBottom">
-          <div className="shareOptions">
-           
+          <hr className="shareHr" />
 
-           
-            <label htmlFor="file" className="shareOption">
-              <PermMedia className="shareIcon" style={{ color: "#2e0196f1" }} />
-              <div className="shareOptionText">Image</div>
-              <input
-                type="file"
-                name="image"
-                id="file"
-                accept=".png,.jpeg,.jpg"
-                style={{ display: "none" }}
-                onChange={handleFile}
+          {file && (
+            <div className="shareImgContainer">
+              <img
+                src={URL.createObjectURL(file)}
+                alt=""
+                className="shareImg"
               />
-            </label>
-
-
-
-
-            <div className="shareOption">
-              <EmojiEmotions
-                className="shareIcon"
-                style={{ color: "#bfc600ec" }}
-              />
-              <div className="shareOptionText">Feelings/Activity</div>
+              <Close className="shareCancelImg" onClick={removeImage} />
             </div>
-            <Button disabled={isFormInvalid()}  type="submit">
-            <div className="shareOption">
-              <SendIcon className="shareIcon" style={{ color: "#0399f4" }} />
-              <div className="shareOptionText">Share</div>
+          )}
+
+          <div className="shareBottom">
+            <div className="shareOptions">
+              <label htmlFor="file" className="shareOption">
+                <PermMedia
+                  className="shareIcon"
+                  style={{ color: "#2e0196f1" }}
+                />
+                <div className="shareOptionText">Image</div>
+                <input
+                  type="file"
+                  name="image"
+                  id="file"
+                  accept=".png,.jpeg,.jpg"
+                  style={{ display: "none" }}
+                  onChange={handleFile}
+                />
+              </label>
+
+              <Button disabled={isFormInvalid()} type="submit">
+                <div className="shareOption">
+                  <SendIcon
+                    className="shareIcon"
+                    style={{ color: "#0399f4" }}
+                  />
+                  <div className="shareOptionText">Share</div>
+                </div>
+              </Button>
             </div>
-            </Button>
           </div>
         </div>
       </div>
-    </div>
     </Grid>
   );
 };

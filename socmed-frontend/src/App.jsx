@@ -8,10 +8,14 @@ import Profile from "./pages/profile/Profile";
 import DetailsPageConnector from "./pages/detailsPage/DetailsPageConnector";
 import LikesConnector from "./pages/likes/LikesConnector";
 import "./style/dark.css";
+import EditPost from "./Components/editPost/EditPost";
+import NavBar from "./Components/navbar/NavBar";
 const App = () => {
   return (
     <>
       <CssBaseline>
+      <NavBar />
+
           <Routes>
              <Route path="/" element={<Navigate to="/homepage" />} />
             <Route path="/homepage" element={<HomePage />} />
@@ -20,7 +24,7 @@ const App = () => {
             <Route path="/profile" element={<Profile />} />
             <Route path="/post/id/:id" element={<DetailsPageConnector />} /> 
             <Route path="/appreciate/:id" element={<LikesConnector />} />
-
+            <Route path="/post/update/status/:id"element= {<EditPost />}/>
           </Routes>
       </CssBaseline>
     </>
