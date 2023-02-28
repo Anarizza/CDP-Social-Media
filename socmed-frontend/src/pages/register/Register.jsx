@@ -9,6 +9,7 @@ function Register() {
   const navigate = useNavigate();
   const [signIn, toggle] = useState(true);
 
+  let creds = "";
   const [users, setUsers] = useState({
     profilePic: "",
     givenName: "",
@@ -42,29 +43,34 @@ function Register() {
     });
   };
 
-  useEffect(() => {
-    userService.registerUser(users).then((response) => {
-      setUsers(response.data);
-    });
-  }, []);
-
   const [loginDetails, setLoginDetails] = useState({
     username: "",
     password: "",
   });
 
+  useEffect(() => {
+    userService.registerUser(users).then((response) => {
+      setUsers(response.data);
+    });
+
+    creds = userService.getUsers().then((response) => {
+      setLoginDetails(response.data);
+      console.log(response.data);
+    });
+  }, []);
+
   const handleSubmitLogin = (event) => {
     event.preventDefault();
     if (loginDetails.username === "" || loginDetails.password === "") {
       console.log("Username and password is required!");
-      return;
+    } else if (
+      creds.username === loginDetails.username &&
+      creds.password === loginDetails.password
+    ) {
+      navigate("/");
     }
 
-    const userName1 = "";
-    const userPassword1 = "";
-
     //userService.getUsers;
-    navigate("/");
   };
 
   const handleChangeLogin = (event) => {
@@ -73,13 +79,6 @@ function Register() {
       [event.currentTarget.name]: event.currentTarget.value,
     });
   };
-
-  useEffect(() => {
-    userService.getUsers().then((response) => {
-      setLoginDetails(response.data);
-      console.log(response.data);
-    });
-  }, []);
 
   return (
     <Components.Outer>
@@ -155,7 +154,7 @@ function Register() {
               <Components.SignUpInput
                 name="password"
                 value={users.password}
-                type="text"
+                type="password"
                 placeholder="Password"
                 onChange={handleChange}
               />
