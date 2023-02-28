@@ -43,6 +43,8 @@ function Register() {
     });
   };
 
+  // login funcs
+
   const [loginDetails, setLoginDetails] = useState({
     username: "",
     password: "",

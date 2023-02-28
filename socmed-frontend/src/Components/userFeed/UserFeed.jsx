@@ -1,4 +1,3 @@
-
 import React, { useState, useEffect } from "react";
 import "./Feed.css";
 import Post from "../post/Post";
