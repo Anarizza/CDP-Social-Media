@@ -78,5 +78,9 @@ public class UsersService {
 	public Users getUsersBySurname(String surname) {
 		return usersRepository.findBySurname(surname);
 	}
+	
+	public Users getUsersByUsername(String surname) {
+		return usersRepository.findByUsername(surname);
+	}
 
 }

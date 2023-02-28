@@ -8,6 +8,10 @@ export function getUsersById(id) {
   return http.get(`/users/id/${id}`);
 }
 
+export function getUsersByUsername(username) {
+  return http.get(`/users/username/${username}`);
+}
+
 export function registerUser(user) {
   const postClone = { ...user };
   Object.keys(postClone).forEach((key) => {

@@ -36,6 +36,14 @@ public class UsersController {
 	}
 	
 	@CrossOrigin(originPatterns = "http://localhost:3000")
+	@RequestMapping(path = "users/username/{username}", method = RequestMethod.GET)
+	public Users selectUsersByUsername(@PathVariable("username") String username){
+		Users user =usersService.getUsersByUsername(username);
+		return user;
+	}
+	
+	
+	@CrossOrigin(originPatterns = "http://localhost:3000")
 	@RequestMapping(path = "users/id/{id}", method = RequestMethod.GET)
 	public Users selectUsersById(@PathVariable("id") Integer userId) {
 		Users user =usersService.getUsersById(userId);
