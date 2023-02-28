@@ -10,22 +10,27 @@ import LikesConnector from "./pages/likes/LikesConnector";
 import "./style/dark.css";
 import EditPost from "./Components/editPost/EditPost";
 import NavBar from "./Components/navbar/NavBar";
+import FriendProfile from "./pages/friendProfile/FriendProfile";
+import EditProfile from "./pages/editProfile/EditProfile";
+
 const App = () => {
   return (
     <>
       <CssBaseline>
-      <NavBar />
+        <NavBar />
 
-          <Routes>
-             <Route path="/" element={<Navigate to="/homepage" />} />
-            <Route path="/homepage" element={<HomePage />} />
-            <Route path="/login" element={<Login />} />
-            <Route path="/register" element={<Register />} />
-            <Route path="/profile" element={<Profile />} />
-            <Route path="/post/id/:id" element={<DetailsPageConnector />} /> 
-            <Route path="/appreciate/:id" element={<LikesConnector />} />
-            <Route path="/post/update/status/:id"element= {<EditPost />}/>
-          </Routes>
+        <Routes>
+          <Route path="/" element={<Navigate to="/homepage" />} />
+          <Route path="/homepage" element={<HomePage />} />
+          <Route path="/login" element={<Login />} />
+          <Route path="/register" element={<Register />} />
+          <Route path="/profile" element={<Profile />} />
+          <Route path="/post/id/:id" element={<DetailsPageConnector />} />
+          <Route path="/appreciate/:id" element={<LikesConnector />} />
+          <Route path="/post/update/status/:id" element={<EditPost />} />
+          <Route path="/profile/friend/:id" element={<FriendProfile />} />
+          <Route path="/profile/edit" element={<EditProfile />} />
+        </Routes>
       </CssBaseline>
     </>
   );

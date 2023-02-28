@@ -15,7 +15,7 @@ const ProfileRightBar = () => {
     <div className="profileRightBar">
       <div className="profileRightBarHeading">
         <div className="profileRightBarTitle"> User Information</div>
-        <Link to="/profile/userId/edit" style={{ textDecoration: "none" }}>
+        <Link to="/profile/edit" style={{ textDecoration: "none" }}>
           <div className="editButton">Edit Profile</div>
         </Link>
       </div>

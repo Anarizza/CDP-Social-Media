@@ -23,8 +23,11 @@ const Sidebar = () => {
 
   const [theme, setTheme] = useState("light");
   const handleClick = () => {
-    localStorage.setItem("theme", JSON.stringify(theme === "light" ? "dark" : "light"));
-    setTheme((prevTheme) => prevTheme === "light" ? "dark" : "light");
+    localStorage.setItem(
+      "theme",
+      JSON.stringify(theme === "light" ? "dark" : "light")
+    );
+    setTheme((prevTheme) => (prevTheme === "light" ? "dark" : "light"));
   };
   useEffect(() => {
     if (theme === "dark") {
@@ -32,9 +35,9 @@ const Sidebar = () => {
     } else {
       document.body.classList.remove("dark");
     }
-    if(localStorage.getItem("theme")){
-      setTheme(JSON.parse(localStorage.getItem("theme")))
-     }
+    if (localStorage.getItem("theme")) {
+      setTheme(JSON.parse(localStorage.getItem("theme")));
+    }
   });
 
   return (
@@ -43,9 +46,15 @@ const Sidebar = () => {
         <MenuLink Icon={<RssFeedIcon />} text="Feed" />
         <MenuLink Icon={<BookmarkIcon />} text="Saved" />
 
-          {/*Temposry lang yung parameter na 1 kas dapat userId yun since wala pang login*/}
-        <Link to={`/appreciate/${1}`} style={{ textDecoration: "none", color: theme === "light" ? "black" : "white"}}>
-          <MenuLink Icon={ <StarBorderPurple500SharpIcon/> } text="Appreciate" />
+        {/*Temposry lang yung parameter na 1 kas dapat userId yun since wala pang login*/}
+        <Link
+          to={`/appreciate/${1}`}
+          style={{
+            textDecoration: "none",
+            color: theme === "light" ? "black" : "white",
+          }}
+        >
+          <MenuLink Icon={<StarBorderPurple500SharpIcon />} text="Appreciate" />
         </Link>
         <div onClick={handleClick}>
           <MenuLink Icon={<Brightness4Icon />} text="Theme" />
@@ -57,7 +66,12 @@ const Sidebar = () => {
         <h4>Friend List</h4>
         <ul className="sidebarFriendList">
           {users.map((u) => (
-            <Friends key={u.id} user={u} />
+            <Link
+              to={`/profile/friend/${u.userId}`}
+              sx={{ textDecorator: "none" }}
+            >
+              <Friends key={u.id} user={u} />
+            </Link>
           ))}
         </ul>
       </div>
