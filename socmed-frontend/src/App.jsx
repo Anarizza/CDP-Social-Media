@@ -20,10 +20,10 @@ const App = () => {
         <NavBar />
 
         <Routes>
-          <Route path="/" element={<Navigate to="/homepage" />} />
+          <Route path="/" element={<Navigate to="/signin" />} />
           <Route path="/homepage" element={<HomePage />} />
           <Route path="/login" element={<Login />} />
-          <Route path="/register" element={<Register />} />
+          <Route path="/signin" element={<Register />} />
           <Route path="/profile" element={<Profile />} />
           <Route path="/post/id/:id" element={<DetailsPageConnector />} />
           <Route path="/appreciate/:id" element={<LikesConnector />} />

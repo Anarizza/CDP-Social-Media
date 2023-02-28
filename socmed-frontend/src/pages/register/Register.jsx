@@ -26,7 +26,7 @@ function Register() {
   const onSubmit = (user) => {
     userService.registerUser(user).then((response) => {
       console.log(response);
-      navigate("/");
+      navigate("/homepage");
     });
   };
 
@@ -48,9 +48,7 @@ function Register() {
     });
   }, []);
 
-
   //******************LOGIN HERE****************************** */
-  
 
   const [loginDetails, setLoginDetails] = useState({
     username: "",
@@ -61,50 +59,48 @@ function Register() {
     setLoginDetails({
       ...loginDetails,
       [event.currentTarget.name]: event.currentTarget.value,
-     
     });
 
-    console.log("changes in user and pass: " + loginDetails)
+    console.log("changes in user and pass: " + loginDetails);
   };
 
-  
-
-  const [person, setPerson ] = useState([])
+  const [person, setPerson] = useState([]);
   useEffect(() => {
     userService.getUsers().then((response) => {
       setPerson(response.data);
       console.log(response.data);
     });
-  }, []); 
+  }, []);
 
   /*
   const isExists = person2.find((user) => user.username === loginDetails.username && user.password === loginDetails.password)
   console.log("hereeeeeee pola: "+isExists);
   */
 
-const [person2, setPerson2 ] = useState([])//ito yung need
+  const [person2, setPerson2] = useState([]); //ito yung need
 
+  //console.log("hereeeeeee pola person2: "+person2);
+  //console.log("hereeeeeee pola person: "+person);
 
-//console.log("hereeeeeee pola person2: "+person2);
-//console.log("hereeeeeee pola person: "+person);
+  //const tao = person.find((p) =>p.username === loginDetails.username && p.password === loginDetails.password)
+  //const isExists2 = person.map((user) => user.find(f => f.username === loginDetails.username && f.password === loginDetails.password));
+  //console.log("person2: "+person2);
 
-//const tao = person.find((p) =>p.username === loginDetails.username && p.password === loginDetails.password)
-//const isExists2 = person.map((user) => user.find(f => f.username === loginDetails.username && f.password === loginDetails.password));
-//console.log("person2: "+person2);
-
-const handleSubmitLogin = (event) => {
-  event.preventDefault();
-  person.map((p) => {
-
-    if(p.username === loginDetails.username && p.password === loginDetails.password){
-          console.log("Successfully login");
-          navigate("/");
-          return;
+  const handleSubmitLogin = (event) => {
+    event.preventDefault();
+    person.map((p) => {
+      if (
+        p.username === loginDetails.username &&
+        p.password === loginDetails.password
+      ) {
+        console.log("Successfully login");
+        navigate("/homepage");
+        return;
       }
 
-      console.log("Username and pasword not match!")
-   })
-  }
+      console.log("Username and pasword not match!");
+    });
+  };
 
   return (
     <Components.Outer>
@@ -255,7 +251,7 @@ const handleSubmitLogin = (event) => {
             <Components.SignInInput
               name="password"
               value={loginDetails.password}
-              type="text"
+              type="password"
               placeholder="Password"
               onChange={handleChangeLogin}
             />
