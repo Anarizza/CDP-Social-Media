@@ -9,7 +9,6 @@ function Register() {
   const navigate = useNavigate();
   const [signIn, toggle] = useState(true);
 
-  let creds = "";
   const [users, setUsers] = useState({
     profilePic: "",
     givenName: "",
@@ -43,44 +42,69 @@ function Register() {
     });
   };
 
-  // login funcs
+  useEffect(() => {
+    userService.registerUser(users).then((response) => {
+      setUsers(response.data);
+    });
+  }, []);
+
+
+  //******************LOGIN HERE****************************** */
+  
 
   const [loginDetails, setLoginDetails] = useState({
     username: "",
     password: "",
   });
 
-  useEffect(() => {
-    userService.registerUser(users).then((response) => {
-      setUsers(response.data);
-    });
-
-    creds = userService.getUsers().then((response) => {
-      setLoginDetails(response.data);
-      console.log(response.data);
-    });
-  }, []);
-
-  const handleSubmitLogin = (event) => {
-    event.preventDefault();
-    if (loginDetails.username === "" || loginDetails.password === "") {
-      console.log("Username and password is required!");
-    } else if (
-      creds.username === loginDetails.username &&
-      creds.password === loginDetails.password
-    ) {
-      navigate("/");
-    }
-
-    //userService.getUsers;
-  };
-
   const handleChangeLogin = (event) => {
     setLoginDetails({
       ...loginDetails,
       [event.currentTarget.name]: event.currentTarget.value,
+     
     });
+
+    console.log("changes in user and pass: " + loginDetails)
   };
+
+  
+
+  const [person, setPerson ] = useState([])
+  useEffect(() => {
+    userService.getUsers().then((response) => {
+      setPerson(response.data);
+      console.log(response.data);
+    });
+  }, []); 
+
+  /*
+  const isExists = person2.find((user) => user.username === loginDetails.username && user.password === loginDetails.password)
+  console.log("hereeeeeee pola: "+isExists);
+  */
+
+const [person2, setPerson2 ] = useState([])//ito yung need
+
+
+//console.log("hereeeeeee pola person2: "+person2);
+//console.log("hereeeeeee pola person: "+person);
+
+//const tao = person.find((p) =>p.username === loginDetails.username && p.password === loginDetails.password)
+//const isExists2 = person.map((user) => user.find(f => f.username === loginDetails.username && f.password === loginDetails.password));
+//console.log("person2: "+person2);
+
+const handleSubmitLogin = (event) => {
+  event.preventDefault();
+  person.map((p) => {
+
+    if(p.username === loginDetails.username && p.password === loginDetails.password){
+          console.log("Successfully login");
+          navigate("/");
+          return;
+      }
+
+      console.log("Username and pasword not match!")
+   })
+  }
 
   return (
     <Components.Outer>
@@ -156,7 +180,7 @@ function Register() {
               <Components.SignUpInput
                 name="password"
                 value={users.password}
-                type="password"
+                type="text"
                 placeholder="Password"
                 onChange={handleChange}
               />
@@ -221,7 +245,7 @@ function Register() {
           <Components.Form onSubmit={handleSubmitLogin} autoComplete="off">
             <Components.Title>Sign in</Components.Title>
             <Components.SignInInput
-              name="signInUsername"
+              name="username"
               value={loginDetails.username}
               type="text"
               placeholder="Enter username"
@@ -229,9 +253,9 @@ function Register() {
             />
 
             <Components.SignInInput
-              name="signInPassword"
+              name="password"
               value={loginDetails.password}
-              type="password"
+              type="text"
               placeholder="Password"
               onChange={handleChangeLogin}
             />
@@ -242,11 +266,9 @@ function Register() {
             <Components.Button type="submit">Sign In</Components.Button>
           </Components.Form>
         </Components.SignInContainer>
-
         {/* End of Sign In... */}
 
         {/* Flipping SignIn/SignUp starts here... */}
-
         <Components.OverlayContainer signinIn={signIn}>
           <Components.Overlay signinIn={signIn}>
             <Components.LeftOverlayPanel signinIn={signIn}>
