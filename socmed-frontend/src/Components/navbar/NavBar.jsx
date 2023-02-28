@@ -186,7 +186,7 @@ const NavBar = () => {
             <Link to={`/profile/${params.id}`}>
               <Button sx={{ my: -1, color: "white", display: "block" }}>
                 <img
-                  src={user.profilPic}
+                  src={user.profilePic}
                   alt=""
                   className="navbarImg"
                 />
