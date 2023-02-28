@@ -2,27 +2,40 @@ import React, { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import Post from "../post/Post";
 import * as postService from "../../Service/post";
+import PostForm from "../form/PostForm";
+import * as userService from "../../Service/users";
+import PostFormConnector from "../form/PostFormConnector";
 
-const EditPost = ({ post }) => {
+const EditPost = () => {
   const params = useParams();
 
   const navigate = useNavigate();
-  const [user, setUser] = useState(null);
+  const [user, setUsers] = useState([]);
+  const [posts, setPosts] = useState(null);
   const [loading, setLoading] = useState(false);
+
+
+  useEffect(() => {
+    userService.getUsersById(1).then((response) => {
+      setUsers(response.data);
+      console.log(response.data);
+    });
+  }, []);
 
   useEffect(() => {
     setLoading(true);
-    postService.selectPostByUsersUserId(params.userId).then((response) => {
-      setUser(response.data);
+    postService.fetchPostById(params.id).then((response) => {
+      setPosts(response.data);
       setLoading(false);
     });
   }, [params.id]);
 
-  const handleEditPost = (postId) => {
+
+  const handleSubmit  = (form) => {
     postService
-      .updatePost(user.id, postId)
+      .updatePost(1, posts.postId, form)
       .then(() => {
-        navigate("/");
+        navigate(`/`);
       })
       .catch((error) => {
         if (error.response && error.response.status == 400) {
@@ -30,15 +43,19 @@ const EditPost = ({ post }) => {
         }
       });
   };
-  if (user)
+
+
+  if (posts)
     return (
       <div>
-        <Post
+         <PostForm
           initialValue={{
-            posttext: post.posttext,
-            image: post.image,
+            posttext: posts.posttext,
+            image: posts.image,
           }}
-        />
+          onSubmit={handleSubmit}
+        /> 
+       
       </div>
     );
 };

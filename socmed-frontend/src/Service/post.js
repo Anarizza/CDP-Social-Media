@@ -19,7 +19,7 @@ export function addPost(userId, post) {
   return http.post(`/post/new/${userId}`, postClone);
 }
 
-export function updatePost(userId, post) {
+export function updatePost(userId,postId, post) {
   const postClone = { ...post };
   Object.keys(postClone).forEach((key) => {
     if (
@@ -30,7 +30,7 @@ export function updatePost(userId, post) {
       delete postClone[key];
     }
   });
-  return http.put(`post/update/status/${userId}`, postClone);
+  return http.put(`update/status/${userId}/${postId}`, postClone);
 }
 
 export function fetchPostById(id) {

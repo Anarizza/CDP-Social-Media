@@ -36,6 +36,7 @@ public class LikesController {
 	@RequestMapping(path = "new/{userId}/like/{postId}", method = RequestMethod.POST)
 	public String newLikes(@PathVariable("userId") Integer userId, @PathVariable("postId") Integer postId, @RequestBody Likes like) {
 		
+		
 		Optional<Users> userOptional = usersRepository.findById(userId);
 		Users user=userOptional.get();
 		like.setUsers(user);

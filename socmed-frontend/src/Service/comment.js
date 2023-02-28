@@ -12,7 +12,7 @@ export function deleteCommentByCommentId(commentId) {
     return http.delete(`/comment/deletecomment/${commentId}`);
 }
 
-export function addComment(userId, comm){
+export function addComment(userId,postId, comm){
     const commentClone = { ...comm};
     Object.keys(commentClone).forEach((key) => {
       if (
@@ -24,6 +24,6 @@ export function addComment(userId, comm){
       }
     });
   
-    return http.post(`/comment/new/${userId}`, commentClone);
+    return http.post(`/comment/new/${userId}/comm/${postId}`, commentClone);
   }
   

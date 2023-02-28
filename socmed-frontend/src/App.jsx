@@ -17,8 +17,6 @@ const App = () => {
   return (
     <>
       <CssBaseline>
-        <NavBar />
-
         <Routes>
           <Route path="/" element={<Navigate to="/signin" />} />
           <Route path="/homepage" element={<HomePage />} />

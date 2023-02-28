@@ -23,6 +23,8 @@ const Profile = () => {
 
   return (
     <div className="profile" >
+                  <NavBar />
+
       <div className="profileWrapper">
         <Sidebar />
         <div className="profileRight">

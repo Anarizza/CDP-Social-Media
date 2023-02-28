@@ -16,7 +16,8 @@ import {
 } from "@mui/icons-material";
 import * as commentService from "../../Service/comment";
 // import * as likeService from "../../Service/like";
-import Joi from 'joi';
+import Joi from "joi";
+import * as userService from "../../Service/users";
 
 import Swal from "sweetalert2";
 
@@ -38,72 +39,65 @@ const DetailsPage = () => {
   const [posts, setPosts] = useState(null);
   const [loading, setLoading] = useState(false);
 
+  const [user, setUsers] = useState([]);
   const [comment, setComment] = useState([]);
-  const [commentOpen, setCommentOpen] = useState(false);
   const [commentBoxVisible, setCommentBoxVisible] = useState(false);
 
   const [likes, setLikes] = useState([]);
 
-// add comment
-  const [form, setForm] = useState(
-    {
-      commenttext: "",
-   
-   }
- );
-// add function in service
- const onSubmit = (comm) => {
-  commentService
-    .addComment(2, comm)
-    .then((response) => {
-      console.log(response);
-    })
-    navigate("/");
+  // add comment
+  const [form, setForm] = useState({
+    commenttext: "",
+  });
+  // add function in service
+  const onSubmit = (comm) => {
+    commentService
+      .addComment(user.userId, posts.postId, comm)
+      .then((response) => {
+        console.log(response);
+      });
+    navigate(0);
+  };
 
-};
+  const handleSubmit = (event) => {
+    event.preventDefault();
+    onSubmit(form);
+  };
+  const [errors, setErrors] = useState({});
 
-const handleSubmit = (event) => {
-  event.preventDefault();
-  onSubmit(form);
-};
-const [errors, setErrors] = useState({});
+  const handleChange = ({ currentTarget: input }) => {
+    setForm({
+      [input.name]: input.value,
+    });
 
-const handleChange = ({ currentTarget: input }) => {
-  setForm({
-  
-    [input.name]: input.value,
+    const result = schema
+      .extract(input.name)
+      .label(input.name)
+      .validate(input.value);
+
+    if (result.error) {
+      setErrors({ ...errors, [input.name]: result.error.details[0].message });
+    } else {
+      delete errors[input.name];
+      setErrors(errors);
+    }
+  };
+  const schema = Joi.object({
+    commenttext: Joi.string().min(1).max(100).required(),
   });
 
-  const result = schema.extract(input.name).label(input.name).validate(input.value);
+  const isFormInvalid = () => {
+    const result = schema.validate(form);
+    return !!result.error;
+  };
 
-  if (result.error){
-    setErrors({...errors,
-        [input.name]: result.error.details[0].message
+  const handleChange2 = (event) => {
+    console.log(event.currentTarget.value);
+    setForm({
+      ...form,
+      commenttext: event.currentTarget.value,
     });
-  } else {
-    delete errors[input.name];
-    setErrors(errors);
-  }
-};
-const schema = Joi.object({
-  commenttext: Joi.string().min(1).max(100).required(),
-});
-
-const isFormInvalid = () => {
-  const result = schema.validate(form);
-  return !!result.error;
-};
-
-
-const handleChange2 = (event) => {
-  console.log(event.currentTarget.value);
-  setForm({
-    ...form,
-    commenttext: event.currentTarget.value
-    
-  })
-}
-
+  };
 
   const handleDeleteComment = async (commentId) => {
     if (commentId) {
@@ -113,7 +107,7 @@ const handleChange2 = (event) => {
         showCancelButton: true,
         confirmButtonColor: "#3085d6",
         cancelButtonColor: "#d33",
-        confirmButtonText: "Yes, delete it!",
+        confirmButtonText: "Delete",
       }).then((result) => {
         if (result.isConfirmed) {
           commentService.deleteCommentByCommentId(commentId);
@@ -141,14 +135,13 @@ const handleChange2 = (event) => {
     });
   }, [params.id]);
 
-  // useEffect(() => {
-  //   setLoading(true);
-  //   likeService.getLikesByUsersUserId(params.id).then((response) => {
-  //     setLikes(response.data);
-  //     setLoading(false);
-  //     console.log(response.data); // hazeeeell
-  //   });
-  // }, [params.id]);
+  // get User by ID 
+  useEffect(() => {
+    userService.getUsersById(1).then((response) => {
+      setUsers(response.data);
+      console.log(response.data);
+    });
+  }, []);
 
   if (loading) {
     return <h1>Loading...</h1>;
@@ -173,11 +166,11 @@ const handleChange2 = (event) => {
               <div className="postUsername">@{posts.users.username}</div>
             </div>
 
-            <div className="postTopRight">
+            {/* <div className="postTopRight">
               <IconButton>
                 <MoreVert className="postVertButton" />
               </IconButton>
-            </div>
+            </div> */}
           </div>
           <div
             className="postDate"
@@ -209,9 +202,8 @@ const handleChange2 = (event) => {
             <div className="postBottomRight">
               <div
                 className="postCommentText"
-                onClick={() => setCommentOpen(!commentOpen)}
               >
-                {comment.length} · comments · share
+                {comment.length} · comments
               </div>
             </div>
           </div>
@@ -237,8 +229,7 @@ const handleChange2 = (event) => {
           </div>
         </div>
         {commentBoxVisible && (
-          <form className="commentBox"    onSubmit={handleSubmit}      
-          >
+          <form className="commentBox" onSubmit={handleSubmit}>
             <input
               name="commenttext"
               type="text"
@@ -248,16 +239,19 @@ const handleChange2 = (event) => {
               onChange={handleChange2}
               placeholder="Write a comment ..."
               className="commentInput"
-
             />
-            <button type="submit" className="commentPost" disabled={isFormInvalid()} >
+            <button
+              type="submit"
+              className="commentPost"
+              disabled={isFormInvalid()}
+            >
               Comment
             </button>
           </form>
         )}
-        {commentOpen > 0 && (
+       
           <div className="comment">
-            {comment.map((c) => (
+            {[...comment].reverse().map((c) => (
               <div key={c.commentId}>
                 <div className="commentWrapper">
                   <div className="commentOptions">
@@ -270,7 +264,6 @@ const handleChange2 = (event) => {
                       open={open}
                       onClose={handleCloseMenu}
                     >
-                      <MenuItem>Edit Comment</MenuItem>
                       <MenuItem
                         onClick={() => handleDeleteComment(c.commentId)}
                       >
@@ -294,7 +287,7 @@ const handleChange2 = (event) => {
               </div>
             ))}
           </div>
-        )}
+        
       </div>
     );
 };

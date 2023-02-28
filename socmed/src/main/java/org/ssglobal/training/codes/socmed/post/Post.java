@@ -114,5 +114,10 @@ public class Post {
 	public void setCreatedDate(String createdDate) {
 		this.createdDate = createdDate;
 	}
+
+	public void setPost(Post post) {
+		
+		
+	}
 	
 }

@@ -13,6 +13,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
+import org.ssglobal.training.codes.socmed.post.Post;
+import org.ssglobal.training.codes.socmed.post.PostRepository;
 import org.ssglobal.training.codes.socmed.users.Users;
 import org.ssglobal.training.codes.socmed.users.UsersRepository;
 
@@ -22,11 +24,13 @@ public class CommentController {
 
 	private final CommentService commentService;
 	private final UsersRepository usersRepository;
+	private final PostRepository postRepository;
 
 	@Autowired
-	public CommentController(CommentService commentService, UsersRepository usersRepository) {
+	public CommentController(CommentService commentService, UsersRepository usersRepository, PostRepository postRepository) {
 		this.commentService = commentService;
 		this.usersRepository = usersRepository;
+		this.postRepository = postRepository;
 
 	}
 
@@ -38,8 +42,8 @@ public class CommentController {
 	}
 
 	@CrossOrigin(originPatterns = "http://localhost:3000")
-	@RequestMapping(path = "new/{userId}", method = RequestMethod.POST)
-	public Comment newPost(@PathVariable("userId") Integer userId, @RequestBody Comment comm) {
+	@RequestMapping(path = "new/{userId}/comm/{postId}", method = RequestMethod.POST)
+	public Comment newComment(@PathVariable("userId") Integer userId, @PathVariable("postId") Integer postId, @RequestBody Comment comm) {
 
 		DateTimeFormatter dtf = DateTimeFormatter.ofPattern("MMMM dd, yyyy hh:mm:ss a");
 		LocalDateTime now = LocalDateTime.now();
@@ -49,6 +53,11 @@ public class CommentController {
 		Users user = userOptional.get();
 		comm.setUsers(user);
 		comm.setDateCreated(date);
+		
+		Optional<Post> postOptional = postRepository.findById(postId);
+		Post post=postOptional.get();
+		comm.setPost(post);
+	
 		return commentService.addComment(comm);
 	}
 

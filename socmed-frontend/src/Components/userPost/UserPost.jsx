@@ -160,7 +160,7 @@ const UserPost = ({ post }) => {
               open={open}
               onClose={handleCloseMenu}
             >
-              <MenuItem>Edit</MenuItem>
+              <MenuItem onClick={() => navigate(`/post/update/status/${post.userId}/${post.postId}`)}>Edit</MenuItem>
               <MenuItem onClick={() => handleDeletePost(post.postId)}>
                 Delete
               </MenuItem>

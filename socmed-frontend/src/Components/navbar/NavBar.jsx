@@ -1,4 +1,4 @@
-import React from "react";
+import React,{useState, useEffect} from "react";
 import SearchIcon from "@mui/icons-material/Search";
 import NotificationsIcon from "@mui/icons-material/Notifications";
 import { Link } from "react-router-dom";
@@ -16,6 +16,7 @@ import MenuIcon from "@mui/icons-material/Menu";
 import Container from "@mui/material/Container";
 import Button from "@mui/material/Button";
 import MenuItem from "@mui/material/MenuItem";
+import * as postService from "../../Service/post";
 
 const NavBar = () => {
   const [anchorElNav, setAnchorElNav] = React.useState(null);
@@ -35,6 +36,27 @@ const NavBar = () => {
   const handleCloseUserMenu = () => {
     setAnchorElUser(null);
   };
+
+  // const [posts, setPosts] = useState([]);
+  // const [searchData, setSearchData] = useState([]);
+  // const [filterVal, setFilterVal] = useState('');
+  // useEffect(() => {
+  //   postService.getPosts().then((response) => {
+  //     setPosts(response.data);
+  //     setSearchData(response.data);
+  //     console.log(response.data);
+  //   });
+  // }, []);
+
+  // const handleFilter = (e) => {
+  //   if(e.target.value === ''){
+  //     setPosts(searchData);
+  //   }else{
+  //   const filterResult =  searchData.filter(item => item.name.includes(e.target.value))
+  //   setPosts(filterResult);
+  // }
+  // setFilterVal(e.target.value)
+  // }
 
   return (
     <AppBar position="sticky" sx={{ background: "#00796b", height: "50px" }}>

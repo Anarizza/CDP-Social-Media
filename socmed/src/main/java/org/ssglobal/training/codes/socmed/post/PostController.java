@@ -22,11 +22,13 @@ public class PostController {
 	
 	private final PostService postService;
 	private final UsersRepository usersRepository;
+	private final PostRepository postRepository;
 
 	@Autowired
-	public PostController(PostService postService, UsersRepository usersRepository) {
+	public PostController(PostService postService, UsersRepository usersRepository, PostRepository postRepository) {
 		this.postService = postService;
 		this.usersRepository = usersRepository;
+		this.postRepository = postRepository;
 	}
 
 
@@ -71,8 +73,17 @@ public class PostController {
 	}
 	
 	@CrossOrigin(originPatterns = "http://localhost:3000")
-	@RequestMapping(path = "update/status", method = RequestMethod.PUT)
-	public String updatePost(@RequestBody Post updatePost) {
+	@RequestMapping(path = "update/status/{userId}/{postId}", method = RequestMethod.PUT)
+	public String updatePost(@PathVariable ("userId") Integer userId, @PathVariable("postId") Integer postId,@RequestBody Post updatePost) {
+		
+		Optional<Users> userOptional = usersRepository.findById(userId);
+		Users user=userOptional.get();
+		updatePost.setUsers(user);
+		
+		Optional<Post> postOptional = postRepository.findById(postId);
+		Post post=postOptional.get();
+		updatePost.setPost(post);
+	
 		return postService.updatePost(updatePost);
 	}
 	
