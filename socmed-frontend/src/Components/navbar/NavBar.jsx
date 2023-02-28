@@ -17,6 +17,8 @@ import Container from "@mui/material/Container";
 import Button from "@mui/material/Button";
 import MenuItem from "@mui/material/MenuItem";
 import * as postService from "../../Service/post";
+import * as userService from "../../Service/users";
+import { useParams } from "react-router-dom";
 
 const NavBar = () => {
   const [anchorElNav, setAnchorElNav] = React.useState(null);
@@ -36,6 +38,18 @@ const NavBar = () => {
   const handleCloseUserMenu = () => {
     setAnchorElUser(null);
   };
+
+  //*****************NEWEST CONFIGURATION********************** */
+  const params = useParams();
+  const [user, setUsers] = useState([]);
+
+  useEffect(() => {
+    userService.getUsersById(params.id).then((response) => {
+      setUsers(response.data);
+      console.log(response.data);
+    });
+  }, []);
+
 
   // const [posts, setPosts] = useState([]);
   // const [searchData, setSearchData] = useState([]);
@@ -135,7 +149,7 @@ const NavBar = () => {
               }}
             >
               <Link
-                to="/profile"
+                to={`/profile/${user.userId}`}
                 style={{ textDecoration: "none", color: "black" }}
               >
                 <MenuItem onClick={handleCloseNavMenu} LinkComponent>
@@ -144,7 +158,7 @@ const NavBar = () => {
                 </MenuItem>
               </Link>
               <Link
-                to="/homepage"
+                to={`/homepage/${user.userId}`}
                 style={{ textDecoration: "none", color: "black" }}
               >
                 <MenuItem onClick={handleCloseNavMenu}>
@@ -169,10 +183,10 @@ const NavBar = () => {
               mb: 1,
             }}
           >
-            <Link to="/profile">
+            <Link to={`/profile/${params.id}`}>
               <Button sx={{ my: -1, color: "white", display: "block" }}>
                 <img
-                  src="/assets/person/user.jpg"
+                  src={user.profilPic}
                   alt=""
                   className="navbarImg"
                 />
@@ -192,7 +206,7 @@ const NavBar = () => {
               <ChatIcon fontSize="medium" />
             </Button>
 
-            <Link to="/homepage">
+            <Link to={`/homepage/${user.userId}`}>
               <Button sx={{ my: -1, color: "white", display: "block" }}>
                 <HomeIcon fontSize="medium" />
               </Button>

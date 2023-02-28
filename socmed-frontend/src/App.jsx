@@ -22,7 +22,7 @@ const App = () => {
           <Route path="/homepage/:id" element={<HomePage />} />
           <Route path="/login" element={<Login />} />
           <Route path="/signin" element={<Register />} />
-          <Route path="/profile" element={<Profile />} />
+          <Route path="/profile/:id" element={<Profile />} />
           <Route path="/post/id/:id" element={<DetailsPageConnector />} />
           <Route path="/appreciate/:id" element={<LikesConnector />} />
           <Route path="/post/update/status/:id" element={<EditPost />} />
