@@ -19,8 +19,7 @@ import MenuItem from "@mui/material/MenuItem";
 import * as postService from "../../Service/post";
 import * as userService from "../../Service/users";
 import { useParams } from "react-router-dom";
-import SearchBar from "../search/SearchBar";
-import ListPage from "../search/ListPage";
+
 const NavBar = () => {
   const [anchorElNav, setAnchorElNav] = React.useState(null);
   const [anchorElUser, setAnchorElUser] = React.useState(null);

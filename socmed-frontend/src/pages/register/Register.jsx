@@ -4,6 +4,18 @@ import "./formInput.css";
 import * as userService from "../../Service/users";
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
+import { Close, EmojiEmotions, PermMedia } from "@mui/icons-material";
+import { borderRadius } from "@mui/system";
+import Joi from "joi";
+import {
+  Button,
+  Card,
+  CardActions,
+  CardContent,
+  CardHeader,
+  Grid,
+  TextField,
+} from "@mui/material";
 
 function Register() {
   const navigate = useNavigate();
@@ -26,7 +38,7 @@ function Register() {
   const onSubmit = (user) => {
     userService.registerUser(user).then((response) => {
       console.log(response);
-      navigate("/");
+      navigate(0);
     });
   };
 
@@ -35,23 +47,66 @@ function Register() {
     onSubmit(users);
   };
 
-  const handleChange = (event) => {
+  const schema = Joi.object({
+    profilePic: Joi.string().allow("").optional(),
+    givenName: Joi.string().min(1).max(100).required(),
+    surname: Joi.string().min(1).max(20).required(),
+    username: Joi.string().min(3).max(20).required(),
+    phoneNumber: Joi.string().min(6).max(15).allow("").optional(),
+    email: Joi.string()
+      .email({ minDomainSegments: 2, tlds: { allow: ["com", "net"] } })
+      .required(),
+
+   
+    brgy: Joi.string().min(3).max(500).allow("").optional(),
+    city: Joi.string().min(3).max(500).allow("").required(),
+    province: Joi.string().min(3).max(500).allow("").required(),
+    dot: Joi.string().min(6).max(500).allow("").required(),
+    password: Joi.string().min(8).max(15).required(),
+  
+  });
+
+
+  const [errors, setErrors] = useState({});
+
+  const handleChange = ({currentTarget: input}) => {
     setUsers({
       ...users,
-      [event.currentTarget.name]: event.currentTarget.value,
+      [input.name]: input.value,
+      profilePic: file == null ? "" : URL.createObjectURL(file),
     });
+
+    const { error } = schema
+    .extract(input.name)
+    .label(input.name)
+    .validate(input.value);
+
+  if (error) {
+    setErrors({ ...errors, [input.name]: error.details[0].message });
+  } else {
+    delete errors[input.name];
+    setErrors(errors);
+  }
   };
 
+  /*
   useEffect(() => {
     userService.registerUser(users).then((response) => {
       setUsers(response.data);
     });
   }, []);
+  */
+
+ 
+
+  const isFormInvalid = () => {
+    const result = schema.validate(users);
+    console.log(result);
+    return !!result.error;
+  };
 
 
   //******************LOGIN HERE****************************** */
-  
-
   const [loginDetails, setLoginDetails] = useState({
     username: "",
     password: "",
@@ -68,23 +123,6 @@ function Register() {
   };
 
  
-  /*
-  const isExists = person2.find((user) => user.username === loginDetails.username && user.password === loginDetails.password)
-  console.log("hereeeeeee pola: "+isExists);
-  */
-
-
-//console.log("hereeeeeee pola person2: "+person2);
-//console.log("hereeeeeee pola person: "+person);
-
-//const tao = person.find((p) =>p.username === loginDetails.username && p.password === loginDetails.password)
-//const isExists2 = person.map((user) => user.find(f => f.username === loginDetails.username && f.password === loginDetails.password));
-//console.log("person2: "+person2);
-
-//const user = person.find(u => u.username === loginDetails.username && u.password === loginDetails.password);
-//console.log("hereeee user: "+user)
-//const user = person2.filter((u) => u.username === loginDetails.username && u.password === loginDetails.password)
-//console.log("user: "+ user)
 
 const [person, setPerson ] = useState([])
 useEffect(() => {
@@ -94,16 +132,34 @@ useEffect(() => {
   });
 }, [loginDetails.username]); 
 
-const handleSubmitLogin = (event) => {
+const handleSubmitLogin = async (event) => {
   event.preventDefault();
+  try{
     if(person.username === loginDetails.username && person.password === loginDetails.password){
-          console.log("Successfully login");
-          navigate(`/homepage/${person.userId}`);
-          return;
+      console.log("Successfully login");
+      navigate(`/homepage/${person.userId}`);
+      return;
       }
-      console.log("Username and pasword not match!")
+       console.log("Username and pasword not match!")
+
+  } catch(error){
+         console.log("API ERROR: " + error)
+      }
+
  
   }
+  //*********FOR PROFILE********************** */
+
+  const [file, setFile] = useState(null);
+
+  function handleFile(event) {
+    setFile(event.target.files[0]);
+    console.log(event.target.files[0]);
+  }
+
+  const removeImage = () => {
+    setFile(null);
+  };
 
   return (
     <Components.Outer>
@@ -112,26 +168,62 @@ const handleSubmitLogin = (event) => {
           <Components.Form onSubmit={handleSubmit} autoComplete="off">
             {/* SignUp starts here... */}
             <Components.Title>Create Account</Components.Title>
+          
+            {file && (
+            <div className="shareImgContainer" >
+              <img
+                src={URL.createObjectURL(file)}
+                alt=""
+                className="shareImg" 
+                style={{borderRadius: "50%", height: "60px", width: "60px", objectFit: "cover", marginBottom: "-20px"}}
+              />
+              <Close className="shareCancelImg" onClick={removeImage} />
+            </div>
+          )}
+
             <div className="profilePic">
               <div className="givenName">
+              <label htmlFor="file" className="shareOption">
+                <PermMedia
+                  className="shareIcon"
+                  style={{ color: "#00796b"}}
+                /> Choose profile
+                <div className="profie" sx={{color: 'black'}}>
                 <Components.NameInput
-                  name="profilePic"
-                  value={users.profilePic}
-                  type="text"
-                  placeholder="Profile picture"
-                  onChange={handleChange}
+                  id="file"
+                  //value={users.profilePic}
+                  type="file"
+                  accept=".png,.jpeg,.jpg"
+                  placeholder="Select profile"
+                  //onChange={handleChange}
+                  style={{ display: 'none' }}
+                  onChange={handleFile}
                 />
+                </div>
+                </label>
               </div>
             </div>
+
+        
+           
+           
             <div className="nameContainer">
               <div className="givenName">
                 <Components.NameInput
-                  name="givenName"
-                  value={users.givenName}
-                  type="text"
-                  placeholder="First Name"
-                  onChange={handleChange}
+              
+                      helperText="mynameishelper"
+                      name="givenName"
+                      error={!!errors.name}
+                      value={users.givenName}
+                      type="text"
+                      placeholder="First Name"
+                      onChange={handleChange}
+                  
+
                 />
+              
+
+                
               </div>
 
               <div className="surName">
@@ -141,6 +233,8 @@ const handleSubmitLogin = (event) => {
                   type="text"
                   placeholder="Last Name"
                   onChange={handleChange}
+                  error={!!errors.name}
+                  helperText={errors.name}
                 />
               </div>
             </div>
@@ -152,6 +246,8 @@ const handleSubmitLogin = (event) => {
                 type="text"
                 placeholder="username"
                 onChange={handleChange}
+                error={!!errors.name}
+                helperText={errors.name}
               />
             </div>
 
@@ -162,6 +258,8 @@ const handleSubmitLogin = (event) => {
                 type="text"
                 onChange={handleChange}
                 placeholder="Phone Number(+63)"
+                error={!!errors.name}
+                helperText={errors.name}
               />
             </div>
 
@@ -172,18 +270,12 @@ const handleSubmitLogin = (event) => {
                 type="text"
                 placeholder="Email"
                 onChange={handleChange}
+                error={!!errors.name}
+                helperText={errors.name}
               />
             </div>
 
-            <div>
-              <Components.SignUpInput
-                name="password"
-                value={users.password}
-                type="text"
-                placeholder="Password"
-                onChange={handleChange}
-              />
-            </div>
+        
 
             <div>
               {/* <Components.LabelBrgy>Barangay</Components.LabelBrgy>
@@ -195,6 +287,8 @@ const handleSubmitLogin = (event) => {
                 type="text"
                 placeholder="Brgy"
                 onChange={handleChange}
+                error={!!errors.name}
+                helperText={errors.name}
               />
             </div>
             <div>
@@ -204,6 +298,8 @@ const handleSubmitLogin = (event) => {
                 type="text"
                 placeholder="City"
                 onChange={handleChange}
+                error={!!errors.name}
+                helperText={errors.name}
               />
             </div>
             <div>
@@ -213,6 +309,8 @@ const handleSubmitLogin = (event) => {
                 type="text"
                 placeholder="Province"
                 onChange={handleChange}
+                error={!!errors.name}
+                helperText={errors.name}
               />
             </div>
 
@@ -230,9 +328,31 @@ const handleSubmitLogin = (event) => {
                   onChange={handleChange}
                 />
               </div>
+
+              <div>
+              <Components.SignUpInput
+                name="password"
+                value={users.password}
+                type="text"
+                placeholder="Password"
+                onChange={handleChange}
+              />
             </div>
 
-            <Components.Button type="submit">Sign Up</Components.Button>
+            <div>
+              <Components.SignUpInput
+                name="password"
+                value={users.password}
+                type="text"
+                placeholder="Confirm Password"
+                onChange={handleChange}
+              />
+            </div>
+
+
+            </div>
+
+            <Components.Button disabled={isFormInvalid()} type="submit">Sign Up</Components.Button>
           </Components.Form>
         </Components.SignUpContainer>
 
@@ -260,7 +380,7 @@ const handleSubmitLogin = (event) => {
             />
 
             <Components.Anchor href="#">
-              Forgot your password?
+           
             </Components.Anchor>
             <Components.Button type="submit">Sign In</Components.Button>
           </Components.Form>
@@ -271,7 +391,7 @@ const handleSubmitLogin = (event) => {
         <Components.OverlayContainer signinIn={signIn}>
           <Components.Overlay signinIn={signIn}>
             <Components.LeftOverlayPanel signinIn={signIn}>
-              <Components.Title>Welcome Back!</Components.Title>
+              <Components.Title>Welcome To Timeline!</Components.Title>
               <Components.Paragraph>
                 Have an existing account? Please sign in.
               </Components.Paragraph>

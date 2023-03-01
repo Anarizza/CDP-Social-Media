@@ -23,11 +23,13 @@ public class UsersService {
 		Optional<Users> optionalSurname = usersRepository.findUsersBySurname(user.getSurname());
 		System.out.println("uname: " + optionalSurname);
 		Optional<Users> optionalGivenName = usersRepository.findUsersByGivenName(user.getGivenName());
+		Optional<Users> optionalUsername = usersRepository.findUsersByUsername(user.getUsername());
+		
 		StringBuffer sb = new StringBuffer();
 		int count = 0;
-		if (optionalSurname.isPresent() || optionalGivenName.isPresent()) {
+		if (optionalSurname.isPresent() || optionalGivenName.isPresent() || optionalUsername.isPresent()) {
 			if (optionalSurname.isPresent()) {
-				sb.append("Username ");
+				sb.append("Surname ");
 				count++;
 			}
 			if (optionalGivenName.isPresent()) {
@@ -35,6 +37,12 @@ public class UsersService {
 					sb.append("& ");
 				}
 				sb.append("GivenName ");
+			}
+			if (optionalUsername.isPresent()) {
+				if (count > 0) {
+					sb.append("& ");
+				}
+				sb.append(" Username ");
 			}
 			//throw new NonUniqueResultException("username taken");
 			sb.append("is already taken");
