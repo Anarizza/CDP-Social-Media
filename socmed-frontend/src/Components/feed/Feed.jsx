@@ -7,7 +7,6 @@ import * as postService from "../../Service/post";
 
 const Feed = () => {
   const [posts, setPosts] = useState([]);
-
   useEffect(() => {
     postService.getPosts().then((response) => {
       setPosts(response.data);
@@ -18,13 +17,11 @@ const Feed = () => {
   return (
     <div className="feed">
       <div className="feedWrapper">
-        {/* <Stories /> */}
+        {/* <Stories />  */}
         <Share />
-
         {[...posts].reverse().map((p) => (
           <Post  post={p} />
         ))}
-      
       </div>
     </div>
   );

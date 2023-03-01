@@ -75,15 +75,6 @@ const Post = ({ post }) => {
     event.preventDefault();
     onSubmit(likesForm);
   };
-  /*
-  const [ok, setOk] = useState([])
-
-  const isUserLiked = () => {
-    if (user.userId === post.users.userId){
-
-    }
-  };
-  */
 
   const showToast = () => {
     toast.success("Shared to your profile!", {

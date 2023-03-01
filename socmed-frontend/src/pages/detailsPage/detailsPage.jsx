@@ -8,18 +8,20 @@ import { Link } from "react-router-dom";
 import ModalImage from "react-modal-image";
 import {
   ChatBubbleOutline,
-  MoreVert,
-  Favorite,
-  ThumbUp,
-  ThumbUpAltOutlined,
   ShareOutlined,
 } from "@mui/icons-material";
 import * as commentService from "../../Service/comment";
 // import * as likeService from "../../Service/like";
 import Joi from "joi";
 import * as userService from "../../Service/users";
-
+import { ToastContainer, toast } from "react-toastify";
+import StarIcon from "@mui/icons-material/Star";
+import StarBorderOutlinedIcon from "@mui/icons-material/StarBorderOutlined";
+import Grid from "@mui/material/Grid";
+import ChatOutlinedIcon from "@mui/icons-material/ChatOutlined";
 import Swal from "sweetalert2";
+import { Posts } from "../../data/data";
+import * as likesService from "../../Service/likes";
 
 const DetailsPage = () => {
   const params = useParams();
@@ -143,6 +145,21 @@ const DetailsPage = () => {
     });
   }, []);
 
+  const [isActive, setActive] = useState(false);
+
+  const showToast = () => {
+    toast.success("Shared to your profile!", {
+      autoClose: 2000,
+    });
+  };
+
+// get likes
+  useEffect(() => {
+    likesService.getLikes(params.id).then((response) => {
+      setLikes(response.data);
+      console.log(response.data);
+    });
+  }, [params.id]);
   if (loading) {
     return <h1>Loading...</h1>;
   }
@@ -191,6 +208,50 @@ const DetailsPage = () => {
             />
           </div>
           <div className="postBottom">
+          <div className="postBottomLeft">
+            <StarIcon className="bottomLeftIcon" style={{ color: "#E1AD01" }} />
+            <b>{likes.length}</b>
+            <div className="postLikeCounter" sx={{ fontSize: "1%" }}>
+              <ChatOutlinedIcon sx={{ marginRight: "7px" }} />
+              {comment.length}
+            </div>
+          </div>
+          <div className="postBottomRight">
+            <div className="postCommentText">
+              {/* {comment.length} · comments · share */}
+            </div>
+          </div>
+        </div>
+
+        <hr className="footerHr" />
+        <div className="postBottomFooter">
+          <Grid>
+            <div className="postBottomFooterItem">
+              <Grid component="form" onSubmit={handleSubmit}>
+                <IconButton
+                  type="submit"
+                  onClick={showToast} /*onClick={() => setActive(!isActive)}*/
+                >
+                  <div>
+                    {isActive ? (
+                      <StarIcon sx={{ color: "#E1AD01" }} />
+                    ) : (
+                      <StarBorderOutlinedIcon className="footerIcon" />
+                    )}
+                  </div>
+                </IconButton>
+                <ToastContainer
+                  position={"top-center"}
+                  closeOnClick={true}
+                  closeButton={<p>x</p>}
+                  draggable={false}
+                />
+              </Grid>
+              <div className="footerText">Appreciate</div>
+            </div>
+          </Grid>
+
+          {/* <div className="postBottom">
             <div className="postBottomLeft">
               <Favorite className="bottomLeftIcon" style={{ color: "red" }} />
               <ThumbUp className="bottomLeftIcon" />
@@ -199,14 +260,15 @@ const DetailsPage = () => {
             <div className="postBottomRight">
               <div className="postCommentText">{comment.length} · comments</div>
             </div>
-          </div>
+          </div> */}
 
-          <hr className="footerHr" />
-          <div className="postBottomFooter">
-            <div className="postBottomFooterItem">
+          {/* <hr className="footerHr" /> */}
+          {/* <div className="postBottomFooter"> */}
+            {/* <div className="postBottomFooterItem">
               <ThumbUpAltOutlined className="footerIcon" />
               <div className="footerText">Like</div>
-            </div>
+            </div> */}
+
 
             <div
               className="postBottomFooterItem"
@@ -279,6 +341,7 @@ const DetailsPage = () => {
           ))}
         </div>
       </div>
+      // </div>
     );
 };
 

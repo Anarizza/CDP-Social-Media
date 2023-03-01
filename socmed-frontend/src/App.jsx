@@ -9,7 +9,6 @@ import DetailsPageConnector from "./pages/detailsPage/DetailsPageConnector";
 import LikesConnector from "./pages/likes/LikesConnector";
 import "./style/dark.css";
 import EditPost from "./Components/editPost/EditPost";
-import NavBar from "./Components/navbar/NavBar";
 import FriendProfile from "./pages/friendProfile/FriendProfile";
 import EditProfile from "./pages/editProfile/EditProfile";
 import Footer from "./Components/footer/Footer";
@@ -28,7 +27,7 @@ const App = () => {
           <Route path="/appreciate/:id" element={<LikesConnector />} />
           <Route path="/post/update/status/:id" element={<EditPost />} />
           <Route path="/profile/friend/:id" element={<FriendProfile />} />
-          <Route path="/profile/edit" element={<EditProfile />} />
+          <Route path="/profile/edit/" element={<EditProfile />} />
           <Route path="/footer" element={<Footer />} />
         </Routes>
       </CssBaseline>
