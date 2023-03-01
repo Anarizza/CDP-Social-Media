@@ -21,7 +21,6 @@ import StarBorderOutlinedIcon from '@mui/icons-material/StarBorderOutlined';
 import * as userService from "../../Service/users";
 import Grid from "@mui/material/Grid";
 import { useNavigate } from "react-router-dom";
-import "../../style/dark.css";
 
 
 

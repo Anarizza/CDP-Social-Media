@@ -23,7 +23,7 @@ import * as userService from "../../Service/users";
 import Grid from "@mui/material/Grid";
 import { useNavigate } from "react-router-dom";
 import Swal from "sweetalert2";
-import "../../style/dark.css";
+
 
 const UserPost = ({ post }) => {
   // const params = useParams();
