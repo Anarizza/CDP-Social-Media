@@ -34,6 +34,7 @@
   .image{
     margin-left: 10px;
     margin-top: 6px;
+    
   }
   .logo {
     font-size: 24px;
@@ -121,6 +122,7 @@
     border: 2px solid white;
     object-fit: cover;
     cursor: pointer;
+    margin-bottom: 10px;
   }
   
   /* //Responsiveness */

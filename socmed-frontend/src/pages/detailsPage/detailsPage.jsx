@@ -49,7 +49,7 @@ const DetailsPage = () => {
   const [form, setForm] = useState({
     commenttext: "",
   });
-  // add function in service
+  // add comment function in service
   const onSubmit = (comm) => {
     commentService
       .addComment(user.userId, posts.postId, comm)
@@ -135,9 +135,9 @@ const DetailsPage = () => {
     });
   }, [params.id]);
 
-  // get User by ID 
+  // get User by ID
   useEffect(() => {
-    userService.getUsersById(1).then((response) => {
+    userService.getUsersById(params.id).then((response) => {
       setUsers(response.data);
       console.log(response.data);
     });
@@ -193,17 +193,11 @@ const DetailsPage = () => {
           <div className="postBottom">
             <div className="postBottomLeft">
               <Favorite className="bottomLeftIcon" style={{ color: "red" }} />
-              <ThumbUp
-                className="bottomLeftIcon"
-              />
+              <ThumbUp className="bottomLeftIcon" />
               <div className="postLikeCounter">{likes}</div>
             </div>
             <div className="postBottomRight">
-              <div
-                className="postCommentText"
-              >
-                {comment.length} · comments
-              </div>
+              <div className="postCommentText">{comment.length} · comments</div>
             </div>
           </div>
 
@@ -248,45 +242,42 @@ const DetailsPage = () => {
             </button>
           </form>
         )}
-       
-          <div className="comment">
-            {[...comment].reverse().map((c) => (
-              <div key={c.commentId}>
-                <div className="commentWrapper">
-                  <div className="commentOptions">
-                    <IconButton onClick={handleOpenMenu}>
-                      <MoreHorizIcon className="commentVertButton" />
-                    </IconButton>
-                    <Menu
-                      id="basic-menu"
-                      anchorEl={anchorEl}
-                      open={open}
-                      onClose={handleCloseMenu}
-                    >
-                      <MenuItem
-                        onClick={() => handleDeleteComment(c.commentId)}
-                      >
-                        Delete Comment
-                      </MenuItem>
-                    </Menu>
-                  </div>
-                  <img
-                    className="commentProfileImg"
-                    src={c.post.users.profilePic}
-                    alt=""
-                  />
 
-                  <div className="commentInfo">
-                    <div className="commentUsername">
-                      @{c.post.users.username.toLowerCase()}
-                    </div>
-                    <div className="commentText">{c.commenttext} </div>
+        <div className="comment">
+          {[...comment].reverse().map((c) => (
+            <div key={c.commentId}>
+              <div className="commentWrapper">
+                <div className="commentOptions">
+                  <IconButton onClick={handleOpenMenu}>
+                    <MoreHorizIcon className="commentVertButton" />
+                  </IconButton>
+                  <Menu
+                    id="basic-menu"
+                    anchorEl={anchorEl}
+                    open={open}
+                    onClose={handleCloseMenu}
+                  >
+                    <MenuItem onClick={() => handleDeleteComment(c.commentId)}>
+                      Delete Comment
+                    </MenuItem>
+                  </Menu>
+                </div>
+                <img
+                  className="commentProfileImg"
+                  src={c.post.users.profilePic}
+                  alt=""
+                />
+
+                <div className="commentInfo">
+                  <div className="commentUsername">
+                    @{c.post.users.username.toLowerCase()}
                   </div>
+                  <div className="commentText">{c.commenttext} </div>
                 </div>
               </div>
-            ))}
-          </div>
-        
+            </div>
+          ))}
+        </div>
       </div>
     );
 };

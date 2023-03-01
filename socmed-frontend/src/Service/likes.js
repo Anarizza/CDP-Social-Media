@@ -18,6 +18,9 @@ export function addLikes(userId, postId, likes) {
     return http.post(`/likes/new/${userId}/like/${postId}`, likeClone);
 }
 
+export function deleteLike(likeId) {
+    return http.delete(`/likes/removelikes/${likeId}`);
+}
 
   
 

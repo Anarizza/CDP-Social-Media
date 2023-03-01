@@ -15,8 +15,10 @@ import {
   TextField,
 } from "@mui/material";
 import { useNavigate } from "react-router-dom";
+import { useParams } from "react-router-dom";
 
 const Share = () => {
+  const params = useParams();
   const [form, setForm] = useState({
     posttext: "",
     image: "",
@@ -26,9 +28,9 @@ const Share = () => {
 
   //ito yung sa axios/service
   const onSubmit = (post) => {
-    postService.addPost(1, post).then((response) => {
+    postService.addPost(params.id, post).then((response) => {
       console.log(response);
-      navigate("/");
+      navigate(`/homepage/${params.id}`);
     });
   };
 
@@ -106,7 +108,7 @@ const Share = () => {
 
   const [user, setUsers] = useState([]);
   useEffect(() => {
-    userService.getUsersById(1).then((response) => {
+    userService.getUsersById(params.id).then((response) => {
       setUsers(response.data);
       console.log(response.data);
     });

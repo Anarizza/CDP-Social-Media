@@ -1,4 +1,4 @@
-import React,{useState, useEffect} from "react";
+import React, { useState, useEffect } from "react";
 import SearchIcon from "@mui/icons-material/Search";
 import NotificationsIcon from "@mui/icons-material/Notifications";
 import { Link } from "react-router-dom";
@@ -19,7 +19,8 @@ import MenuItem from "@mui/material/MenuItem";
 import * as postService from "../../Service/post";
 import * as userService from "../../Service/users";
 import { useParams } from "react-router-dom";
-
+import SearchBar from "../search/SearchBar";
+import ListPage from "../search/ListPage";
 const NavBar = () => {
   const [anchorElNav, setAnchorElNav] = React.useState(null);
   const [anchorElUser, setAnchorElUser] = React.useState(null);
@@ -50,20 +51,20 @@ const NavBar = () => {
     });
   }, []);
 
+  const [posts, setPosts] = useState([]);
+  const [searchResults, setSearchResults] = useState([]);
 
-  // const [posts, setPosts] = useState([]);
-  // const [searchData, setSearchData] = useState([]);
-  // const [filterVal, setFilterVal] = useState('');
-  // useEffect(() => {
-  //   postService.getPosts().then((response) => {
-  //     setPosts(response.data);
-  //     setSearchData(response.data);
-  //     console.log(response.data);
-  //   });
-  // }, []);
+  const [filterVal, setFilterVal] = useState("");
 
-  // const handleFilter = (e) => {
-  //   if(e.target.value === ''){
+  useEffect(() => {
+    postService.getPosts().then((response) => {
+      setPosts(response.data);
+      setSearchResults(response.data);
+      console.log(response.data);
+    });
+  }, []);
+
+  //   {
   //     setPosts(searchData);
   //   }else{
   //   const filterResult =  searchData.filter(item => item.name.includes(e.target.value))
@@ -101,7 +102,6 @@ const NavBar = () => {
           <div className="navbarCenter">
             <div className="searchBar">
               <SearchIcon className="searchIcon" sx={{ display: "block" }} />
-              <input type="text" placeholder="Search" className="searchInput" />
             </div>
           </div>
 
@@ -183,13 +183,9 @@ const NavBar = () => {
               mb: 1,
             }}
           >
-            <Link to={`/profile/${params.id}`}>
+            <Link to={`/profile/${user.userId}`}>
               <Button sx={{ my: -1, color: "white", display: "block" }}>
-                <img
-                  src={user.profilePic}
-                  alt=""
-                  className="navbarImg"
-                />
+                <img src={user.profilePic} alt="" className="navbarImg" />
               </Button>
             </Link>
             {/* <Link to="/profile">

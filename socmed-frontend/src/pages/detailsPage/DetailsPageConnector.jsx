@@ -8,8 +8,7 @@ import NavBar from "../../Components/navbar/NavBar";
 const DetailsPageConnector = () => {
   return (
     <div className="home">
-                  <NavBar />
-
+      <NavBar />
       <div className="homeContainer">
         <div className="side">
           <Sidebar />

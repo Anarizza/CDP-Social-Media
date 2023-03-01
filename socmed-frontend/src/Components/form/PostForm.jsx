@@ -68,7 +68,7 @@ const PostForm = ({ onSubmit, initialValue }) => {
   const [file, setFile] = useState(null);
   const [user, setUsers] = useState([]);
   useEffect(() => {
-    userService.getUsersById(1).then((response) => {
+    userService.getUsersById(user.userId).then((response) => {
       setUsers(response.data);
       console.log(response.data);
     });

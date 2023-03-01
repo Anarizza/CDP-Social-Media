@@ -16,7 +16,7 @@ const EditPost = () => {
 
 
   useEffect(() => {
-    userService.getUsersById(1).then((response) => {
+    userService.getUsersById(user.userId).then((response) => {
       setUsers(response.data);
       console.log(response.data);
     });
@@ -33,7 +33,7 @@ const EditPost = () => {
 
   const handleSubmit  = (form) => {
     postService
-      .updatePost(1, posts.postId, form)
+      .updatePost(user.userId, posts.postId, form)
       .then(() => {
         navigate(`/`);
       })

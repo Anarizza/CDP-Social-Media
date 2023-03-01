@@ -3,10 +3,13 @@ import { Link } from "react-router-dom";
 import "./ProfileRightBar.css";
 import * as userService from "../../Service/users";
 import { useState, useEffect } from "react";
+import { useParams } from "react-router-dom";
+
 const ProfileRightBar = () => {
+  const params = useParams();
   const [user, setUsers] = useState([]);
   useEffect(() => {
-    userService.getUsersById(1).then((response) => {
+    userService.getUsersById(params.id).then((response) => {
       setUsers(response.data);
       console.log(response.data);
     });

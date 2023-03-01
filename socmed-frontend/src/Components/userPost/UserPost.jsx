@@ -138,13 +138,13 @@ const UserPost = ({ post }) => {
       <div className="postWrapper">
         <div className="postTop">
           <div className="postTopLeft">
-            <Link to="/profile/userId">
+            {/* <Link to="/profile/userId"> */}
               <img
                 src={post.users.profilePic}
                 alt=""
                 className="postProfileImg"
               />
-            </Link>
+            {/* </Link> */}
             <div className="postName">
               {post.users.givenName + " " + post.users.surname}
             </div>
@@ -161,7 +161,7 @@ const UserPost = ({ post }) => {
               open={open}
               onClose={handleCloseMenu}
             >
-              <MenuItem onClick={() => navigate(`/post/update/status/${post.userId}/${post.postId}`)}>Edit</MenuItem>
+              <MenuItem onClick={() => navigate(`/post/update/status/${post.postId}`)}>Edit</MenuItem>
               <MenuItem onClick={() => handleDeletePost(post.postId)}>
                 Delete
               </MenuItem>

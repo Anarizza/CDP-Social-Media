@@ -1,15 +1,11 @@
 import { DriveFolderUploadOutlined } from "@mui/icons-material";
 import React from "react";
-import NavBar from "../../Components/navbar/NavBar";
-import Sidebar from "../../Components/sidebar/Sidebar";
 import "./editProfile.css";
 
 const EditProfile = () => {
   return (
     <div className="editProfile">
-      <NavBar />
       <div className="editProfileWrapper">
-        <Sidebar />
         <div className="profileRight">
           <div className="profileRightTop">
             <div className="profileCover">

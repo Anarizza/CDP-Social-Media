@@ -25,18 +25,8 @@ import { useNavigate } from "react-router-dom";
 
 
 const Post = ({ post }) => {
-  // const params = useParams();
-
-  // const [comment, setComment] = useState([]);
-
-  // useEffect(() => {
-  //   commentService.getCommentByPostPostId(params.id).then((response) => {
-  //     setComment(response.data);
-  //     console.log(response.data); // hazeeeell
-  //   });
-  // }, [params.id]);
-
-
+  const params = useParams();
+  const navigate = useNavigate();
 
   const [likes, setLikes] = useState([]);
 
@@ -63,7 +53,7 @@ const Post = ({ post }) => {
 const [user, setUsers] = useState([]);
 //dapat useParam yung parameter pero wala pan login so hardcode value muna
 useEffect(() => {
-  userService.getUsersById(1).then((response) => {
+  userService.getUsersById(params.id).then((response) => {
     setUsers(response.data);
     console.log(response.data);
   });
@@ -77,24 +67,13 @@ useEffect(() => {
     }
   );
 
- 
-  /*
-  useEffect(() => {
-    likestService.addLikes(likes2, post.postId, user.userId).then((response) => {
-      setLikes2(response.data);
-      console.log(response.data);
-    });
-  }, []);
-  */
-
-  const navigate = useNavigate();
 
   const onSubmit = (layk) => {
     likesService
       .addLikes(user.userId, post.postId, layk)
       .then((response) => {
         console.log(response);
-        navigate("/");
+        navigate(`/homepage/${user.userId}`);
       })
   };
 
@@ -119,7 +98,7 @@ useEffect(() => {
       <div className="postWrapper">
         <div className="postTop">
           <div className="postTopLeft">
-            <Link to="/profile/userId">
+            <Link to={`/profile/${post.users.userId}`}>
               <img
                 src={post.users.profilePic}
                 alt=""

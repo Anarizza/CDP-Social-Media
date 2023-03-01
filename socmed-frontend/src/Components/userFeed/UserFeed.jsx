@@ -5,11 +5,14 @@ import Share from "../share/Share";
 import * as postService from "../../Service/post";
 import * as userService from "../../Service/users";
 import UserPost from "../../Components/userPost/UserPost";
+import { useParams } from "react-router-dom";
+
 const UserFeed = () => {
+  const params = useParams();
   const [posts, setPosts] = useState([]);
 
   useEffect(() => {
-    postService.selectPostByUsersUserId(1).then((response) => {
+    postService.selectPostByUsersUserId(params.id).then((response) => {
       setPosts(response.data);
       console.log(response.data);
     });

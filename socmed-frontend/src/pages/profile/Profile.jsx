@@ -9,11 +9,13 @@ import { Users } from "../../data/data";
 import * as userService from "../../Service/users";
 import { useState, useEffect } from "react";
 import UserFeed from "../../Components/userFeed/UserFeed";
+import { useParams } from "react-router-dom";
 
 const Profile = () => {
+  const params = useParams();
   const [user, setUsers] = useState([]);
   useEffect(() => {
-    userService.getUsersById(1).then((response) => {
+    userService.getUsersById(params.id).then((response) => {
       setUsers(response.data);
       console.log(response.data);
     });
