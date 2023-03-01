@@ -32,7 +32,7 @@ const Share = () => {
   const onSubmit = (post) => {
     postService.addPost(params.id, post).then((response) => {
       console.log(response);
-      navigate("/");
+      navigate(`/homepage/${params.id}`);
     });
   };
 

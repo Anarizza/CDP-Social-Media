@@ -11,9 +11,12 @@ import BookmarkIcon from "@mui/icons-material/Bookmark";
 import "../../style/dark.css";
 import StarBorderPurple500SharpIcon from "@mui/icons-material/StarBorderPurple500Sharp";
 import { Link } from "react-router-dom";
+import { useParams } from "react-router-dom";
 
 const Sidebar = () => {
   const [users, setUsers] = useState([]);
+
+  const { id } = useParams();
   useEffect(() => {
     usersService.getUsers().then((response) => {
       setUsers(response.data);
@@ -67,10 +70,9 @@ const Sidebar = () => {
         <ul className="sidebarFriendList">
           {users.map((u) => (
             <Link
-              to={`/profile/friend/${u.userId}`}
+              to={`/profile/friend/${id}/${u.userId}`}
               style={{
                 textDecoration: "none",
-                
               }}
             >
               <Friends key={u.id} user={u} />
