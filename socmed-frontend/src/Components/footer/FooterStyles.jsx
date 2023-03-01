@@ -60,3 +60,9 @@ export const Heading = styled.p`
 	margin-bottom: 20px;
 	font-weight: bold;
 `;
+
+export const AppName = styled.div`
+	display: flex;
+	margin-left: 0px;
+	grid-gap: 0px;
+`;
