@@ -23,6 +23,7 @@ import * as userService from "../../Service/users";
 import Grid from "@mui/material/Grid";
 import { useNavigate } from "react-router-dom";
 import Swal from "sweetalert2";
+import "../../style/dark.css";
 
 const UserPost = ({ post }) => {
   // const params = useParams();
@@ -212,7 +213,7 @@ const UserPost = ({ post }) => {
                     {isActive ? (
                       <StarIcon sx={{ color: "#E1AD01" }} />
                     ) : (
-                      <StarBorderOutlinedIcon />
+                      <StarBorderOutlinedIcon className="starIcon"/>
                     )}
                   </div>
                 </IconButton>
@@ -229,7 +230,7 @@ const UserPost = ({ post }) => {
               <div className="postBottomFooterItem">
                 <div
                   className="footerText"
-                  style={{ fontSize: "11px", color: "black" }}
+                  style={{ fontSize: "11px" }}
                 >
                   See More...
                 </div>

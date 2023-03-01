@@ -195,7 +195,6 @@ const DetailsPage = () => {
               <Favorite className="bottomLeftIcon" style={{ color: "red" }} />
               <ThumbUp
                 className="bottomLeftIcon"
-                style={{ color: "#011631" }}
               />
               <div className="postLikeCounter">{likes}</div>
             </div>

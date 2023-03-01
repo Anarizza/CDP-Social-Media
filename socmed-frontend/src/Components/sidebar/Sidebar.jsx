@@ -68,7 +68,10 @@ const Sidebar = () => {
           {users.map((u) => (
             <Link
               to={`/profile/friend/${u.userId}`}
-              sx={{ textDecorator: "none" }}
+              style={{
+                textDecoration: "none",
+                
+              }}
             >
               <Friends key={u.id} user={u} />
             </Link>

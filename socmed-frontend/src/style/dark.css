@@ -3,6 +3,34 @@
   color: white;
 }
 
+.dark .footerText {
+  color: white;
+}
+
+.dark .footerIcon {
+  color: white;
+}
+
+.dark .starIcon {
+  color: white;
+}
+
+.dark .rightbarUsername {
+  color: white;
+}
+
+.dark .shareOptionText {
+  color: white;
+}
+
+.dark .bottomLeftIcon{
+  color: white;
+}
+
+.dark .sidebarFriendName{
+  color: white;
+}
+
 .menuLink:hover {
   background-color: rgba(98, 97, 97, 0.3);
 }

@@ -21,7 +21,7 @@ import StarBorderOutlinedIcon from '@mui/icons-material/StarBorderOutlined';
 import * as userService from "../../Service/users";
 import Grid from "@mui/material/Grid";
 import { useNavigate } from "react-router-dom";
-
+import "../../style/dark.css";
 
 
 
@@ -169,7 +169,7 @@ useEffect(() => {
           <div className="postBottomFooterItem">
             <Grid  component="form" onSubmit={handleSubmit}>
               <IconButton type="submit" onClick={() => setActive(!isActive)} >
-                <div>{isActive ? <StarIcon sx={{color: '#E1AD01'}}/> : <StarBorderOutlinedIcon/> }</div>
+                <div>{isActive ? <StarIcon sx={{color: '#E1AD01'}}/> : <StarBorderOutlinedIcon className="footerIcon"/> }</div>
               </IconButton>
             </Grid>
             <div className="footerText">Appreciate</div>
@@ -184,7 +184,7 @@ useEffect(() => {
               <div className="postBottomFooterItem">
                 <div
                   className="footerText"
-                  style={{ fontSize: "11px", color: "black" }}
+                  style={{ fontSize: "11px" }}
                 >
                   See More...
                 </div>

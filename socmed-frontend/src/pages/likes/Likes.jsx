@@ -96,7 +96,7 @@ const Likes = () => {
         <div className="postBottom">
           <div className="postBottomLeft">
             <Favorite className="bottomLeftIcon" style={{ color: "red" }} />
-            <ThumbUp className="bottomLeftIcon" style={{ color: "#011631" }} />
+            <ThumbUp className="bottomLeftIcon" />
             <div className="postLikeCounter">{posts.like}</div>
           </div>
           <div className="postBottomRight">
