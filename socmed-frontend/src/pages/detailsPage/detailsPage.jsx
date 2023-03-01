@@ -20,7 +20,6 @@ import StarBorderOutlinedIcon from "@mui/icons-material/StarBorderOutlined";
 import Grid from "@mui/material/Grid";
 import ChatOutlinedIcon from "@mui/icons-material/ChatOutlined";
 import Swal from "sweetalert2";
-import { Posts } from "../../data/data";
 import * as likesService from "../../Service/likes";
 
 const DetailsPage = () => {

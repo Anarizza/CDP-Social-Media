@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from "react";
 import RssFeedIcon from "@mui/icons-material/RssFeed";
-import ChatIcon from "@mui/icons-material/Chat";
 import Brightness4Icon from "@mui/icons-material/Brightness4";
 import ExitToAppOutlinedIcon from "@mui/icons-material/ExitToAppOutlined";
 import "./Sidebar.css";

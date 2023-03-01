@@ -1,10 +1,8 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
-import Post from "../post/Post";
 import * as postService from "../../Service/post";
 import PostForm from "../form/PostForm";
 import * as userService from "../../Service/users";
-import PostFormConnector from "../form/PostFormConnector";
 
 const EditPost = () => {
   const params = useParams();
@@ -20,7 +18,7 @@ const EditPost = () => {
       setUsers(response.data);
       console.log(response.data);
     });
-  }, []);
+  }, [user.userId]);
 
   useEffect(() => {
     setLoading(true);

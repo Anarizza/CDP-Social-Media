@@ -3,18 +3,10 @@ import "./Post.css";
 import { IconButton } from "@mui/material";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import {
-  Favorite,
-  ThumbUp,
-  ThumbUpAltOutlined,
-  ShareOutlined,
-} from "@mui/icons-material";
 import { Link } from "react-router-dom";
 import ModalImage from "react-modal-image";
-import * as postService from "../../Service/post";
 import ScreenRotationAltIcon from "@mui/icons-material/ScreenRotationAlt";
 import StarIcon from "@mui/icons-material/Star";
-import StarBorderPurple500SharpIcon from "@mui/icons-material/StarBorderPurple500Sharp";
 import * as likesService from "../../Service/likes";
 import * as commentService from "../../Service/comment";
 import { useParams } from "react-router-dom";
@@ -35,7 +27,7 @@ const Post = ({ post }) => {
       setLikes(response.data);
       console.log(response.data);
     });
-  }, []);
+  }, [post.postId]);
 
   const [comment, setComment] = useState([]);
 
@@ -44,7 +36,7 @@ const Post = ({ post }) => {
       setComment(response.data);
       console.log(response.data);
     });
-  }, []);
+  }, [post.postId]);
 
   //------------THIS IS FOR LIKES BUTTON--------------------
   //sample palang tong user since wala pang login
@@ -56,7 +48,7 @@ const Post = ({ post }) => {
       setUsers(response.data);
       console.log(response.data);
     });
-  }, []);
+  }, [params.id]);
 
   const [isActive, setActive] = useState(false);
 

@@ -1,15 +1,10 @@
 import React, { useState , useEffect} from "react";
 import {
-  Card,
-  CardContent,
-  CardHeader,
   Grid,
-  TextField,
-  CardActions,
   Button,
 } from "@mui/material";
 import Joi from "joi";
-import { Close, EmojiEmotions, PermMedia } from "@mui/icons-material";
+import { Close, PermMedia } from "@mui/icons-material";
 import SendIcon from "@mui/icons-material/Send";
 import * as userService from "../../Service/users";
 import "./PostForm.css";
