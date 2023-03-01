@@ -4,11 +4,11 @@ import DetailsPage from "./detailsPage";
 import Sidebar from "../../Components/sidebar/Sidebar";
 import Rightbar from "../../Components/rightbar/Rightbar";
 import "./DetailsPageConnector.css";
-import NavBar from "../../Components/navbar/NavBar";
+import Navbar from "../navbar/Navbar";
 const DetailsPageConnector = () => {
   return (
     <div className="home">
-      <NavBar />
+      <Navbar/>
       <div className="homeContainer">
         <div className="side">
           <Sidebar />

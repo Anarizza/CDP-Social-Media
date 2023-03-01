@@ -30,7 +30,7 @@ const Share = () => {
   const onSubmit = (post) => {
     postService.addPost(params.id, post).then((response) => {
       console.log(response);
-      navigate(`/homepage/${params.id}`);
+      navigate("/");
     });
   };
 
@@ -99,12 +99,12 @@ const Share = () => {
   const [file, setFile] = useState(null);
   const [posts, setPosts] = useState([]);
 
-  useEffect(() => {
-    postService.addPost().then((response) => {
-      setPosts(response.data);
-      console.log(response.data);
-    });
-  }, []);
+  // useEffect(() => {
+  //   postService.addPost().then((response) => {
+  //     setPosts(response.data);
+  //     console.log(response.data);
+  //   });
+  // }, []);
 
   const [user, setUsers] = useState([]);
   useEffect(() => {

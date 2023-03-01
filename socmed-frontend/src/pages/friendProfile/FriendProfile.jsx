@@ -1,16 +1,13 @@
 import React from "react";
 
 import "./Profile.css";
-import Feed from "../../Components/feed/Feed";
-import NavBar from "../../Components/navbar/NavBar";
 import Rightbar from "../../Components/rightbar/Rightbar";
 import Sidebar from "../../Components/sidebar/Sidebar";
-import { Users } from "../../data/data";
 import * as userService from "../../Service/users";
 import { useState, useEffect } from "react";
 import UserFeedFriends from "../../Components/userFeedFriends/UserFeedFriends";
 import { useParams } from "react-router-dom";
-
+import Navbar from "../navbar/Navbar";
 const FriendProfile = () => {
   const { id } = useParams();
   const [user, setUsers] = useState([]);
@@ -25,6 +22,7 @@ const FriendProfile = () => {
 
   return (
     <div className="profile">
+      <Navbar />
       <div className="profileWrapper">
         <Sidebar />
         <div className="profileRight">

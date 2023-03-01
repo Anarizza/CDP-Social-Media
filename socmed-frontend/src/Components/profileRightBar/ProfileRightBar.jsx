@@ -16,7 +16,8 @@ const ProfileRightBar = () => {
   }, []);
   return (
     <div className="profileRightBar">
-      <div className="profileRightBarHeading">
+
+      {/* <div className="profileRightBarHeading">
         <div className="profileRightBarTitle"> User Information</div>
         <Link to="/profile/edit" style={{ textDecoration: "none" }}>
           <div className="editButton">Edit Profile</div>
@@ -42,7 +43,7 @@ const ProfileRightBar = () => {
           <div className="profileRightBarInfoKey">Work Experience: </div>
           <div className="profileRightBarInfoValue">Manlasing ng tao</div>
         </div>
-      </div>
+      </div> */}
 
       <h4 className="profileRightBarTitle">Close Friends</h4>
       <div className="profileRightBarFollowings">

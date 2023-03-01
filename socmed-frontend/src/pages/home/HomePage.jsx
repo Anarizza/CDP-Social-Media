@@ -4,15 +4,17 @@ import Rightbar from "../../Components/rightbar/Rightbar";
 import Sidebar from "../../Components/sidebar/Sidebar";
 import "./HomePage.css";
 import NavBar from "../../Components/navbar/NavBar";
+import Footer from "../../Components/footer/Footer";
 const HomePage = () => {
   return (
     <div className="home">
-            <NavBar />
+      <NavBar />
       <div className="homeContainer">
         <Sidebar />
         <Feed className="feed" />
         <Rightbar />
       </div>
+      <Footer />
     </div>
   );
 };

@@ -26,9 +26,7 @@ import {
   ShareOutlined,
 } from "@mui/icons-material";
 
-
 const Likes = () => {
-
   const params = useParams();
 
   const [anchorEl, setAnchorEl] = useState(null);
@@ -49,82 +47,84 @@ const Likes = () => {
     });
   }, [params.id]);
 
-  console.log("ito polaaaa"+posts)
+  console.log("ito polaaaa" + posts);
 
   if (loading) {
     return <h1>Loading...</h1>;
   }
 
   if (posts)
-  return (
-    <>
-    {posts.map((p) => (
-    <div className="postdetails">
-      <div className="postWrapper">
-        <div className="postTop">
-          <div className="postTopLeft">
-            <Link to="/profile/userId">
-           
-              <img
-                src={p.post.users.profilePic}
-                alt=""
-                className="postProfileImg"
-              />
-            </Link>
-            <div className="postName">{p.post.users.givenName +' '+ p.post.users.surname}</div>
-            <div className="postUsername">@{p.post.users.username}</div>
-          </div>
+    return (
+      <>
+        {posts.map((p) => (
+          <div className="postdetails">
+            <div className="postWrapper">
+              <div className="postTop">
+                <div className="postTopLeft">
+                  <Link to="/profile/userId">
+                    <img
+                      src={p.post.users.profilePic}
+                      alt=""
+                      className="postProfileImg"
+                    />
+                  </Link>
+                  <div className="postName">
+                    {p.post.users.givenName + " " + p.post.users.surname}
+                  </div>
+                  <div className="postUsername">@{p.post.users.username}</div>
+                </div>
+              </div>
+              <div
+                className="postDate"
+                style={{ marginTop: "-10px", color: "grey", fontSize: "100%" }}
+              >
+                {p.post.createdDate}
+              </div>
+              <div className="postCenter">
+                <div className="postText" style={{ fontSize: "115%" }}>
+                  {p.post.posttext}
+                </div>
 
-          <div className="postTopRight">
-            <IconButton>
-              <MoreVert className="postVertButton" />
-            </IconButton>
-          </div>
-        </div>
-        <div className="postDate" style={{marginTop: '-10px', color: 'grey', fontSize: '100%'}}>{p.post.createdDate}</div>
-        <div className="postCenter">
-          <div className="postText" style={{fontSize:'115%'}}>{p.post.posttext}</div>
+                <ModalImage
+                  className="postImg"
+                  small={p.post.image}
+                  medium={p.post.image}
+                  alt=""
+                />
+              </div>
+              <div className="postBottom">
+                <div className="postBottomLeft">
+                  <Favorite
+                    className="bottomLeftIcon"
+                    style={{ color: "red" }}
+                  />
+                  <ThumbUp className="bottomLeftIcon" />
+                  <div className="postLikeCounter">{posts.like}</div>
+                </div>
+                <div className="postBottomRight">
+                  <div className="postCommentText">
+                    {posts.comment} · comments · share
+                  </div>
+                </div>
+              </div>
 
-          <ModalImage
-              className="postImg"
-              small={p.post.image}
-              medium={p.post.image}
-              alt=""
-           />
+              <hr className="footerHr" />
+              <div className="postBottomFooter">
+                <div className="postBottomFooterItem">
+                  <ThumbUpAltOutlined className="footerIcon" />
+                  <div className="footerText">Like</div>
+                </div>
 
-        </div>
-        <div className="postBottom">
-          <div className="postBottomLeft">
-            <Favorite className="bottomLeftIcon" style={{ color: "red" }} />
-            <ThumbUp className="bottomLeftIcon" />
-            <div className="postLikeCounter">{posts.like}</div>
-          </div>
-          <div className="postBottomRight">
-            <div className="postCommentText">
-              {posts.comment} · comments · share
+                <div className="postBottomFooterItem">
+                  <ShareOutlined className="footerIcon" />
+                  <div className="footerText">Share</div>
+                </div>
+              </div>
             </div>
           </div>
-        </div>
-
-        <hr className="footerHr" />
-        <div className="postBottomFooter">
-          <div className="postBottomFooterItem">
-            <ThumbUpAltOutlined className="footerIcon" />
-            <div className="footerText">Like</div>
-          </div>
-      
-          <div className="postBottomFooterItem">
-            <ShareOutlined className="footerIcon" />
-            <div className="footerText">Share</div>
-          </div>
-        </div>
-      </div>
-   
-    </div>
-     ))}
-     </>
-  );
-
-}
+        ))}
+      </>
+    );
+};
 
 export default Likes;
