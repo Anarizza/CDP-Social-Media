@@ -5,6 +5,7 @@ import {
   Row,
   BottomRow,
   Column,
+  ColumnIcon,
   FooterLink,
   Heading,
 } from "./FooterStyles";
@@ -32,23 +33,18 @@ const Footer = () => {
         <FooterLink href="#">Privacy Policy</FooterLink>
         <FooterLink href="#">Terms of use</FooterLink>
       </Column>
+      <Column>
+      <ColumnIcon>
+        <a href="#" class="fa fa-facebook" style={{ textDecoration: "none", color: "white" }}></a>
+        <a href="#" class="fa fa-twitter" style={{ textDecoration: "none", color: "white" }}></a>
+        <a href="#" class="fa fa-youtube" style={{ textDecoration: "none", color: "white" }}></a>
+        <a href="#" class="fa fa-instagram" style={{ textDecoration: "none", color: "white" }}></a>
+        <a href="#" class="fa fa-google" style={{ textDecoration: "none", color: "white" }}></a>
+      </ColumnIcon>
+      </Column>
       </Row>
       <BottomRow>
-      <Column>
-        <a href="#" class="fa fa-facebook" style={{ textDecoration: "none", color: "white" }}></a>
-      </Column>
-      <Column>
-        <a href="#" class="fa fa-twitter" style={{ textDecoration: "none", color: "white" }}></a>
-      </Column>
-      <Column>
-        <a href="#" class="fa fa-youtube" style={{ textDecoration: "none", color: "white" }}></a>
-      </Column>
-      <Column>
-        <a href="#" class="fa fa-instagram" style={{ textDecoration: "none", color: "white" }}></a>
-      </Column>
-      <Column>
-        <a href="#" class="fa fa-google" style={{ textDecoration: "none", color: "white" }}></a>
-      </Column>
+        <footer style={{ textDecoration: "none", color: "white" }}>TIMELINE © 2023 - All Rights Reserved</footer>
       </BottomRow>
     </Container>
     </Box>

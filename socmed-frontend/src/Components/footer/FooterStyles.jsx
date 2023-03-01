@@ -19,18 +19,27 @@ export const Column = styled.div`
 	margin-left: 60px;
 `;
 
+export const ColumnIcon = styled.div`
+	display: flex;
+	margin-left: 60px;
+	grid-gap: 40px;
+`;
+
 export const Row = styled.div`
 	display: grid;
 	grid-template-columns: repeat(auto-fill, minmax(185px, 1fr));
 	grid-gap: 20px;
 	margin-top: 20px;
+	margin-bottom: 20px;
 `;
 
 export const BottomRow = styled.div`
-	display: grid;
 	grid-template-columns: repeat(auto-fill, minmax(40px, 1fr));
 	margin-top: 20px;
 	margin-bottom: 20px;
+	margin-left: 500px;
+	font-weight: bold;
+	font-size: 12px;
 `;
 
 export const FooterLink = styled.a`
