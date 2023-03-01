@@ -77,7 +77,7 @@ const NavBar = () => {
       <Container maxWidth="xl">
         <Toolbar disableGutters>
           <div className="bars">
-            <img src="./assets/logo.png" width="40px" height="40px" />
+            <img src="../assets/logo.png" width="40px" height="40px" />
           </div>
 
           <Typography
