@@ -3,6 +3,7 @@ import {
   Box,
   Container,
   Row,
+  BottomRow,
   Column,
   FooterLink,
   Heading,
@@ -31,15 +32,24 @@ const Footer = () => {
         <FooterLink href="#">Privacy Policy</FooterLink>
         <FooterLink href="#">Terms of use</FooterLink>
       </Column>
-      <Column>
-        <Heading>Social Media</Heading>
-        <a href="#" class="fa fa-facebook"></a>
-        <a href="#" class="fa fa-twitter"></a>
-        <a href="#" class="fa fa-youtube"></a>
-        <a href="#" class="fa fa-instagram"></a>
-        <a href="#" class="fa fa-google"></a>
-      </Column>
       </Row>
+      <BottomRow>
+      <Column>
+        <a href="#" class="fa fa-facebook" style={{ textDecoration: "none", color: "white" }}></a>
+      </Column>
+      <Column>
+        <a href="#" class="fa fa-twitter" style={{ textDecoration: "none", color: "white" }}></a>
+      </Column>
+      <Column>
+        <a href="#" class="fa fa-youtube" style={{ textDecoration: "none", color: "white" }}></a>
+      </Column>
+      <Column>
+        <a href="#" class="fa fa-instagram" style={{ textDecoration: "none", color: "white" }}></a>
+      </Column>
+      <Column>
+        <a href="#" class="fa fa-google" style={{ textDecoration: "none", color: "white" }}></a>
+      </Column>
+      </BottomRow>
     </Container>
     </Box>
   )
