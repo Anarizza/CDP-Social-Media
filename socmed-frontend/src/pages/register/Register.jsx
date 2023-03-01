@@ -136,11 +136,11 @@ const handleSubmitLogin = async (event) => {
   event.preventDefault();
   try{
     if(person.username === loginDetails.username && person.password === loginDetails.password){
-      console.log("Successfully login");
+      alert("Successfully login");
       navigate(`/homepage/${person.userId}`);
       return;
       }
-       console.log("Username and pasword not match!")
+       alert("Inavalid usernam/password!");
 
   } catch(error){
          console.log("API ERROR: " + error)
