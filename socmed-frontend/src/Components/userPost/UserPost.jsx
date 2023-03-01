@@ -11,6 +11,7 @@ import {
 import { Link } from "react-router-dom";
 import ModalImage from "react-modal-image";
 import * as postService from "../../Service/post";
+import * as userService from "../../Service/users";
 import ScreenRotationAltIcon from "@mui/icons-material/ScreenRotationAlt";
 import StarIcon from "@mui/icons-material/Star";
 import StarBorderPurple500SharpIcon from "@mui/icons-material/StarBorderPurple500Sharp";
@@ -19,11 +20,9 @@ import * as commentService from "../../Service/comment";
 import { useParams } from "react-router-dom";
 import ChatOutlinedIcon from "@mui/icons-material/ChatOutlined";
 import StarBorderOutlinedIcon from "@mui/icons-material/StarBorderOutlined";
-import * as userService from "../../Service/users";
 import Grid from "@mui/material/Grid";
 import { useNavigate } from "react-router-dom";
 import Swal from "sweetalert2";
-
 
 const UserPost = ({ post }) => {
   // const params = useParams();
@@ -139,11 +138,11 @@ const UserPost = ({ post }) => {
         <div className="postTop">
           <div className="postTopLeft">
             {/* <Link to="/profile/userId"> */}
-              <img
-                src={post.users.profilePic}
-                alt=""
-                className="postProfileImg"
-              />
+            <img
+              src={post.users.profilePic}
+              alt=""
+              className="postProfileImg"
+            />
             {/* </Link> */}
             <div className="postName">
               {post.users.givenName + " " + post.users.surname}
@@ -161,7 +160,11 @@ const UserPost = ({ post }) => {
               open={open}
               onClose={handleCloseMenu}
             >
-              <MenuItem onClick={() => navigate(`/post/update/status/${post.postId}`)}>Edit</MenuItem>
+              <MenuItem
+                onClick={() => navigate(`/post/update/status/${post.postId}`)}
+              >
+                Edit
+              </MenuItem>
               <MenuItem onClick={() => handleDeletePost(post.postId)}>
                 Delete
               </MenuItem>
@@ -213,7 +216,7 @@ const UserPost = ({ post }) => {
                     {isActive ? (
                       <StarIcon sx={{ color: "#E1AD01" }} />
                     ) : (
-                      <StarBorderOutlinedIcon className="starIcon"/>
+                      <StarBorderOutlinedIcon className="starIcon" />
                     )}
                   </div>
                 </IconButton>
@@ -228,10 +231,7 @@ const UserPost = ({ post }) => {
           >
             <IconButton>
               <div className="postBottomFooterItem">
-                <div
-                  className="footerText"
-                  style={{ fontSize: "11px" }}
-                >
+                <div className="footerText" style={{ fontSize: "11px" }}>
                   See More...
                 </div>
               </div>

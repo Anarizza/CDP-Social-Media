@@ -1,4 +1,6 @@
 import React, { useState, useEffect } from "react";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 import { Close, EmojiEmotions, PermMedia } from "@mui/icons-material";
 import "./Share.css";
 import SendIcon from "@mui/icons-material/Send";
@@ -117,6 +119,12 @@ const Share = () => {
   const removeImage = () => {
     setFile(null);
   };
+
+  const showToast = () => {
+    toast.success("Shared to your profile!", {
+      autoClose: 2000,
+    });
+  };
   return (
     <Grid container component="form" onSubmit={handleSubmit}>
       <div className="share">
@@ -163,7 +171,11 @@ const Share = () => {
                 />
               </label>
 
-              <Button disabled={isFormInvalid()} type="submit">
+              <Button
+                onClick={showToast}
+                disabled={isFormInvalid()}
+                type="submit"
+              >
                 <div className="shareOption">
                   <SendIcon
                     className="shareIcon"
@@ -171,6 +183,12 @@ const Share = () => {
                   />
                   <div className="shareOptionText">Share</div>
                 </div>
+                <ToastContainer
+                  position={"top-center"}
+                  closeOnClick={true}
+                  closeButton={<p>x</p>}
+                  draggable={false}
+                />
               </Button>
             </div>
           </div>

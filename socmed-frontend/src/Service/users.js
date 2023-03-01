@@ -12,6 +12,12 @@ export function getUsersByUsername(username) {
   return http.get(`/users/username/${username}`);
 }
 
+export function getUsersByName(name, password) {
+  return http.get(this.baseURL.concat("users/name/" + name + "/" + password), {
+    responseType: "text",
+  });
+}
+
 export function registerUser(user) {
   const postClone = { ...user };
   Object.keys(postClone).forEach((key) => {

@@ -14,7 +14,7 @@ const HomePage = () => {
         <Feed className="feed" />
         <Rightbar />
       </div>
-      <Footer />
+      {/* <Footer /> */}
     </div>
   );
 };

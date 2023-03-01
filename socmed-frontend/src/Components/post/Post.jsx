@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from "react";
 import "./Post.css";
 import { IconButton } from "@mui/material";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 import {
   Favorite,
   ThumbUp,
@@ -16,13 +18,11 @@ import StarBorderPurple500SharpIcon from "@mui/icons-material/StarBorderPurple50
 import * as likesService from "../../Service/likes";
 import * as commentService from "../../Service/comment";
 import { useParams } from "react-router-dom";
-import ChatOutlinedIcon from '@mui/icons-material/ChatOutlined';
-import StarBorderOutlinedIcon from '@mui/icons-material/StarBorderOutlined';
+import ChatOutlinedIcon from "@mui/icons-material/ChatOutlined";
+import StarBorderOutlinedIcon from "@mui/icons-material/StarBorderOutlined";
 import * as userService from "../../Service/users";
 import Grid from "@mui/material/Grid";
 import { useNavigate } from "react-router-dom";
-
-
 
 const Post = ({ post }) => {
   const params = useParams();
@@ -47,41 +47,35 @@ const Post = ({ post }) => {
   }, []);
 
   //------------THIS IS FOR LIKES BUTTON--------------------
-//sample palang tong user since wala pang login 
+  //sample palang tong user since wala pang login
 
-
-const [user, setUsers] = useState([]);
-//dapat useParam yung parameter pero wala pan login so hardcode value muna
-useEffect(() => {
-  userService.getUsersById(params.id).then((response) => {
-    setUsers(response.data);
-    console.log(response.data);
-  });
-}, []);
+  const [user, setUsers] = useState([]);
+  //dapat useParam yung parameter pero wala pan login so hardcode value muna
+  useEffect(() => {
+    userService.getUsersById(params.id).then((response) => {
+      setUsers(response.data);
+      console.log(response.data);
+    });
+  }, []);
 
   const [isActive, setActive] = useState(false);
 
-  const [likesForm, setLikesForm] = useState(
-    {
-      createdDate: "none",
-    }
-  );
-
+  const [likesForm, setLikesForm] = useState({
+    createdDate: "none",
+  });
 
   const onSubmit = (layk) => {
-    likesService
-      .addLikes(user.userId, post.postId, layk)
-      .then((response) => {
-        console.log(response);
-        navigate(`/homepage/${user.userId}`);
-      })
+    likesService.addLikes(user.userId, post.postId, layk).then((response) => {
+      console.log(response);
+      navigate(`/homepage/${user.userId}`);
+    });
   };
 
   const handleSubmit = (event) => {
     event.preventDefault();
     onSubmit(likesForm);
   };
-/*
+  /*
   const [ok, setOk] = useState([])
 
   const isUserLiked = () => {
@@ -91,9 +85,13 @@ useEffect(() => {
   };
   */
 
-  return (
-    
+  const showToast = () => {
+    toast.success("Shared to your profile!", {
+      autoClose: 2000,
+    });
+  };
 
+  return (
     <div className="post">
       <div className="postWrapper">
         <div className="postTop">
@@ -131,8 +129,12 @@ useEffect(() => {
         </div>
         <div className="postBottom">
           <div className="postBottomLeft">
-            <StarIcon className="bottomLeftIcon" style={{ color: "#E1AD01" }} /><b>{likes.length}</b>
-            <div className="postLikeCounter" sx={{fontSize: "1%"}}><ChatOutlinedIcon  sx={{marginRight: "7px"}}/>{comment.length}</div>
+            <StarIcon className="bottomLeftIcon" style={{ color: "#E1AD01" }} />
+            <b>{likes.length}</b>
+            <div className="postLikeCounter" sx={{ fontSize: "1%" }}>
+              <ChatOutlinedIcon sx={{ marginRight: "7px" }} />
+              {comment.length}
+            </div>
           </div>
           <div className="postBottomRight">
             <div className="postCommentText">
@@ -143,15 +145,30 @@ useEffect(() => {
 
         <hr className="footerHr" />
         <div className="postBottomFooter">
-         <Grid>
-          <div className="postBottomFooterItem">
-            <Grid  component="form" onSubmit={handleSubmit}>
-              <IconButton type="submit" onClick={() => setActive(!isActive)} >
-                <div>{isActive ? <StarIcon sx={{color: '#E1AD01'}}/> : <StarBorderOutlinedIcon className="footerIcon"/> }</div>
-              </IconButton>
-            </Grid>
-            <div className="footerText">Appreciate</div>
-          </div>
+          <Grid>
+            <div className="postBottomFooterItem">
+              <Grid component="form" onSubmit={handleSubmit}>
+                <IconButton
+                  type="submit"
+                  onClick={showToast} /*onClick={() => setActive(!isActive)}*/
+                >
+                  <div>
+                    {isActive ? (
+                      <StarIcon sx={{ color: "#E1AD01" }} />
+                    ) : (
+                      <StarBorderOutlinedIcon className="footerIcon" />
+                    )}
+                  </div>
+                </IconButton>
+                <ToastContainer
+                  position={"top-center"}
+                  closeOnClick={true}
+                  closeButton={<p>x</p>}
+                  draggable={false}
+                />
+              </Grid>
+              <div className="footerText">Appreciate</div>
+            </div>
           </Grid>
 
           <Link
@@ -160,10 +177,7 @@ useEffect(() => {
           >
             <IconButton>
               <div className="postBottomFooterItem">
-                <div
-                  className="footerText"
-                  style={{ fontSize: "11px" }}
-                >
+                <div className="footerText" style={{ fontSize: "11px" }}>
                   See More...
                 </div>
               </div>
@@ -177,7 +191,6 @@ useEffect(() => {
       </div>
     </div>
   );
-
 };
 
 export default Post;

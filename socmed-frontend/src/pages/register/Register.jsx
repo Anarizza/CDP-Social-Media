@@ -7,6 +7,7 @@ import { useNavigate } from "react-router-dom";
 import { Close, EmojiEmotions, PermMedia } from "@mui/icons-material";
 import { borderRadius } from "@mui/system";
 import Joi from "joi";
+import Swal from "sweetalert2";
 import {
   Button,
   Card,
@@ -57,19 +58,16 @@ function Register() {
       .email({ minDomainSegments: 2, tlds: { allow: ["com", "net"] } })
       .required(),
 
-   
     brgy: Joi.string().min(3).max(500).allow("").optional(),
     city: Joi.string().min(3).max(500).allow("").required(),
     province: Joi.string().min(3).max(500).allow("").required(),
     dot: Joi.string().min(6).max(500).allow("").required(),
     password: Joi.string().min(8).max(15).required(),
-  
   });
-
 
   const [errors, setErrors] = useState({});
 
-  const handleChange = ({currentTarget: input}) => {
+  const handleChange = ({ currentTarget: input }) => {
     setUsers({
       ...users,
       [input.name]: input.value,
@@ -77,16 +75,16 @@ function Register() {
     });
 
     const { error } = schema
-    .extract(input.name)
-    .label(input.name)
-    .validate(input.value);
+      .extract(input.name)
+      .label(input.name)
+      .validate(input.value);
 
-  if (error) {
-    setErrors({ ...errors, [input.name]: error.details[0].message });
-  } else {
-    delete errors[input.name];
-    setErrors(errors);
-  }
+    if (error) {
+      setErrors({ ...errors, [input.name]: error.details[0].message });
+    } else {
+      delete errors[input.name];
+      setErrors(errors);
+    }
   };
 
   /*
@@ -97,16 +95,14 @@ function Register() {
   }, []);
   */
 
- 
-
   const isFormInvalid = () => {
     const result = schema.validate(users);
     console.log(result);
     return !!result.error;
   };
 
-
   //******************LOGIN HERE****************************** */
+
   const [loginDetails, setLoginDetails] = useState({
     username: "",
     password: "",
@@ -116,38 +112,53 @@ function Register() {
     setLoginDetails({
       ...loginDetails,
       [event.currentTarget.name]: event.currentTarget.value,
-     
     });
 
-    console.log("changes in user and pass: " + loginDetails)
+    console.log("changes in user and pass: " + loginDetails);
   };
 
- 
+  /*
+  const isExists = person2.find((user) => user.username === loginDetails.username && user.password === loginDetails.password)
+  console.log("hereeeeeee pola: "+isExists);
+  */
 
-const [person, setPerson ] = useState([])
-useEffect(() => {
-  userService.getUsersByUsername(loginDetails.username).then((response) => {
-    setPerson(response.data);
-    console.log(response.data);
-  });
-}, [loginDetails.username]); 
+  //console.log("hereeeeeee pola person2: "+person2);
+  //console.log("hereeeeeee pola person: "+person);
 
-const handleSubmitLogin = async (event) => {
-  event.preventDefault();
-  try{
-    if(person.username === loginDetails.username && person.password === loginDetails.password){
-      alert("Successfully login");
-      navigate(`/homepage/${person.userId}`);
-      return;
+  const [person, setPerson] = useState([]);
+  useEffect(() => {
+    userService.getUsersByUsername(loginDetails.username).then((response) => {
+      setPerson(response.data);
+      console.log(response.data);
+    });
+  }, [loginDetails.username]);
+
+  const handleSubmitLogin = async (event) => {
+    event.preventDefault();
+    try {
+      if (
+        person.username === loginDetails.username &&
+        person.password === loginDetails.password
+      ) {
+        Swal.fire({
+          title: "Success!",
+          text: "Successfully logged in!",
+          icon: "success",
+          confirmButtonColor: "#00796b",
+        });
+        navigate(`/homepage/${person.userId}`);
+        return;
       }
-       alert("Inavalid usernam/password!");
-
-  } catch(error){
-         console.log("API ERROR: " + error)
-      }
-
- 
-  }
+      Swal.fire({
+        title: "Error!",
+        text: "User does not exist!",
+        icon: "error",
+        confirmButtonColor: "#00796b",
+      });
+    } catch (error) {
+      console.log("API ERROR: " + error);
+    }
+  };
   //*********FOR PROFILE********************** */
 
   const [file, setFile] = useState(null);
@@ -168,62 +179,60 @@ const handleSubmitLogin = async (event) => {
           <Components.Form onSubmit={handleSubmit} autoComplete="off">
             {/* SignUp starts here... */}
             <Components.Title>Create Account</Components.Title>
-          
+
             {file && (
-            <div className="shareImgContainer" >
-              <img
-                src={URL.createObjectURL(file)}
-                alt=""
-                className="shareImg" 
-                style={{borderRadius: "50%", height: "60px", width: "60px", objectFit: "cover", marginBottom: "-20px"}}
-              />
-              <Close className="shareCancelImg" onClick={removeImage} />
-            </div>
-          )}
+              <div className="shareImgContainer">
+                <img
+                  src={URL.createObjectURL(file)}
+                  alt=""
+                  className="shareImg"
+                  style={{
+                    borderRadius: "50%",
+                    height: "60px",
+                    width: "60px",
+                    objectFit: "cover",
+                    marginBottom: "-20px",
+                  }}
+                />
+                <Close className="shareCancelImg" onClick={removeImage} />
+              </div>
+            )}
 
             <div className="profilePic">
               <div className="givenName">
-              <label htmlFor="file" className="shareOption">
-                <PermMedia
-                  className="shareIcon"
-                  style={{ color: "#00796b"}}
-                /> Choose profile
-                <div className="profie" sx={{color: 'black'}}>
-                <Components.NameInput
-                  id="file"
-                  //value={users.profilePic}
-                  type="file"
-                  accept=".png,.jpeg,.jpg"
-                  placeholder="Select profile"
-                  //onChange={handleChange}
-                  style={{ display: 'none' }}
-                  onChange={handleFile}
-                />
-                </div>
+                <label htmlFor="file" className="shareOption">
+                  <PermMedia
+                    className="shareIcon"
+                    style={{ color: "#00796b" }}
+                  />{" "}
+                  Choose profile
+                  <div className="profie" sx={{ color: "black" }}>
+                    <Components.NameInput
+                      id="file"
+                      //value={users.profilePic}
+                      type="file"
+                      accept=".png,.jpeg,.jpg"
+                      placeholder="Select profile"
+                      //onChange={handleChange}
+                      style={{ display: "none" }}
+                      onChange={handleFile}
+                    />
+                  </div>
                 </label>
               </div>
             </div>
 
-        
-           
-           
             <div className="nameContainer">
               <div className="givenName">
                 <Components.NameInput
-              
-                      helperText="mynameishelper"
-                      name="givenName"
-                      error={!!errors.name}
-                      value={users.givenName}
-                      type="text"
-                      placeholder="First Name"
-                      onChange={handleChange}
-                  
-
+                  helperText="mynameishelper"
+                  name="givenName"
+                  error={!!errors.name}
+                  value={users.givenName}
+                  type="text"
+                  placeholder="First Name"
+                  onChange={handleChange}
                 />
-              
-
-                
               </div>
 
               <div className="surName">
@@ -274,8 +283,6 @@ const handleSubmitLogin = async (event) => {
                 helperText={errors.name}
               />
             </div>
-
-        
 
             <div>
               {/* <Components.LabelBrgy>Barangay</Components.LabelBrgy>
@@ -330,29 +337,29 @@ const handleSubmitLogin = async (event) => {
               </div>
 
               <div>
-              <Components.SignUpInput
-                name="password"
-                value={users.password}
-                type="text"
-                placeholder="Password"
-                onChange={handleChange}
-              />
+                <Components.SignUpInput
+                  name="password"
+                  value={users.password}
+                  type="text"
+                  placeholder="Password"
+                  onChange={handleChange}
+                />
+              </div>
+
+              <div>
+                <Components.SignUpInput
+                  name="password"
+                  value={users.password}
+                  type="text"
+                  placeholder="Confirm Password"
+                  onChange={handleChange}
+                />
+              </div>
             </div>
 
-            <div>
-              <Components.SignUpInput
-                name="password"
-                value={users.password}
-                type="text"
-                placeholder="Confirm Password"
-                onChange={handleChange}
-              />
-            </div>
-
-
-            </div>
-
-            <Components.Button disabled={isFormInvalid()} type="submit">Sign Up</Components.Button>
+            <Components.Button disabled={isFormInvalid()} type="submit">
+              Sign Up
+            </Components.Button>
           </Components.Form>
         </Components.SignUpContainer>
 
@@ -379,9 +386,7 @@ const handleSubmitLogin = async (event) => {
               onChange={handleChangeLogin}
             />
 
-            <Components.Anchor href="#">
-           
-            </Components.Anchor>
+            <Components.Anchor href="#"></Components.Anchor>
             <Components.Button type="submit">Sign In</Components.Button>
           </Components.Form>
         </Components.SignInContainer>
