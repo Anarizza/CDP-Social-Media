@@ -114,9 +114,12 @@ const Post = ({ post }) => {
           <div className="postBottomLeft">
             <StarIcon className="bottomLeftIcon" style={{ color: "#E1AD01" }} />
             <b>{likes.length}</b>
-            <div className="postLikeCounter" sx={{ fontSize: "1%" }}>
-              <ChatOutlinedIcon sx={{ marginRight: "7px" }} />
-              {comment.length}
+            <div className="postBottomLeft">
+              <ChatOutlinedIcon
+                className="postBottomLeft"
+                sx={{ marginRight: "7px" }}
+              />
+              <b>{comment.length}</b>
             </div>
           </div>
           <div className="postBottomRight">
