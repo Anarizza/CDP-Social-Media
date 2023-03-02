@@ -7,6 +7,8 @@ import { useNavigate } from "react-router-dom";
 import { Close, PermMedia } from "@mui/icons-material";
 import Joi from "joi";
 import Swal from "sweetalert2";
+import FormHelperText from '@mui/material/FormHelperText';
+import { TextField } from "@mui/material";
 
 function Register() {
   const navigate = useNavigate();
@@ -41,8 +43,8 @@ function Register() {
 
   const schema = Joi.object({
     profilePic: Joi.string().allow("").optional(),
-    givenName: Joi.string().min(1).max(100).required(),
-    surname: Joi.string().min(1).max(20).required(),
+    givenName: Joi.string().min(3).max(100).required(),
+    surname: Joi.string().min(3).max(20).required(),
     username: Joi.string().min(3).max(20).required(),
     phoneNumber: Joi.string().min(6).max(15).allow("").optional(),
     email: Joi.string()
@@ -219,64 +221,76 @@ function Register() {
 
             <div className="nameContainer">
               <div className="givenName">
-                <Components.NameInput
-                  HelperText visibility="true"
-                  helperText="meeee"
+                <TextField
+                  helperText={errors.givenName}
                   name="givenName"
-                  error={!!errors.name}
+                  error={!!errors.givenName}
                   value={users.givenName}
                   type="text"
-                  placeholder="First Name"
+                  variant="standard"
+                  label="First Name"
                   onChange={handleChange}
+                 
                 />
+              
               </div>
 
               <div className="surName">
-                <Components.NameInput
+                <TextField
                   name="surname"
+                  helperText={errors.surname}
+                  error={!!errors.surname}
+                  variant="standard"
                   value={users.surname}
                   type="text"
-                  placeholder="Last Name"
+                  label="Last Name"
                   onChange={handleChange}
-                  error={!!errors.name}
-                  helperText={errors.name}
+               
+                
                 />
               </div>
             </div>
 
             <div>
-              <Components.SignUpInput
+              <TextField
+                helperText={errors.username}
+                error={!!errors.username}
+                variant="standard"
                 name="username"
                 value={users.username}
                 type="text"
-                placeholder="username"
+                label="username"
                 onChange={handleChange}
-                error={!!errors.name}
-                helperText={errors.name}
+                fullWidth
+              
               />
             </div>
 
             <div>
-              <Components.SignUpInput
+              <TextField
                 name="phoneNumber"
+                helperText={errors.phoneNumber}
+                error={!!errors.phoneNumber}
                 value={users.phoneNumber}
                 type="text"
+                variant="standard"
                 onChange={handleChange}
-                placeholder="Phone Number(+63)"
-                error={!!errors.name}
-                helperText={errors.name}
+                label="Phone Number(+63)"
+                fullWidth
               />
             </div>
 
             <div>
-              <Components.SignUpInput
+              <TextField
                 name="email"
                 value={users.email}
                 type="text"
-                placeholder="Email"
+                variant="standard"
+                label="Email"
                 onChange={handleChange}
-                error={!!errors.name}
-                helperText={errors.name}
+                error={!!errors.email}
+                helperText={errors.email}
+                fullWidth
               />
             </div>
 
@@ -284,36 +298,42 @@ function Register() {
               {/* <Components.LabelBrgy>Barangay</Components.LabelBrgy>
             <Components.LabelProvince>Province</Components.LabelProvince>
             <Components.LabelCity>City</Components.LabelCity> */}
-              <Components.SignUpInput
+              <TextField
                 name="brgy"
                 value={users.brgy}
                 type="text"
-                placeholder="Brgy"
+                variant="standard"
+                label="Brgy"
                 onChange={handleChange}
-                error={!!errors.name}
-                helperText={errors.name}
+                error={!!errors.brgy}
+                helperText={errors.brgy}
+                fullWidth
               />
             </div>
             <div>
-              <Components.SignUpInput
+              <TextField
                 name="city"
                 value={users.city}
                 type="text"
-                placeholder="City"
+                variant="standard"
+                label="City"
                 onChange={handleChange}
-                error={!!errors.name}
-                helperText={errors.name}
+                error={!!errors.city}
+                helperText={errors.city}
+                fullWidth
               />
             </div>
             <div>
-              <Components.SignUpInput
+              <TextField
                 name="province"
                 value={users.province}
                 type="text"
-                placeholder="Province"
+                variant="standard"
+                label="Province"
                 onChange={handleChange}
-                error={!!errors.name}
-                helperText={errors.name}
+                error={!!errors.province}
+                helperText={errors.province}
+                fullWidth
               />
             </div>
 
@@ -323,32 +343,45 @@ function Register() {
             </div> */}
 
               <div className="bDateInput">
-                <Components.SignUpBDate
+                <TextField
                   name="dot"
                   value={users.dot}
                   type="date"
-                  placeholder="Birthdate"
+                  variant="standard"
+                  label="Birthdate"
                   onChange={handleChange}
+                  error={!!errors.dot}
+                  InputLabelProps={{shrink: true}}
+                  helperText={errors.dot}
+                  fullWidth
                 />
               </div>
 
               <div>
-                <Components.SignUpInput
+                <TextField
                   name="password"
                   value={users.password}
                   type="password"
-                  placeholder="Password"
+                  variant="standard"
+                  label="Password"
                   onChange={handleChange}
+                  error={!!errors.password}
+                  helperText={errors.password}
+                  fullWidth
                 />
               </div>
 
               <div>
-                <Components.SignUpInput
+                <TextField
                   name="confirmePassword"
                   value={users.confirmePassword}
                   type="password"
-                  placeholder="Confirm Password"
+                  variant="standard"
+                  label="Confirm Password"
                   onChange={handleChange}
+                  error={!!errors.confirmePassword}
+                  helperText={errors.confirmePassword}
+                  fullWidth
                 />
               </div>
 
