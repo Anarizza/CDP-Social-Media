@@ -38,6 +38,12 @@ function Register({setIsLoggedIn}) {
 
   const handleSubmit = (event) => {
     event.preventDefault();
+    Swal.fire({
+      title: "Success!",
+      text: "ACcount created!!",
+      icon: "success",
+      confirmButtonColor: "#00796b",
+    });
     onSubmit(users);
   };
 
