@@ -14,9 +14,10 @@ const ProfileRightBar = () => {
       console.log(response.data);
     });
   }, []);
+
   return (
     <div className="profileRightBar">
-      <div className="profileRightBarHeading">
+      {/* <div className="profileRightBarHeading">
         <div className="profileRightBarTitle"> User Information</div>
         <Link to="/profile/edit" style={{ textDecoration: "none" }}>
           <div className="editButton">Edit Profile</div>
@@ -36,7 +37,7 @@ const ProfileRightBar = () => {
           <div className="profileRightBarInfoKey">City: </div>
           <div className="profileRightBarInfoValue">{user.city}</div>
         </div>
-      </div>
+      </div> */}
 
       <h4 className="profileRightBarTitle">People you may know</h4>
       <div className="profileRightBarFollowings">

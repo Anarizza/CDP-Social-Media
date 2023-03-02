@@ -52,7 +52,7 @@ const Navbar = () => {
         <Toolbar disableGutters>
           <div className="bars">
             <img
-              src="../../assets/logo.png"
+              src="../../../assets/logo.png"
               alt="logo"
               width="40px"
               height="40px"

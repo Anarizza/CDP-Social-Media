@@ -20,7 +20,7 @@ import FormControl from "@mui/material/FormControl";
 import Visibility from "@mui/icons-material/Visibility";
 import VisibilityOff from "@mui/icons-material/VisibilityOff";
 
-function Register() {
+function Register({setIsLoggedIn}) {
   const navigate = useNavigate();
   const [signIn, toggle] = useState(true);
 
@@ -57,6 +57,12 @@ function Register() {
 
   const handleSubmit = (event) => {
     event.preventDefault();
+    Swal.fire({
+      title: "Success!",
+      text: "ACcount created!!",
+      icon: "success",
+      confirmButtonColor: "#00796b",
+    });
     onSubmit(users);
   };
 
@@ -169,6 +175,7 @@ function Register() {
         person.username === loginDetails.username &&
         person.password === loginDetails.password
       ) {
+        setIsLoggedIn(false);
         Swal.fire({
           title: "Success!",
           text: "Successfully logged in!",

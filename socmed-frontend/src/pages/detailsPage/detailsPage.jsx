@@ -276,10 +276,7 @@ const DetailsPage = () => {
               <ChatBubbleOutline className="footerIcon" />
               <span className="footerText">Comment</span>
             </div>
-            <div className="postBottomFooterItem">
-              <ShareOutlined className="footerIcon" />
-              <div className="footerText">Share</div>
-            </div>
+  
           </div>
         </div>
         {commentBoxVisible && (

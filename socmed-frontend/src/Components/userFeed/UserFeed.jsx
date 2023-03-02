@@ -23,7 +23,7 @@ const UserFeed = () => {
       <div className="feedWrapper">
         {/* <Stories /> */}
         <Share />
-        {posts.map((p) => (
+        {[...posts].reverse().map((p) => (
           <UserPost key={p.id} post={p} />
         ))}
       </div>
