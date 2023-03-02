@@ -16,6 +16,9 @@ import MenuItem from "@mui/material/MenuItem";
 import * as postService from "../../Service/post";
 import * as userService from "../../Service/users";
 import { useParams } from "react-router-dom";
+import Brightness4Icon from "@mui/icons-material/Brightness4";
+import ExitToAppOutlinedIcon from "@mui/icons-material/ExitToAppOutlined";
+import StarBorderPurple500SharpIcon from "@mui/icons-material/StarBorderPurple500Sharp";
 
 const NavBar = () => {
   const [anchorElNav, setAnchorElNav] = React.useState(null);
@@ -148,6 +151,18 @@ const NavBar = () => {
                   <HomeIcon /> Home
                 </MenuItem>
               </Link>
+               <MenuItem onClick={handleCloseNavMenu}>
+                  <Brightness4Icon /> THEME
+                </MenuItem>
+                <MenuItem onClick={handleCloseNavMenu}>
+                  <StarBorderPurple500SharpIcon /> APPRECIATE
+                </MenuItem>
+                <Link to="/" style={{textDecoration: "none", color: "black"}}>
+                <MenuItem onClick={handleCloseNavMenu}>
+                  <ExitToAppOutlinedIcon /> LOGOUT
+                </MenuItem>
+                </Link>
+             
               {/* <MenuItem onClick={handleCloseNavMenu}>
                 <NotificationsIcon /> Notification
               </MenuItem>
@@ -186,7 +201,7 @@ const NavBar = () => {
             </Button> */}
 
             <Link to={`/homepage/${user.userId}`}>
-              <Button sx={{ my: -1, color: "white", display: "block" }}>
+              <Button sx={{ my: -1,  color: "white", display: "block" }}>
                 <HomeIcon fontSize="medium" />
               </Button>
             </Link>
