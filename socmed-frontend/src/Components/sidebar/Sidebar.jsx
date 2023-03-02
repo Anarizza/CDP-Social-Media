@@ -68,7 +68,7 @@ const Sidebar = () => {
         <div onClick={handleClick}>
           <MenuLink Icon={<Brightness4Icon />} text="Theme" />
         </div>
-        <Link to="/" style={{textDecoration: "none", color: "black"}}>
+        <Link to="/" style={{textDecoration: "none", color: theme === "light" ? "black" : "white"}}>
         <MenuLink Icon={<ExitToAppOutlinedIcon />} text="Logout" />
         </Link>
 
