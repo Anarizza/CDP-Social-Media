@@ -79,7 +79,7 @@ function Register({setIsLoggedIn}) {
     brgy: Joi.string().min(3).max(500).allow("").optional(),
     city: Joi.string().min(3).max(500).allow("").required(),
     province: Joi.string().min(3).max(500).allow("").required(),
-    dot: Joi.string().min(6).max(500).allow("").required(),
+    dot: Joi.date().max('1-1-2005').iso(),
     password: Joi.string()
       .pattern(RegExp("^[a-zA-Z0-9]"))
       .min(8)
