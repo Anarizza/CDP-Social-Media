@@ -46,7 +46,6 @@ const Navbar = () => {
     });
   }, [params.id]);
 
-
   return (
     <AppBar position="sticky" sx={{ background: "#00796b", height: "50px" }}>
       <Container maxWidth="xl">
@@ -168,10 +167,10 @@ const Navbar = () => {
               </Button>
             </Link> */}
             <Link to={`/profile/${user.userId}`}>
-            <Button sx={{ my: -1, color: "white", display: "block" }}>
-              <AccountCircleIcon fontSize="medium" />
-            </Button>
-          </Link>
+              <Button sx={{ my: -1, color: "white", display: "block" }}>
+                <img src={user.profilePic} alt="" className="navbarImg" />
+              </Button>
+            </Link>
 
             {/* <Button sx={{ my: -1, color: "white", display: "block" }}>
               <NotificationsIcon fontSize="medium" />

@@ -173,9 +173,9 @@ const NavBar = () => {
             </Link> */}
             <Link to={`/profile/${user.userId}`}>
               <Button sx={{ my: -1, color: "white", display: "block" }}>
-                <AccountCircleIcon fontSize="medium" />
+                <img src={user.profilePic} alt="" className="navbarImg" />
               </Button>
-            </Link> 
+            </Link>
 
             {/* <Button sx={{ my: -1, color: "white", display: "block" }}>
               <NotificationsIcon fontSize="medium" />

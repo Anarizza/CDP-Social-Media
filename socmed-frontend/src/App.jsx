@@ -16,7 +16,6 @@ import About from "./pages/footer/About";
 import PrivacyPolicy from "./pages/footer/PrivacyPolicy";
 import TermsOfServices from "./pages/footer/TermsOfServices";
 
-
 const App = () => {
   return (
     <>
@@ -30,7 +29,7 @@ const App = () => {
           <Route path="/post/id/:id" element={<DetailsPageConnector />} />
           <Route path="/appreciate/:id" element={<LikesConnector />} />
           <Route path="/post/update/status/:id" element={<EditPost />} />
-          <Route path="/profile/friend/:id" element={<FriendProfile />} />
+          <Route path="/profile/friend/:id/:fid" element={<FriendProfile />} />
           <Route path="/profile/edit/" element={<EditProfile />} />
           <Route path="/footer" element={<Footer />} />
           <Route path="/about" element={<About />} />

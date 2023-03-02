@@ -7,10 +7,7 @@ import SendIcon from "@mui/icons-material/Send";
 import * as postService from "../../Service/post";
 import * as userService from "../../Service/users";
 import Joi from "joi";
-import {
-  Button,
-  Grid,
-} from "@mui/material";
+import { Button, Grid } from "@mui/material";
 import { useNavigate } from "react-router-dom";
 import { useParams } from "react-router-dom";
 
@@ -27,7 +24,8 @@ const Share = () => {
   const onSubmit = (post) => {
     postService.addPost(params.id, post).then((response) => {
       console.log(response);
-      navigate(`/homepage/${params.id}`);
+      navigate(`/profile/${params.id}`);
+      // navigate(0);
     });
   };
 
