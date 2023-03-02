@@ -12,6 +12,10 @@ import EditPost from "./Components/editPost/EditPost";
 import FriendProfile from "./pages/friendProfile/FriendProfile";
 import EditProfile from "./pages/editProfile/EditProfile";
 import Footer from "./Components/footer/Footer";
+import About from "./pages/footer/About";
+import PrivacyPolicy from "./pages/footer/PrivacyPolicy";
+import TermsOfServices from "./pages/footer/TermsOfServices";
+
 
 const App = () => {
   return (
@@ -29,6 +33,9 @@ const App = () => {
           <Route path="/profile/friend/:id" element={<FriendProfile />} />
           <Route path="/profile/edit/" element={<EditProfile />} />
           <Route path="/footer" element={<Footer />} />
+          <Route path="/about" element={<About />} />
+          <Route path="/privacypolicy" element={<PrivacyPolicy />} />
+          <Route path="/termsofservices" element={<TermsOfServices />} />
         </Routes>
       </CssBaseline>
     </>

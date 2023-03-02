@@ -42,18 +42,6 @@ export const BottomRow = styled.div`
 	font-size: 12px;
 `;
 
-export const FooterLink = styled.a`
-	color: #fff;
-	margin-bottom: 20px;
-	font-size: 12px;
-	text-decoration: none;
-
-	&:hover {
-		color: black;
-		transition: 200ms ease-in;
-	}
-`;
-
 export const Heading = styled.p`
 	font-size: 18px;
 	color: #fff;

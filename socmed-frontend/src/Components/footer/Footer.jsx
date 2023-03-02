@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 import Typography from "@mui/material/Typography";
 import {
   Box,
@@ -7,7 +8,6 @@ import {
   BottomRow,
   Column,
   ColumnIcon,
-  FooterLink,
   Heading,
   AppName,
 } from "./FooterStyles";
@@ -20,18 +20,45 @@ const Footer = () => {
       <Row>
       <Column>
         <Heading>Office</Heading>
-        <FooterLink href="#">Ortigas Center, Pasig City, Philippines</FooterLink>
-        <FooterLink href="#">timeline@outlook.com</FooterLink>
+        <Link
+          style={{ textDecoration: "none", color: "white", fontSize: "12px" }}
+        >
+          Ortigas Center, Pasig City, Philippines
+        </Link>
+        <Link
+          style={{ textDecoration: "none", color: "white", fontSize: "12px" }}
+        >
+          timeline@outlook.com
+        </Link>
       </Column>
       <Column>
         <Heading>Links</Heading>
-        <FooterLink href="#">About Us</FooterLink>
-        <FooterLink href="#">Contacts</FooterLink>
+        <Link
+          to='/about'
+          style={{ textDecoration: "none", color: "white", fontSize: "12px" }}
+        >
+          About Us
+        </Link>
+        <Link
+          style={{ textDecoration: "none", color: "white", fontSize: "12px" }}
+        >
+          Contacts
+        </Link>
       </Column>
       <Column>
         <Heading>Legal</Heading>
-        <FooterLink href="#">Terms and Conditions</FooterLink>
-        <FooterLink href="#">Privacy Policy</FooterLink>
+        <Link
+          to='/termsofservices'
+          style={{ textDecoration: "none", color: "white", fontSize: "12px" }}
+        >
+          Terms and Conditions
+        </Link>
+        <Link
+          to='/privacypolicy'
+          style={{ textDecoration: "none", color: "white", fontSize: "12px" }}
+        >
+          Privacy Policy
+        </Link>
       </Column>
       <Column>
       <AppName>
