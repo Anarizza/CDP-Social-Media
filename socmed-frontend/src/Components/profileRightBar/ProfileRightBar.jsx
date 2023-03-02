@@ -1,5 +1,4 @@
 import React from "react";
-import { Link } from "react-router-dom";
 import "./ProfileRightBar.css";
 import * as userService from "../../Service/users";
 import { useState, useEffect } from "react";

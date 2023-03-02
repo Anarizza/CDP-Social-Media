@@ -1,9 +1,6 @@
 import React, { useState, useEffect } from "react";
-import SearchIcon from "@mui/icons-material/Search";
-import NotificationsIcon from "@mui/icons-material/Notifications";
 import { Link } from "react-router-dom";
 import HomeIcon from "@mui/icons-material/Home";
-import ChatIcon from "@mui/icons-material/Chat";
 import "./Navbar.css";
 import AccountCircleIcon from "@mui/icons-material/AccountCircle";
 import AppBar from "@mui/material/AppBar";
@@ -49,18 +46,6 @@ const Navbar = () => {
     });
   }, [params.id]);
 
-  // const [posts, setPosts] = useState([]);
-  // const [searchResults, setSearchResults] = useState([]);
-
-  // const [filterVal, setFilterVal] = useState("");
-
-  // useEffect(() => {
-  //   postService.getPosts().then((response) => {
-  //     setPosts(response.data);
-  //     setSearchResults(response.data);
-  //     console.log(response.data);
-  //   });
-  // }, []);
 
   return (
     <AppBar position="sticky" sx={{ background: "#00796b", height: "50px" }}>
@@ -93,11 +78,11 @@ const Navbar = () => {
             {" "}
             <div className="imeline">IMELINE</div>
           </Typography>
-          <div className="navbarCenter">
+          {/* <div className="navbarCenter">
             <div className="searchBar">
               <SearchIcon className="searchIcon" sx={{ display: "block" }} />
             </div>
-          </div>
+          </div> */}
 
           <Box
             sx={{
@@ -159,12 +144,12 @@ const Navbar = () => {
                   <HomeIcon /> Home
                 </MenuItem>
               </Link>
-              <MenuItem onClick={handleCloseNavMenu}>
+              {/* <MenuItem onClick={handleCloseNavMenu}>
                 <NotificationsIcon /> Notification
               </MenuItem>
               <MenuItem onClick={handleCloseNavMenu}>
                 <ChatIcon /> Messages
-              </MenuItem>
+              </MenuItem> */}
             </Menu>
           </Box>
 
@@ -177,24 +162,24 @@ const Navbar = () => {
               mb: 1,
             }}
           >
-            <Link to={`/profile/${user.userId}`}>
+            {/* <Link to={`/profile/${user.userId}`}>
               <Button sx={{ my: -1, color: "white", display: "block" }}>
                 <img src={user.profilePic} alt="" className="navbarImg" />
               </Button>
-            </Link>
-            {/* <Link to="/profile">
+            </Link> */}
+            <Link to={`/profile/${user.userId}`}>
             <Button sx={{ my: -1, color: "white", display: "block" }}>
               <AccountCircleIcon fontSize="medium" />
             </Button>
-          </Link> */}
+          </Link>
 
-            <Button sx={{ my: -1, color: "white", display: "block" }}>
+            {/* <Button sx={{ my: -1, color: "white", display: "block" }}>
               <NotificationsIcon fontSize="medium" />
             </Button>
 
             <Button sx={{ my: -1, color: "white", display: "block" }}>
               <ChatIcon fontSize="medium" />
-            </Button>
+            </Button> */}
 
             <Link to={`/homepage/${user.userId}`}>
               <Button sx={{ my: -1, color: "white", display: "block" }}>

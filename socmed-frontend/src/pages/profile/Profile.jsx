@@ -1,11 +1,8 @@
 import React from "react";
-
 import "./Profile.css";
-import Feed from "../../Components/feed/Feed";
 import NavBar from "../../Components/navbar/NavBar";
 import Rightbar from "../../Components/rightbar/Rightbar";
 import Sidebar from "../../Components/sidebar/Sidebar";
-import { Users } from "../../data/data";
 import * as userService from "../../Service/users";
 import { useState, useEffect } from "react";
 import UserFeed from "../../Components/userFeed/UserFeed";
@@ -19,13 +16,13 @@ const Profile = () => {
       setUsers(response.data);
       console.log(response.data);
     });
-  }, []);
+  }, [params.id]);
 
   const fullname = user.givenName + " " + user.surname;
 
   return (
-    <div className="profile" >
-                  <NavBar />
+    <div className="profile">
+      <NavBar />
 
       <div className="profileWrapper">
         <Sidebar />

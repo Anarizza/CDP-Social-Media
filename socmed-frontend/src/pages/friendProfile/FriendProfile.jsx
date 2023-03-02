@@ -9,10 +9,10 @@ import UserFeedFriends from "../../Components/userFeedFriends/UserFeedFriends";
 import { useParams } from "react-router-dom";
 import Navbar from "../navbar/Navbar";
 const FriendProfile = () => {
-  const { id } = useParams();
+  const { fid } = useParams();
   const [user, setUsers] = useState([]);
   useEffect(() => {
-    userService.getUsersById(id).then((response) => {
+    userService.getUsersById(fid).then((response) => {
       setUsers(response.data);
       console.log(response.data);
     });

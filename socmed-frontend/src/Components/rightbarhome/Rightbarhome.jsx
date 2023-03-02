@@ -1,7 +1,5 @@
 import React from "react";
-import Online from "../online/Online";
 import "./Rightbarhome.css";
-import { Usersonline } from "../../data/data";
 import { Link } from "@mui/material";
 const Rightbarhome = () => {
   return (

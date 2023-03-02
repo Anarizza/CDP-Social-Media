@@ -8,9 +8,9 @@ import UserPost from "../userPost/UserPost";
 import { useParams } from "react-router-dom";
 const UserFeed = () => {
   const [posts, setPosts] = useState([]);
-  const { id } = useParams();
+  const { fid } = useParams();
   useEffect(() => {
-    postService.selectPostByUsersUserId(id).then((response) => {
+    postService.selectPostByUsersUserId(fid).then((response) => {
       setPosts(response.data);
       console.log(response.data);
     });

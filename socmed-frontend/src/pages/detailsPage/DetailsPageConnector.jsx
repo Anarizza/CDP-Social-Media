@@ -1,8 +1,6 @@
-import { Card, CardContent } from "@mui/material";
 import React from "react";
 import DetailsPage from "./detailsPage";
 import Sidebar from "../../Components/sidebar/Sidebar";
-import Rightbar from "../../Components/rightbar/Rightbar";
 import "./DetailsPageConnector.css";
 import Navbar from "../navbar/Navbar";
 const DetailsPageConnector = () => {

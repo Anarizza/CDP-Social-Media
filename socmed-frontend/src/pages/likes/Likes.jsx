@@ -1,31 +1,15 @@
-import MoreVertIcon from "@mui/icons-material/MoreVert";
-import Sidebar from "../../Components/sidebar/Sidebar";
 import "./Likes.css";
-import {
-  Card,
-  CardContent,
-  CardHeader,
-  Grid,
-  IconButton,
-  Menu,
-  MenuItem,
-  Typography,
-} from "@mui/material";
 import React, { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
-import NavBar from "../../Components/navbar/NavBar";
 import * as postService from "../../Service/post";
 import { Link } from "react-router-dom";
 import ModalImage from "react-modal-image";
 import {
-  ChatBubbleOutline,
-  MoreVert,
   Favorite,
   ThumbUp,
   ThumbUpAltOutlined,
   ShareOutlined,
 } from "@mui/icons-material";
-
 const Likes = () => {
   const params = useParams();
 
@@ -61,7 +45,7 @@ const Likes = () => {
             <div className="postWrapper">
               <div className="postTop">
                 <div className="postTopLeft">
-                  <Link to="/profile/userId">
+                  <Link to={`/profile/${p.post.users.userId}`}>
                     <img
                       src={p.post.users.profilePic}
                       alt=""

@@ -3,10 +3,6 @@ import "./Post.css";
 import { IconButton, MenuItem, Menu } from "@mui/material";
 import {
   MoreVert,
-  Favorite,
-  ThumbUp,
-  ThumbUpAltOutlined,
-  ShareOutlined,
 } from "@mui/icons-material";
 import { Link } from "react-router-dom";
 import ModalImage from "react-modal-image";
@@ -14,10 +10,8 @@ import * as postService from "../../Service/post";
 import * as userService from "../../Service/users";
 import ScreenRotationAltIcon from "@mui/icons-material/ScreenRotationAlt";
 import StarIcon from "@mui/icons-material/Star";
-import StarBorderPurple500SharpIcon from "@mui/icons-material/StarBorderPurple500Sharp";
 import * as likesService from "../../Service/likes";
 import * as commentService from "../../Service/comment";
-import { useParams } from "react-router-dom";
 import ChatOutlinedIcon from "@mui/icons-material/ChatOutlined";
 import StarBorderOutlinedIcon from "@mui/icons-material/StarBorderOutlined";
 import Grid from "@mui/material/Grid";
@@ -25,16 +19,6 @@ import { useNavigate } from "react-router-dom";
 import Swal from "sweetalert2";
 
 const UserPost = ({ post }) => {
-  // const params = useParams();
-
-  // const [comment, setComment] = useState([]);
-
-  // useEffect(() => {
-  //   commentService.getCommentByPostPostId(params.id).then((response) => {
-  //     setComment(response.data);
-  //     console.log(response.data); // hazeeeell
-  //   });
-  // }, [params.id]);
 
   const [anchorEl, setAnchorEl] = useState(null);
   const [likes, setLikes] = useState([]);
@@ -54,7 +38,7 @@ const UserPost = ({ post }) => {
       setComment(response.data);
       console.log(response.data);
     });
-  }, []);
+  }, [post.postId]);
 
   //------------THIS IS FOR LIKES BUTTON--------------------
   //sample palang tong user since wala pang login
@@ -74,14 +58,6 @@ const UserPost = ({ post }) => {
     createdDate: "none",
   });
 
-  /*
-  useEffect(() => {
-    likestService.addLikes(likes2, post.postId, user.userId).then((response) => {
-      setLikes2(response.data);
-      console.log(response.data);
-    });
-  }, []);
-  */
 
   const navigate = useNavigate();
 
@@ -96,15 +72,6 @@ const UserPost = ({ post }) => {
     event.preventDefault();
     onSubmit(likesForm);
   };
-  /*
-  const [ok, setOk] = useState([])
-
-  const isUserLiked = () => {
-    if (user.userId === post.users.userId){
-
-    }
-  };
-  */
 
   const handleDeletePost = async (postId) => {
     if (postId) {

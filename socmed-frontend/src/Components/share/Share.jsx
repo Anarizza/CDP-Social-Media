@@ -1,20 +1,15 @@
 import React, { useState, useEffect } from "react";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import { Close, EmojiEmotions, PermMedia } from "@mui/icons-material";
+import { Close, PermMedia } from "@mui/icons-material";
 import "./Share.css";
 import SendIcon from "@mui/icons-material/Send";
 import * as postService from "../../Service/post";
 import * as userService from "../../Service/users";
-import Joi, { optional } from "joi";
+import Joi from "joi";
 import {
   Button,
-  Card,
-  CardActions,
-  CardContent,
-  CardHeader,
   Grid,
-  TextField,
 } from "@mui/material";
 import { useNavigate } from "react-router-dom";
 import { useParams } from "react-router-dom";
@@ -32,7 +27,7 @@ const Share = () => {
   const onSubmit = (post) => {
     postService.addPost(params.id, post).then((response) => {
       console.log(response);
-      navigate("/");
+      navigate(`/homepage/${params.id}`);
     });
   };
 

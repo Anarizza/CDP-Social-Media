@@ -1,6 +1,7 @@
 .rightbarhome .birthdayContainer {
     display: flex;
     align-items: center;
+   
   }
   .birthdayImg {
     width: 300px;
