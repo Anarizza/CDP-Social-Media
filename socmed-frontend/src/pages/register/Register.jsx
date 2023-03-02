@@ -7,12 +7,31 @@ import { useNavigate } from "react-router-dom";
 import { Close, PermMedia } from "@mui/icons-material";
 import Joi from "joi";
 import Swal from "sweetalert2";
-import FormHelperText from '@mui/material/FormHelperText';
 import { TextField } from "@mui/material";
+import Box from "@mui/material/Box";
+import IconButton from "@mui/material/IconButton";
+import Input from "@mui/material/Input";
+import FilledInput from "@mui/material/FilledInput";
+import OutlinedInput from "@mui/material/OutlinedInput";
+import InputLabel from "@mui/material/InputLabel";
+import InputAdornment from "@mui/material/InputAdornment";
+import FormHelperText from "@mui/material/FormHelperText";
+import FormControl from "@mui/material/FormControl";
+import Visibility from "@mui/icons-material/Visibility";
+import VisibilityOff from "@mui/icons-material/VisibilityOff";
 
 function Register() {
   const navigate = useNavigate();
   const [signIn, toggle] = useState(true);
+
+  //showPassword
+  const [showPassword, setShowPassword] = React.useState(false);
+
+  const handleClickShowPassword = () => setShowPassword((show) => !show);
+
+  const handleMouseDownPassword = (event) => {
+    event.preventDefault();
+  };
 
   const [users, setUsers] = useState({
     profilePic: "",
@@ -55,7 +74,11 @@ function Register() {
     city: Joi.string().min(3).max(500).allow("").required(),
     province: Joi.string().min(3).max(500).allow("").required(),
     dot: Joi.string().min(6).max(500).allow("").required(),
-    password: Joi.string().pattern(RegExp("^[a-zA-Z0-9]")).min(8).max(15).required(),
+    password: Joi.string()
+      .pattern(RegExp("^[a-zA-Z0-9]"))
+      .min(8)
+      .max(15)
+      .required(),
     confirmePassword: Joi.valid(users.password).messages({
       "any.only": "The two passwords do not match",
       "any.required": "Please re-enter the password",
@@ -94,8 +117,17 @@ function Register() {
 
   const isFormInvalid = () => {
     const result = schema.validate(users);
+    // if (!!result) {
+    //   Swal.fire({
+    //     title: "Success!",
+    //     text: "Successfully Registered!",
+    //     icon: "success",
+    //     confirmButtonColor: "#00796b",
+    //   });
+    // } else {
     console.log(result);
     return !!result.error;
+    //}
   };
 
   //******************LOGIN HERE****************************** */
@@ -213,6 +245,7 @@ function Register() {
                       //onChange={handleChange}
                       style={{ display: "none" }}
                       onChange={handleFile}
+                      color="secondary"
                     />
                   </div>
                 </label>
@@ -227,12 +260,18 @@ function Register() {
                   error={!!errors.givenName}
                   value={users.givenName}
                   type="text"
-                  variant="standard"
                   label="First Name"
                   onChange={handleChange}
-                 
+                  color="success"
+                  size="small"
+                  variant="outlined"
+                  sx={{
+                    width: { sm: 100, md: 190 },
+
+                    mb: 2,
+                  }}
+                  required
                 />
-              
               </div>
 
               <div className="surName">
@@ -240,44 +279,66 @@ function Register() {
                   name="surname"
                   helperText={errors.surname}
                   error={!!errors.surname}
-                  variant="standard"
                   value={users.surname}
+                  color="success"
+                  size="small"
+                  variant="outlined"
                   type="text"
                   label="Last Name"
                   onChange={handleChange}
-               
-                
+                  sx={{
+                    width: { sm: 100, md: 190 },
+
+                    mb: 2,
+                  }}
+                  required
                 />
               </div>
             </div>
 
-            <div>
-              <TextField
-                helperText={errors.username}
-                error={!!errors.username}
-                variant="standard"
-                name="username"
-                value={users.username}
-                type="text"
-                label="username"
-                onChange={handleChange}
-                fullWidth
-              
-              />
-            </div>
+            <div className="uNamePhoneContainer">
+              <div className="userName">
+                <TextField
+                  helperText={errors.username}
+                  error={!!errors.username}
+                  name="username"
+                  value={users.username}
+                  type="text"
+                  label="username"
+                  onChange={handleChange}
+                  //fullWidth
+                  color="success"
+                  size="small"
+                  variant="outlined"
+                  sx={{
+                    width: { sm: 100, md: 190 },
 
-            <div>
-              <TextField
-                name="phoneNumber"
-                helperText={errors.phoneNumber}
-                error={!!errors.phoneNumber}
-                value={users.phoneNumber}
-                type="text"
-                variant="standard"
-                onChange={handleChange}
-                label="Phone Number(+63)"
-                fullWidth
-              />
+                    mb: 2,
+                  }}
+                  required
+                />
+              </div>
+
+              <div className="phone">
+                <TextField
+                  name="phoneNumber"
+                  helperText={errors.phoneNumber}
+                  error={!!errors.phoneNumber}
+                  value={users.phoneNumber}
+                  type="text"
+                  onChange={handleChange}
+                  label="Phone Number(+63)"
+                  //fullWidth
+                  color="success"
+                  size="small"
+                  variant="outlined"
+                  sx={{
+                    width: { sm: 100, md: 190 },
+
+                    mb: 2,
+                  }}
+                />
+              </div>
             </div>
 
             <div>
@@ -285,108 +346,205 @@ function Register() {
                 name="email"
                 value={users.email}
                 type="text"
-                variant="standard"
                 label="Email"
                 onChange={handleChange}
                 error={!!errors.email}
                 helperText={errors.email}
                 fullWidth
+                variant="outlined"
+                color="success"
+                size="small"
+                sx={{
+                  width: { sm: 200, md: 388 },
+
+                  mb: 2,
+                }}
+                InputLabelProps={{ style: { fontSize: 15 } }}
+                required
               />
             </div>
 
-            <div>
-              {/* <Components.LabelBrgy>Barangay</Components.LabelBrgy>
-            <Components.LabelProvince>Province</Components.LabelProvince>
-            <Components.LabelCity>City</Components.LabelCity> */}
-              <TextField
-                name="brgy"
-                value={users.brgy}
-                type="text"
-                variant="standard"
-                label="Brgy"
-                onChange={handleChange}
-                error={!!errors.brgy}
-                helperText={errors.brgy}
-                fullWidth
-              />
-            </div>
-            <div>
-              <TextField
-                name="city"
-                value={users.city}
-                type="text"
-                variant="standard"
-                label="City"
-                onChange={handleChange}
-                error={!!errors.city}
-                helperText={errors.city}
-                fullWidth
-              />
-            </div>
-            <div>
-              <TextField
-                name="province"
-                value={users.province}
-                type="text"
-                variant="standard"
-                label="Province"
-                onChange={handleChange}
-                error={!!errors.province}
-                helperText={errors.province}
-                fullWidth
-              />
-            </div>
-
-            <div className="bDateContainer">
-              {/* <div className="bDateLabel">
-              <Components.LabelBDate>Birthdate</Components.LabelBDate>
-            </div> */}
-
-              <div className="bDateInput">
+            <div className="brgyCityContainer">
+              <div className="brgy">
                 <TextField
-                  name="dot"
-                  value={users.dot}
-                  type="date"
-                  variant="standard"
-                  label="Birthdate"
+                  name="brgy"
+                  value={users.brgy}
+                  type="text"
+                  label="Brgy"
                   onChange={handleChange}
-                  error={!!errors.dot}
-                  InputLabelProps={{shrink: true}}
-                  helperText={errors.dot}
+                  error={!!errors.brgy}
+                  helperText={errors.brgy}
                   fullWidth
+                  color="success"
+                  size="small"
+                  variant="outlined"
+                  sx={{
+                    width: { sm: 100, md: 190 },
+
+                    mb: 2,
+                  }}
+                  required
                 />
               </div>
 
-              <div>
+              <div className="city">
+                <TextField
+                  name="city"
+                  value={users.city}
+                  type="text"
+                  label="City"
+                  onChange={handleChange}
+                  error={!!errors.city}
+                  helperText={errors.city}
+                  //fullWidth
+                  color="success"
+                  size="small"
+                  variant="outlined"
+                  sx={{
+                    width: { sm: 100, md: 190 },
+
+                    mb: 2,
+                  }}
+                  required
+                />
+              </div>
+            </div>
+
+            <div className="provinceBDateContainer">
+              <div className="province">
+                <TextField
+                  name="province"
+                  value={users.province}
+                  type="text"
+                  label="Province"
+                  onChange={handleChange}
+                  error={!!errors.province}
+                  helperText={errors.province}
+                  //fullWidth
+                  color="success"
+                  size="small"
+                  variant="outlined"
+                  sx={{
+                    width: { sm: 100, md: 190 },
+
+                    mb: 2,
+                  }}
+                  required
+                />
+              </div>
+
+              <div className="bDateContainer">
+                <div className="bDateInput">
+                  <TextField
+                    name="dot"
+                    value={users.dot}
+                    type="date"
+                    label="Birthdate"
+                    onChange={handleChange}
+                    error={!!errors.dot}
+                    InputLabelProps={{ shrink: true }}
+                    helperText={errors.dot}
+                    //fullWidth
+                    color="success"
+                    size="small"
+                    variant="outlined"
+                    sx={{
+                      width: { sm: 100, md: 190 },
+
+                      mb: 2,
+                    }}
+                    required
+                  />
+                </div>
+              </div>
+            </div>
+
+            <div className="passwordContainer">
+              <div className="pWord">
                 <TextField
                   name="password"
                   value={users.password}
                   type="password"
-                  variant="standard"
                   label="Password"
                   onChange={handleChange}
                   error={!!errors.password}
                   helperText={errors.password}
-                  fullWidth
+                  //fullWidth
+                  color="success"
+                  size="small"
+                  variant="outlined"
+                  sx={{
+                    width: { sm: 100, md: 190 },
+
+                    mb: 2,
+                  }}
+                  required
                 />
               </div>
 
-              <div>
+              <div className="cPWord">
                 <TextField
                   name="confirmePassword"
                   value={users.confirmePassword}
-                  type="password"
-                  variant="standard"
+                  //type="password"
                   label="Confirm Password"
                   onChange={handleChange}
                   error={!!errors.confirmePassword}
                   helperText={errors.confirmePassword}
-                  fullWidth
+                  //fullWidth
+                  color="success"
+                  size="small"
+                  variant="outlined"
+                  sx={{
+                    width: { sm: 100, md: 190 },
+
+                    mb: 2,
+                  }}
+                  type="password"
+                  required
+                  // type={showPassword ? "text" : "password"}
+                  // endAdornment={
+                  //   <InputAdornment position="end">
+                  //     <IconButton
+                  //       aria-label="toggle password visibility"
+                  //       onClick={handleClickShowPassword}
+                  //       onMouseDown={handleMouseDownPassword}
+                  //       edge="end"
+                  //     >
+                  //       {showPassword ? <VisibilityOff /> : <Visibility />}
+                  //     </IconButton>
+                  //   </InputAdornment>
+                  // }
                 />
               </div>
-
-        
             </div>
+
+            {/* <FormControl sx={{ m: 1, width: "25ch" }} variant="outlined">
+              <InputLabel htmlFor="outlined-adornment-password">
+                Passwwword
+              </InputLabel>
+              <OutlinedInput
+                id="outlined-adornment-password"
+                type={showPassword ? "text" : "password"}
+                endAdornment={
+                  <InputAdornment position="end">
+                    <IconButton
+                      aria-label="toggle password visibility"
+                      onClick={handleClickShowPassword}
+                      onMouseDown={handleMouseDownPassword}
+                      error={!!errors.confirmePassword}
+                      helperText={errors.confirmePassword}
+                      name="confirmePassword"
+                      value={users.confirmePassword}
+                      edge="end"
+                    >
+                      {showPassword ? <VisibilityOff /> : <Visibility />}
+                    </IconButton>
+                  </InputAdornment>
+                }
+                label="Password"
+              />
+            </FormControl> */}
 
             <Components.Button disabled={isFormInvalid()} type="submit">
               Sign Up

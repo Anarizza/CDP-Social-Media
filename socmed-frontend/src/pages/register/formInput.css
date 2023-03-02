@@ -3,6 +3,26 @@
   flex-direction: row;
 }
 
+.uNamePhoneContainer {
+  display: flex;
+  flex-direction: row;
+}
+
+.brgyCityContainer {
+  display: flex;
+  flex-direction: row;
+}
+
+.provinceBDateContainer {
+  display: flex;
+  flex-direction: row;
+}
+
+.passwordContainer {
+  display: flex;
+  flex-direction: row;
+}
+
 /* .bDateContainer {
   display: flex;
   flex-direction: row;
@@ -16,6 +36,30 @@
 
 .givenName,
 .surName {
+  display: inline-block;
+  margin-right: 10px;
+}
+
+.userName,
+.phone {
+  display: inline-block;
+  margin-right: 10px;
+}
+
+.brgy,
+.city {
+  display: inline-block;
+  margin-right: 10px;
+}
+
+.province,
+.bDateContainer {
+  display: inline-block;
+  margin-right: 10px;
+}
+
+.pWord,
+.cPWord {
   display: inline-block;
   margin-right: 10px;
 }
@@ -41,3 +85,6 @@ select.signup-error {
   text-align: left;
 }
 
+.fName {
+  border-radius: 20px;
+}
