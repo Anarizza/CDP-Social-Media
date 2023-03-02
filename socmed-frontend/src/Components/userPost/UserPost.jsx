@@ -160,9 +160,12 @@ const UserPost = ({ post }) => {
           <div className="postBottomLeft">
             <StarIcon className="bottomLeftIcon" style={{ color: "#E1AD01" }} />
             <b>{likes.length}</b>
-            <div className="postLikeCounter" sx={{ fontSize: "1%" }}>
-              <ChatOutlinedIcon sx={{ marginRight: "7px" }} />
-              {comment.length}
+            <div className="postBottomLeft" sx={{ fontSize: "1%" }}>
+              <ChatOutlinedIcon
+                className="bottomLeftIcon"
+                sx={{ marginRight: "7px" }}
+              />
+              <b>{comment.length}</b>
             </div>
           </div>
           <div className="postBottomRight">
@@ -203,7 +206,6 @@ const UserPost = ({ post }) => {
               </div>
             </IconButton>
           </Link>
-        
         </div>
       </div>
     </div>
