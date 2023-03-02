@@ -48,12 +48,14 @@ const Sidebar = () => {
     <div className="sidebar">
       <div className="sidebarWrapper">
         {/* Need pa to ayusin */}
-        <Link    to={`/homepage/${1}`}
+        <Link
+          to={`/homepage/${1}`}
           style={{
             textDecoration: "none",
             color: theme === "light" ? "black" : "white",
-          }}>
-        <MenuLink Icon={<RssFeedIcon />} text="Feed" />
+          }}
+        >
+          <MenuLink Icon={<RssFeedIcon />} text="Feed" />
         </Link>
         {/*Temposry lang yung parameter na 1 kas dapat userId yun since wala pang login*/}
         <Link
@@ -68,8 +70,14 @@ const Sidebar = () => {
         <div onClick={handleClick}>
           <MenuLink Icon={<Brightness4Icon />} text="Theme" />
         </div>
-        <Link to="/" style={{textDecoration: "none", color: theme === "light" ? "black" : "white"}}>
-        <MenuLink Icon={<ExitToAppOutlinedIcon />} text="Logout" />
+        <Link
+          to="/"
+          style={{
+            textDecoration: "none",
+            color: theme === "light" ? "black" : "white",
+          }}
+        >
+          <MenuLink Icon={<ExitToAppOutlinedIcon />} text="Logout" />
         </Link>
 
         <hr className="sidebarHr" />
@@ -77,14 +85,18 @@ const Sidebar = () => {
         <h4>People on Timeline</h4>
         <ul className="sidebarFriendList">
           {users.map((u) => (
-            <Link
-              to={`/profile/friend/${id}/${u.userId}`}
-              style={{
-                textDecoration: "none",
-              }}
-            >
-              <Friends key={u.id} user={u} />
-            </Link>
+            <>
+              {u.userId != id && (
+                <Link
+                  to={`/profile/friend/${id}/${u.userId}`}
+                  style={{
+                    textDecoration: "none",
+                  }}
+                >
+                  <Friends key={u.id} user={u} />
+                </Link>
+              )}
+            </>
           ))}
         </ul>
       </div>

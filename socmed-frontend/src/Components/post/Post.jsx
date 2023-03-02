@@ -155,7 +155,7 @@ const Post = ({ post }) => {
           </Grid>
 
           <Link
-            to={`/post/id/${post.postId}`}
+            to={`/post/id/${params.id}/${post.postId}`}
             style={{ textDecoration: "none" }}
           >
             <IconButton>

@@ -6,10 +6,7 @@ import { useNavigate, useParams } from "react-router-dom";
 import * as postService from "../../Service/post";
 import { Link } from "react-router-dom";
 import ModalImage from "react-modal-image";
-import {
-  ChatBubbleOutline,
-  ShareOutlined,
-} from "@mui/icons-material";
+import { ChatBubbleOutline, ShareOutlined } from "@mui/icons-material";
 import * as commentService from "../../Service/comment";
 // import * as likeService from "../../Service/like";
 import Joi from "joi";
@@ -120,7 +117,7 @@ const DetailsPage = () => {
 
   useEffect(() => {
     setLoading(true);
-    postService.fetchPostById(params.id).then((response) => {
+    postService.fetchPostById(params.fid).then((response) => {
       setPosts(response.data);
       setLoading(false);
       // console.log(response.data); // polaaaaaa
@@ -129,7 +126,7 @@ const DetailsPage = () => {
 
   useEffect(() => {
     setLoading(true);
-    commentService.getCommentByPostPostId(params.id).then((response) => {
+    commentService.getCommentByPostPostId(params.fid).then((response) => {
       setComment(response.data);
       setLoading(false);
       // console.log(response.data); // hazeeeell
@@ -138,7 +135,7 @@ const DetailsPage = () => {
 
   // get User by ID
   useEffect(() => {
-    userService.getUsersById(params.id).then((response) => {
+    userService.getUsersById(params.fid).then((response) => {
       setUsers(response.data);
       console.log(response.data);
     });
@@ -152,9 +149,9 @@ const DetailsPage = () => {
     });
   };
 
-// get likes
+  // get likes
   useEffect(() => {
-    likesService.getLikes(params.id).then((response) => {
+    likesService.getLikes(params.fid).then((response) => {
       setLikes(response.data);
       console.log(response.data);
     });
@@ -207,50 +204,53 @@ const DetailsPage = () => {
             />
           </div>
           <div className="postBottom">
-          <div className="postBottomLeft">
-            <StarIcon className="bottomLeftIcon" style={{ color: "#E1AD01" }} />
-            <b>{likes.length}</b>
-            <div className="postLikeCounter" sx={{ fontSize: "1%" }}>
-              <ChatOutlinedIcon sx={{ marginRight: "7px" }} />
-              {comment.length}
+            <div className="postBottomLeft">
+              <StarIcon
+                className="bottomLeftIcon"
+                style={{ color: "#E1AD01" }}
+              />
+              <b>{likes.length}</b>
+              <div className="postLikeCounter" sx={{ fontSize: "1%" }}>
+                <ChatOutlinedIcon sx={{ marginRight: "7px" }} />
+                {comment.length}
+              </div>
+            </div>
+            <div className="postBottomRight">
+              <div className="postCommentText">
+                {/* {comment.length} · comments · share */}
+              </div>
             </div>
           </div>
-          <div className="postBottomRight">
-            <div className="postCommentText">
-              {/* {comment.length} · comments · share */}
-            </div>
-          </div>
-        </div>
 
-        <hr className="footerHr" />
-        <div className="postBottomFooter">
-          <Grid>
-            <div className="postBottomFooterItem">
-              <Grid component="form" onSubmit={handleSubmit}>
-                <IconButton
-                  type="submit"
-                  onClick={showToast} /*onClick={() => setActive(!isActive)}*/
-                >
-                  <div>
-                    {isActive ? (
-                      <StarIcon sx={{ color: "#E1AD01" }} />
-                    ) : (
-                      <StarBorderOutlinedIcon className="footerIcon" />
-                    )}
-                  </div>
-                </IconButton>
-                <ToastContainer
-                  position={"top-center"}
-                  closeOnClick={true}
-                  closeButton={<p>x</p>}
-                  draggable={false}
-                />
-              </Grid>
-              <div className="footerText">Appreciate</div>
-            </div>
-          </Grid>
+          <hr className="footerHr" />
+          <div className="postBottomFooter">
+            <Grid>
+              <div className="postBottomFooterItem">
+                <Grid component="form" onSubmit={handleSubmit}>
+                  <IconButton
+                    type="submit"
+                    onClick={showToast} /*onClick={() => setActive(!isActive)}*/
+                  >
+                    <div>
+                      {isActive ? (
+                        <StarIcon sx={{ color: "#E1AD01" }} />
+                      ) : (
+                        <StarBorderOutlinedIcon className="footerIcon" />
+                      )}
+                    </div>
+                  </IconButton>
+                  <ToastContainer
+                    position={"top-center"}
+                    closeOnClick={true}
+                    closeButton={<p>x</p>}
+                    draggable={false}
+                  />
+                </Grid>
+                <div className="footerText">Appreciate</div>
+              </div>
+            </Grid>
 
-          {/* <div className="postBottom">
+            {/* <div className="postBottom">
             <div className="postBottomLeft">
               <Favorite className="bottomLeftIcon" style={{ color: "red" }} />
               <ThumbUp className="bottomLeftIcon" />
@@ -261,13 +261,12 @@ const DetailsPage = () => {
             </div>
           </div> */}
 
-          {/* <hr className="footerHr" /> */}
-          {/* <div className="postBottomFooter"> */}
+            {/* <hr className="footerHr" /> */}
+            {/* <div className="postBottomFooter"> */}
             {/* <div className="postBottomFooterItem">
               <ThumbUpAltOutlined className="footerIcon" />
               <div className="footerText">Like</div>
             </div> */}
-
 
             <div
               className="postBottomFooterItem"
@@ -276,7 +275,6 @@ const DetailsPage = () => {
               <ChatBubbleOutline className="footerIcon" />
               <span className="footerText">Comment</span>
             </div>
-  
           </div>
         </div>
         {commentBoxVisible && (

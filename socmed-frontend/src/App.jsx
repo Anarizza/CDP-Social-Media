@@ -21,8 +21,7 @@ import { useEffect } from "react";
 import NothFound from "./pages/NotFount/NothFound";
 
 const App = () => {
-
-  const [isLoggedIn, setIsLoggedIn] = useState(true);
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
 
   useEffect(() => {
     const data = localStorage.getItem("auth");
@@ -31,36 +30,46 @@ const App = () => {
     }
   }, []);
 
- useEffect(() => {
-      localStorage.setItem("auth", JSON.stringify(isLoggedIn));
-}, [isLoggedIn]); 
+  useEffect(() => {
+    localStorage.setItem("auth", JSON.stringify(isLoggedIn));
+  }, [isLoggedIn]);
 
-
- const Authhguard = () => {
-  return isLoggedIn ?  <Navigate to="/" /> : <Outlet/> 
- }
+  const Authhguard = () => {
+    return isLoggedIn ? <Navigate to="/" /> : <Outlet />;
+  };
   return (
     <>
       <CssBaseline>
         <Routes>
           <Route path="/" element={<Navigate to="/signin" />} />
-          <Route path="/signin" element={<Register setIsLoggedIn={setIsLoggedIn} isLoggedIn={isLoggedIn}/>} />
+          <Route
+            path="/signin"
+            element={
+              <Register setIsLoggedIn={setIsLoggedIn} isLoggedIn={isLoggedIn} />
+            }
+          />
 
           <Route element={Authhguard()}>
-          <Route path="/homepage/:id" element={<HomePage />} />
-          <Route path="/login" element={<Login />} />
-          <Route path="/profile/:id" element={<Profile />} />
-          <Route path="/post/id/:id" element={<DetailsPageConnector />} />
-          <Route path="/appreciate/:id" element={<LikesConnector />} />
-          <Route path="/post/update/status/:id" element={<EditPost />} />
-          <Route path="/profile/friend/:id/:fid" element={<FriendProfile />} />
-          <Route path="/profile/edit/" element={<EditProfile />} />
-          <Route path="/footer" element={<Footer />} />
-          <Route path="/about" element={<About />} />
-          <Route path="/privacypolicy" element={<PrivacyPolicy />} />
-          <Route path="/termsofservices" element={<TermsOfServices />} />
-          <Route path="not-found" element={<NothFound/>} />
-          <Route path="*" element={<Navigate to="/not-found" />} />
+            <Route path="/homepage/:id" element={<HomePage />} />
+            <Route path="/login" element={<Login />} />
+            <Route path="/profile/:id" element={<Profile />} />
+            <Route
+              path="/post/id/:id/:fid"
+              element={<DetailsPageConnector />}
+            />
+            <Route path="/appreciate/:id" element={<LikesConnector />} />
+            <Route path="/post/update/status/:id" element={<EditPost />} />
+            <Route
+              path="/profile/friend/:id/:fid"
+              element={<FriendProfile />}
+            />
+            <Route path="/profile/edit/" element={<EditProfile />} />
+            <Route path="/footer" element={<Footer />} />
+            <Route path="/about" element={<About />} />
+            <Route path="/privacypolicy" element={<PrivacyPolicy />} />
+            <Route path="/termsofservices" element={<TermsOfServices />} />
+            <Route path="not-found" element={<NothFound />} />
+            <Route path="*" element={<Navigate to="/not-found" />} />
           </Route>
         </Routes>
       </CssBaseline>
