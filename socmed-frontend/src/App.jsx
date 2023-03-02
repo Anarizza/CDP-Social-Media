@@ -15,16 +15,40 @@ import Footer from "./Components/footer/Footer";
 import About from "./pages/footer/About";
 import PrivacyPolicy from "./pages/footer/PrivacyPolicy";
 import TermsOfServices from "./pages/footer/TermsOfServices";
+import { useState } from "react";
+import { Outlet } from "react-router-dom";
+import { useEffect } from "react";
+import NothFound from "./pages/NotFount/NothFound";
 
 const App = () => {
+
+  const [isLoggedIn, setIsLoggedIn] = useState(true);
+
+  useEffect(() => {
+    const data = localStorage.getItem("auth");
+    if (data !== null) {
+      setIsLoggedIn(JSON.parse(data));
+    }
+  }, []);
+
+ useEffect(() => {
+      localStorage.setItem("auth", JSON.stringify(isLoggedIn));
+}, [isLoggedIn]); 
+
+
+ const Authhguard = () => {
+  return isLoggedIn ?  <Navigate to="/" /> : <Outlet/> 
+ }
   return (
     <>
       <CssBaseline>
         <Routes>
           <Route path="/" element={<Navigate to="/signin" />} />
+          <Route path="/signin" element={<Register setIsLoggedIn={setIsLoggedIn} isLoggedIn={isLoggedIn}/>} />
+
+          <Route element={Authhguard()}>
           <Route path="/homepage/:id" element={<HomePage />} />
           <Route path="/login" element={<Login />} />
-          <Route path="/signin" element={<Register />} />
           <Route path="/profile/:id" element={<Profile />} />
           <Route path="/post/id/:id" element={<DetailsPageConnector />} />
           <Route path="/appreciate/:id" element={<LikesConnector />} />
@@ -35,6 +59,9 @@ const App = () => {
           <Route path="/about" element={<About />} />
           <Route path="/privacypolicy" element={<PrivacyPolicy />} />
           <Route path="/termsofservices" element={<TermsOfServices />} />
+          <Route path="not-found" element={<NothFound/>} />
+          <Route path="*" element={<Navigate to="/not-found" />} />
+          </Route>
         </Routes>
       </CssBaseline>
     </>

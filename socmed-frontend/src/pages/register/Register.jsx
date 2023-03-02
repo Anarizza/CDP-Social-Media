@@ -10,7 +10,7 @@ import Swal from "sweetalert2";
 import FormHelperText from '@mui/material/FormHelperText';
 import { TextField } from "@mui/material";
 
-function Register() {
+function Register({setIsLoggedIn}) {
   const navigate = useNavigate();
   const [signIn, toggle] = useState(true);
 
@@ -137,6 +137,7 @@ function Register() {
         person.username === loginDetails.username &&
         person.password === loginDetails.password
       ) {
+        setIsLoggedIn(false);
         Swal.fire({
           title: "Success!",
           text: "Successfully logged in!",
