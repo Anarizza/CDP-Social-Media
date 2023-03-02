@@ -24,6 +24,7 @@ function Register() {
     city: "",
     province: "",
     dot: "",
+    confirmePassword: "",
   });
 
   const onSubmit = (user) => {
@@ -52,7 +53,11 @@ function Register() {
     city: Joi.string().min(3).max(500).allow("").required(),
     province: Joi.string().min(3).max(500).allow("").required(),
     dot: Joi.string().min(6).max(500).allow("").required(),
-    password: Joi.string().min(8).max(15).required(),
+    password: Joi.string().pattern(RegExp("^[a-zA-Z0-9]")).min(8).max(15).required(),
+    confirmePassword: Joi.valid(users.password).messages({
+      "any.only": "The two passwords do not match",
+      "any.required": "Please re-enter the password",
+    }),
   });
 
   const [errors, setErrors] = useState({});
@@ -215,7 +220,8 @@ function Register() {
             <div className="nameContainer">
               <div className="givenName">
                 <Components.NameInput
-                  helperText="mynameishelper"
+                  HelperText visibility="true"
+                  helperText="meeee"
                   name="givenName"
                   error={!!errors.name}
                   value={users.givenName}
@@ -330,7 +336,7 @@ function Register() {
                 <Components.SignUpInput
                   name="password"
                   value={users.password}
-                  type="text"
+                  type="password"
                   placeholder="Password"
                   onChange={handleChange}
                 />
@@ -338,13 +344,15 @@ function Register() {
 
               <div>
                 <Components.SignUpInput
-                  name="password"
-                  value={users.password}
-                  type="text"
+                  name="confirmePassword"
+                  value={users.confirmePassword}
+                  type="password"
                   placeholder="Confirm Password"
                   onChange={handleChange}
                 />
               </div>
+
+        
             </div>
 
             <Components.Button disabled={isFormInvalid()} type="submit">

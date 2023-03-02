@@ -41,16 +41,3 @@ select.signup-error {
   text-align: left;
 }
 
-
-
-.profie {
-  color: black;
-  display: flex;
-  width: 32px;
-  height: 32px;
-  border-radius: 50%;
-  border: 2px solid white;
-  object-fit: cover;
-  cursor: pointer;
-  margin-bottom: 10px;
-}
