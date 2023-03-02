@@ -200,10 +200,7 @@ const UserPost = ({ post }) => {
               </div>
             </IconButton>
           </Link>
-          <div className="postBottomFooterItem">
-            <ScreenRotationAltIcon className="footerIcon" />
-            <div className="footerText">Share</div>
-          </div>
+        
         </div>
       </div>
     </div>

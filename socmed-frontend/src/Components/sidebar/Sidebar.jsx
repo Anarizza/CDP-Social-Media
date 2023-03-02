@@ -6,7 +6,6 @@ import "./Sidebar.css";
 import MenuLink from "../menuLink/MenuLink";
 import Friends from "../friends/Friends";
 import * as usersService from "../../Service/users";
-import BookmarkIcon from "@mui/icons-material/Bookmark";
 import "../../style/dark.css";
 import StarBorderPurple500SharpIcon from "@mui/icons-material/StarBorderPurple500Sharp";
 import { Link } from "react-router-dom";
@@ -48,9 +47,14 @@ const Sidebar = () => {
   return (
     <div className="sidebar">
       <div className="sidebarWrapper">
+        {/* Need pa to ayusin */}
+        <Link    to={`/homepage/${1}`}
+          style={{
+            textDecoration: "none",
+            color: theme === "light" ? "black" : "white",
+          }}>
         <MenuLink Icon={<RssFeedIcon />} text="Feed" />
-        <MenuLink Icon={<BookmarkIcon />} text="Saved" />
-
+        </Link>
         {/*Temposry lang yung parameter na 1 kas dapat userId yun since wala pang login*/}
         <Link
           to={`/appreciate/${1}`}
