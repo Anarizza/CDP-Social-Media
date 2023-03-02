@@ -59,7 +59,7 @@ const Sidebar = () => {
         </Link>
         {/*Temposry lang yung parameter na 1 kas dapat userId yun since wala pang login*/}
         <Link
-          to={`/appreciate/${1}`}
+          to={`/appreciate/${id}`}
           style={{
             textDecoration: "none",
             color: theme === "light" ? "black" : "white",
