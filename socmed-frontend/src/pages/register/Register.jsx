@@ -8,6 +8,7 @@ import { Close, PermMedia } from "@mui/icons-material";
 import Joi from "joi";
 import Swal from "sweetalert2";
 import { TextField } from "@mui/material";
+import Footer from "../../Components/footer/Footer";
 import Box from "@mui/material/Box";
 import IconButton from "@mui/material/IconButton";
 import Input from "@mui/material/Input";
@@ -209,6 +210,7 @@ function Register({setIsLoggedIn}) {
   };
 
   return (
+    <div>
     <Components.Outer>
       <Components.Container>
         <Components.SignUpContainer signinIn={signIn}>
@@ -614,6 +616,8 @@ function Register({setIsLoggedIn}) {
         </Components.OverlayContainer>
       </Components.Container>
     </Components.Outer>
+    <Footer />
+    </div>
   );
 }
 
