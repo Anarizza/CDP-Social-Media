@@ -11,6 +11,7 @@ import "../../style/dark.css";
 import StarBorderPurple500SharpIcon from "@mui/icons-material/StarBorderPurple500Sharp";
 import { Link } from "react-router-dom";
 import { useParams } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 const Sidebar = () => {
   const [users, setUsers] = useState([]);
@@ -42,6 +43,8 @@ const Sidebar = () => {
     }
   });
 
+  const navigate = useNavigate;
+
   return (
     <div className="sidebar">
       <div className="sidebarWrapper">
@@ -65,7 +68,7 @@ const Sidebar = () => {
 
         <hr className="sidebarHr" />
 
-        <h4>Friend List</h4>
+        <h4>People on Timeline</h4>
         <ul className="sidebarFriendList">
           {users.map((u) => (
             <Link

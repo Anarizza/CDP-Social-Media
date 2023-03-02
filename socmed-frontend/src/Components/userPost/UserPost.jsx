@@ -1,9 +1,7 @@
 import React, { useState, useEffect } from "react";
 import "./Post.css";
 import { IconButton, MenuItem, Menu } from "@mui/material";
-import {
-  MoreVert,
-} from "@mui/icons-material";
+import { MoreVert } from "@mui/icons-material";
 import { Link } from "react-router-dom";
 import ModalImage from "react-modal-image";
 import * as postService from "../../Service/post";
@@ -19,7 +17,6 @@ import { useNavigate } from "react-router-dom";
 import Swal from "sweetalert2";
 
 const UserPost = ({ post }) => {
-
   const [anchorEl, setAnchorEl] = useState(null);
   const [likes, setLikes] = useState([]);
 
@@ -57,7 +54,6 @@ const UserPost = ({ post }) => {
   const [likesForm, setLikesForm] = useState({
     createdDate: "none",
   });
-
 
   const navigate = useNavigate();
 

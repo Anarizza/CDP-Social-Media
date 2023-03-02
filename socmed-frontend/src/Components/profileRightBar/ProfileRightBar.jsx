@@ -3,6 +3,7 @@ import "./ProfileRightBar.css";
 import * as userService from "../../Service/users";
 import { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
+import { Link } from "react-router-dom";
 
 const ProfileRightBar = () => {
   const params = useParams();
@@ -15,8 +16,7 @@ const ProfileRightBar = () => {
   }, []);
   return (
     <div className="profileRightBar">
-
-      {/* <div className="profileRightBarHeading">
+      <div className="profileRightBarHeading">
         <div className="profileRightBarTitle"> User Information</div>
         <Link to="/profile/edit" style={{ textDecoration: "none" }}>
           <div className="editButton">Edit Profile</div>
@@ -29,22 +29,16 @@ const ProfileRightBar = () => {
           <div className="profileRightBarInfoValue">{user.email}</div>
         </div>
         <div className="profileRightBarInfoItem">
+          <div className="profileRightBarInfoKey">Age: </div>
+          <div className="profileRightBarInfoValue">{}</div>
+        </div>
+        <div className="profileRightBarInfoItem">
           <div className="profileRightBarInfoKey">City: </div>
           <div className="profileRightBarInfoValue">{user.city}</div>
         </div>
-        <div className="profileRightBarInfoItem">
-          <div className="profileRightBarInfoKey">Relationship: </div>
-          <div className="profileRightBarInfoValue">
-            Depende kung sino mag tatanong
-          </div>
-        </div>
-        <div className="profileRightBarInfoItem">
-          <div className="profileRightBarInfoKey">Work Experience: </div>
-          <div className="profileRightBarInfoValue">Manlasing ng tao</div>
-        </div>
-      </div> */}
+      </div>
 
-      <h4 className="profileRightBarTitle">Close Friends</h4>
+      <h4 className="profileRightBarTitle">People you may know</h4>
       <div className="profileRightBarFollowings">
         <div className="profileRightBarFollowing">
           <img

@@ -4,7 +4,6 @@ import Post from "../post/Post";
 import Share from "../share/Share";
 import * as postService from "../../Service/post";
 import * as userService from "../../Service/users";
-import UserPost from "../userPost/UserPost";
 import { useParams } from "react-router-dom";
 const UserFeed = () => {
   const [posts, setPosts] = useState([]);
@@ -21,7 +20,7 @@ const UserFeed = () => {
       <div className="feedWrapper">
         {/* <Stories /> */}
         {posts.map((p) => (
-          <UserPost key={p.id} post={p} />
+          <Post key={p.id} post={p} />
         ))}
       </div>
     </div>
