@@ -48,9 +48,6 @@ const Sidebar = () => {
   return (
     <div className="sidebar">
       <div className="sidebarWrapper">
-        <MenuLink Icon={<RssFeedIcon />} text="Feed" />
-        <MenuLink Icon={<BookmarkIcon />} text="Saved" />
-
         {/*Temposry lang yung parameter na 1 kas dapat userId yun since wala pang login*/}
         <Link
           to={`/appreciate/${1}`}
@@ -64,7 +61,9 @@ const Sidebar = () => {
         <div onClick={handleClick}>
           <MenuLink Icon={<Brightness4Icon />} text="Theme" />
         </div>
+        <Link to="/" style={{textDecoration: "none", color: "black"}}>
         <MenuLink Icon={<ExitToAppOutlinedIcon />} text="Logout" />
+        </Link>
 
         <hr className="sidebarHr" />
 
