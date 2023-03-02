@@ -4,12 +4,12 @@ import { useNavigate, useParams } from "react-router-dom";
 import * as postService from "../../Service/post";
 import { Link } from "react-router-dom";
 import ModalImage from "react-modal-image";
-import {
-  Favorite,
-  ThumbUp,
-  ThumbUpAltOutlined,
-  ShareOutlined,
-} from "@mui/icons-material";
+import * as likesService from "../../Service/likes";
+import * as commentService from "../../Service/comment";
+import StarIcon from "@mui/icons-material/Star";
+import ChatOutlinedIcon from "@mui/icons-material/ChatOutlined";
+import * as userService from "../../Service/users";
+
 const Likes = () => {
   const params = useParams();
 
@@ -18,6 +18,7 @@ const Likes = () => {
   const navigate = useNavigate();
 
   const open = Boolean(anchorEl);
+  const { pid } = useParams();
 
   const [posts, setPosts] = useState(null);
   const [loading, setLoading] = useState(false);
@@ -32,6 +33,34 @@ const Likes = () => {
   }, [params.id]);
 
   console.log("ito polaaaa" + posts);
+
+  const [likes, setLikes] = useState([]);
+
+  useEffect(() => {
+    likesService.getLikes(params.id).then((response) => {
+      setLikes(response.data);
+      console.log(response.data);
+    });
+  }, [params.id]);
+
+  const [comment, setComment] = useState([]);
+
+  useEffect(() => {
+    commentService.getCommentByPostPostId(pid).then((response) => {
+      setComment(response.data);
+      console.log(response.data);
+    });
+  }, [pid]);
+
+  const [user, setUsers] = useState([]);
+  //dapat useParam yung parameter pero wala pan login so hardcode value muna
+  useEffect(() => {
+    userService.getUsersById(params.id).then((response) => {
+      setUsers(response.data);
+      console.log(response.data);
+    });
+  }, [params.id]);
+
 
   if (loading) {
     return <h1>Loading...</h1>;
@@ -76,7 +105,27 @@ const Likes = () => {
                   alt=""
                 />
               </div>
+
               <div className="postBottom">
+                <div className="postBottomLeft">
+                  <StarIcon
+                    className="bottomLeftIcon"
+                    style={{ color: "#E1AD01" }}
+                  />
+                  <b>{likes.length}</b>
+                  <div className="postLikeCounter" sx={{ fontSize: "1%" }}>
+                    <ChatOutlinedIcon sx={{ marginRight: "7px" }} />
+                    {comment.length}
+                  </div>
+                </div>
+                <div className="postBottomRight">
+                  <div className="postCommentText">
+                    {/* {comment.length} · comments · share */}
+                  </div>
+                </div>
+              </div>
+
+              {/* <div className="postBottom">
                 <div className="postBottomLeft">
                   <Favorite
                     className="bottomLeftIcon"
@@ -90,20 +139,29 @@ const Likes = () => {
                     {posts.comment} · comments · share
                   </div>
                 </div>
-              </div>
+              </div> */}
 
-              <hr className="footerHr" />
-              <div className="postBottomFooter">
-                <div className="postBottomFooterItem">
-                  <ThumbUpAltOutlined className="footerIcon" />
-                  <div className="footerText">Like</div>
-                </div>
+              {/* <hr className="footerHr" /> */}
+            </div>
+            <div className="comment">
+              {comment.map((c) => (
+                <div key={c.commentId}>
+                  <div className="commentWrapper">
+                    <img
+                      className="commentProfileImg"
+                      src={c.post.users.profilePic}
+                      alt=""
+                    />
 
-                <div className="postBottomFooterItem">
-                  <ShareOutlined className="footerIcon" />
-                  <div className="footerText">Share</div>
+                    <div className="commentInfo">
+                      <div className="commentUsername">
+                        @{c.post.users.username.toLowerCase()}
+                      </div>
+                      <div className="commentText">{c.commenttext} </div>
+                    </div>
+                  </div>
                 </div>
-              </div>
+              ))}
             </div>
           </div>
         ))}

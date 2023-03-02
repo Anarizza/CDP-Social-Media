@@ -1,5 +1,4 @@
 import React from "react";
-
 import "./Profile.css";
 import Rightbar from "../../Components/rightbar/Rightbar";
 import Sidebar from "../../Components/sidebar/Sidebar";

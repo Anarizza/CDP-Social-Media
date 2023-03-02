@@ -6,7 +6,6 @@ import { Link } from "react-router-dom";
 import ModalImage from "react-modal-image";
 import * as postService from "../../Service/post";
 import * as userService from "../../Service/users";
-import ScreenRotationAltIcon from "@mui/icons-material/ScreenRotationAlt";
 import StarIcon from "@mui/icons-material/Star";
 import * as likesService from "../../Service/likes";
 import * as commentService from "../../Service/comment";
@@ -15,6 +14,7 @@ import StarBorderOutlinedIcon from "@mui/icons-material/StarBorderOutlined";
 import Grid from "@mui/material/Grid";
 import { useNavigate } from "react-router-dom";
 import Swal from "sweetalert2";
+import { useParams } from "react-router-dom";
 
 const UserPost = ({ post }) => {
   const [anchorEl, setAnchorEl] = useState(null);
@@ -41,13 +41,15 @@ const UserPost = ({ post }) => {
   //sample palang tong user since wala pang login
 
   const [user, setUsers] = useState([]);
+  const params = useParams();
+
   //dapat useParam yung parameter pero wala pan login so hardcode value muna
   useEffect(() => {
-    userService.getUsersById(1).then((response) => {
+    userService.getUsersById(params.id).then((response) => {
       setUsers(response.data);
       console.log(response.data);
     });
-  }, []);
+  }, [params.id]);
 
   const [isActive, setActive] = useState(false);
 
@@ -82,6 +84,7 @@ const UserPost = ({ post }) => {
       }).then((result) => {
         if (result.isConfirmed) {
           postService.deletePost(postId);
+          // navigate(`/profile/${params.id}`);
           navigate(0);
         }
       });
