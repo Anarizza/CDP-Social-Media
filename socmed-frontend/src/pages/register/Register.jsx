@@ -4,10 +4,9 @@ import "./formInput.css";
 import * as userService from "../../Service/users";
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import { Close,  PermMedia } from "@mui/icons-material";
+import { Close, PermMedia } from "@mui/icons-material";
 import Joi from "joi";
 import Swal from "sweetalert2";
-
 
 function Register() {
   const navigate = useNavigate();
@@ -142,7 +141,7 @@ function Register() {
       }
       Swal.fire({
         title: "Error!",
-        text: "User does not exist!",
+        text: "Username or Password does not match!",
         icon: "error",
         confirmButtonColor: "#00796b",
       });

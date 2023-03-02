@@ -69,7 +69,7 @@ const Post = ({ post }) => {
   };
 
   const showToast = () => {
-    toast.success("Shared to your profile!", {
+    toast.success("You liked this post!", {
       autoClose: 2000,
     });
   };
