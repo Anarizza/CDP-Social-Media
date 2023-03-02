@@ -25,7 +25,9 @@ const Share = () => {
     postService.addPost(params.id, post).then((response) => {
       console.log(response);
       navigate(`/profile/${params.id}`);
-      // navigate(0);
+      //navigate(0);
+      //navigate(`/post/id/${params.id}/${post.postId}`);
+      // window.location.reload();
     });
   };
 

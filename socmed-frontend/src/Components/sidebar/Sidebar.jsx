@@ -49,7 +49,7 @@ const Sidebar = () => {
       <div className="sidebarWrapper">
         {/* Need pa to ayusin */}
         <Link
-          to={`/homepage/${1}`}
+          to={`/homepage/${id}`}
           style={{
             textDecoration: "none",
             color: theme === "light" ? "black" : "white",
